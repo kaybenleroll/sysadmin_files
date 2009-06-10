@@ -7,32 +7,29 @@ use diagnostics;
 use Getopt::Long;
 use File::Copy;
 use File::Path;
-use Archive::Tar;
+use Date::Manip;
 
-my $logdir = undef;
-my $storagedir = undef;
+my $logdir        = undef;
+my $storagedir    = undef;
 my $t_stamp       = undef;
+my $date          = undef;
 
 GetOptions('logdir=s'     => \$logdir,
-           'storagedir=s' => \$storagedir,
-           'timestamp=s' => \$t_stamp);
+           'storagedir=s' => \$storagedir);
 
-
+#change directory to log directory
 chdir "$logdir";
 
-if ($t_stamp = undef){
-    $t_stamp = `date`; #load $t_stamp with the date and time
-    $t_stamp =~ s/\://g; # remove all colons from time stamp string 
-    $t_stamp =~ s/\s+//g; # remove all white sapces from time stamp string 
-    #$t_stamp =~ s/ /_/g;  # replaces all white space with underscores
-}
+#create timestamp of date in format YYYYMMDD
+$date = ParseDate("today");
+$t_stamp = UnixDate($date, "%Y%m%d");
 
-system("tar cjf apamalogs_${t_stamp}.tar.bz2 . "); #create compressed file
-#@subdir = `ls -R`;
-#create_archive("$logdir"."apamalogs_${t_stamp}.tar.bz2",0,glob("*"));
+#create compressed file
+system("tar cjf apamalogs_${t_stamp}.tar.bz2 . ");
  
-move("apamalogs_${t_stamp}.tar.bz2","$storagedir"); #move compressed file to storage location
- 
-rmtree("$logdir"); #remove the directory that had just been compressed
- 
-mkpath("$logdir"); #recreate the directory that had just been deleted
+#move compressed file to storage location, remove the directory and recreate the directory
+move("apamalogs_${t_stamp}.tar.bz2", $storagedir);
+rmtree($logdir);
+mkpath($logdir);
+
+
