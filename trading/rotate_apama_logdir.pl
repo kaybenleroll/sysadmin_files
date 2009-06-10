@@ -11,17 +11,17 @@ use Date::Manip;
 
 my $logdir        = undef;
 my $storagedir    = undef;
-my $t_stamp       = undef;
 my $date          = undef;
-
+ 
 ### create timestamp of date in format YYYYMMDD
-
-$date = ParseDate("today");
-$t_stamp = UnixDate($date, "%Y%m%d");
-
+ 
+$date = "today";
+ 
 GetOptions('logdir=s'     => \$logdir,
            'storagedir=s' => \$storagedir,
-           'timestamp=s'  => \$t_stamp);
+           'date=s'       => \$date);
+ 
+my $t_stamp = UnixDate(ParseDate($date), "%Y%m%d");
 
 ### change directory to log directory
 chdir "$logdir";
