@@ -14,20 +14,22 @@ my $storagedir    = undef;
 my $t_stamp       = undef;
 my $date          = undef;
 
-GetOptions('logdir=s'     => \$logdir,
-           'storagedir=s' => \$storagedir);
+### create timestamp of date in format YYYYMMDD
 
-#change directory to log directory
-chdir "$logdir";
-
-#create timestamp of date in format YYYYMMDD
 $date = ParseDate("today");
 $t_stamp = UnixDate($date, "%Y%m%d");
 
-#create compressed file
+GetOptions('logdir=s'     => \$logdir,
+           'storagedir=s' => \$storagedir,
+           'timestamp=s'  => \$t_stamp);
+
+### change directory to log directory
+chdir "$logdir";
+
+### create compressed file
 system("tar cjf apamalogs_${t_stamp}.tar.bz2 . ");
  
-#move compressed file to storage location, remove the directory and recreate the directory
+### move compressed file to storage location, remove the directory and recreate the directory
 move("apamalogs_${t_stamp}.tar.bz2", $storagedir);
 rmtree($logdir);
 mkpath($logdir);
