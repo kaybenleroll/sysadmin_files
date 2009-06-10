@@ -27,7 +27,7 @@ my $t_stamp = UnixDate(ParseDate($date), "%Y%m%d");
 chdir "$logdir";
 
 ### create compressed file
-system("tar cjf apamalogs_${t_stamp}.tar.bz2 . ");
+system("tar cjfp apamalogs_${t_stamp}.tar.bz2 . ");
  
 ### move compressed file to storage location, remove the directory and recreate the directory
 move("apamalogs_${t_stamp}.tar.bz2", $storagedir);
