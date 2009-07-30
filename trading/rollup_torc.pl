@@ -4,8 +4,6 @@ use strict;
 use warnings;
 
 my %positions;
-my $junk = <>;
-my $junk = <>;
 
 while(my $line = <>) {
     
