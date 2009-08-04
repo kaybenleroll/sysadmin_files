@@ -9,6 +9,8 @@ my $ca_volume = 0;
 my $us_volume = 0;
 my $ca_cashvolume = 0;
 my $us_cashvolume = 0;
+my $unhedged_pnl = 0;
+my $exchange_rate = 0;
 
 my $cad_fx = 0;
 my $usd_fx = 0;
@@ -24,6 +26,7 @@ while(my $line = <>) {
     if($venue eq "CNX") {
 	$usd_fx                  += ($qty          * ($side eq "BUY" ?  1 : -1));
 	$cad_fx                  += ($qty * $price * ($side eq "BUY" ? -1 :  1));
+        $exchange_rate            = ($price        +(($side eq "BUY" ? -1 :  1)*0.00025));
     } elsif($venue eq "CA") {
 	$ca_positions{"$symbol"} += ($qty          * ($side eq "BUY" ?  1 : -1));
 	$cad_cashflow            += ($qty * $price * ($side eq "BUY" ? -1 :  1));
@@ -50,6 +53,8 @@ foreach my $symbol (sort keys %us_positions) {
     print $symbol . "," . $us_positions{"$symbol"} . "\n"; 
 }
 
+$unhedged_pnl = $usd_cashflow * $exchange_rate + $cad_cashflow;
+
 print "\n\n";
 print "CAD Cashflow: " . sprintf("% 10.2f", $cad_cashflow) . "\n";
 print "CAD FX:       " . sprintf("% 10.2f", $cad_fx) . "\n";
@@ -63,4 +68,7 @@ print "CA Cash Volume: " . sprintf("% 10.2f", $ca_cashvolume) . "\n";
 print "CA Volume       " . sprintf("% 10.2f", $ca_volume) . "\n";
 print "US Cash Volume: " . sprintf("% 10.2f", $us_cashvolume) . "\n";
 print "US Volume       " . sprintf("% 10.2f", $us_volume) . "\n";
+print "\n";
+print "Unhedged PNL: " . sprintf("%10.2f", $unhedged_pnl) . "\n";
+
 
