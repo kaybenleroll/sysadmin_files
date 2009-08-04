@@ -5,8 +5,8 @@ use warnings;
 
 my $cad_cashflow = 0;
 my $usd_cashflow = 0;
-my $ca_volume=0;
-my $us_volume=0
+my $ca_volume = 0;
+my $us_volume = 0;
 my $ca_cashvolume = 0;
 my $us_cashvolume = 0;
 

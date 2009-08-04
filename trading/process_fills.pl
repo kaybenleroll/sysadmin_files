@@ -6,10 +6,11 @@ use warnings;
 my %positions;
 
 while(my $line = <>) {
-    $line =~ /.*OrderUpdate\((.*)\)/;
+    if ($line =~ /.*OrderUpdate\((.*)\)/){
 
 
     my @data = split(",", $1);
+    my %hash;
 
     my $orderid   = $data[0];
     my $symbol    = $data[1];
@@ -19,8 +20,9 @@ while(my $line = <>) {
     my $price     = $data[18];
     my $status    = $data[19];
 
+
     next unless $orderid =~ /^"[^_]/;
-    next unless $status  =~ /\"Filled:/;
+    next unless $status  =~ /Filled:/;
 
     $symbol =~ s/"//g;
     $side   =~ s/"//g;
@@ -40,18 +42,20 @@ while(my $line = <>) {
     my $printprice;
 
     if($venue eq "CNX") {
-	$printprice = sprintf("%4.4f", $price);
+	$printprice = sprintf("%8.6f", $price);
     } else {
 	$printprice = sprintf("%4.2f", $price);
     }
 
 
-    print "$venue,$symbol,$side,$executed,$remaining,$printprice\n";
+    $hash{$orderid} = "$venue,$symbol,$side,$executed,$remaining,$printprice";
+    print "$hash{$orderid}\n";
 
     
     $positions{"$venue"}{"$symbol"}{"$side"}{"count"} += 1;
     $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"} += $executed;
     $positions{"$venue"}{"$symbol"}{"$side"}{"money"} += $executed * $price;
+    }
 }
 
 exit(0);
