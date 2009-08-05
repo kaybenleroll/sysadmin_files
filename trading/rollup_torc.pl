@@ -31,7 +31,7 @@ while(my $line = <>) {
 
     my $printprice;
 
-    $printprice = sprintf("%4.2f", $price);
+    $printprice = sprintf("%8.6f", $price);
     
 
     print "US,$symbol,$side,$executed,0,$printprice\n";
