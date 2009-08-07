@@ -29,20 +29,24 @@ $filename = "/var/jsi/atalogs/ATA_correlator_${date}*";
 
 system("cat $filename | grep OrderUpdate | perl process_fills.pl > trades_${date}.csv");
 
-system("cat $filename | grep OrderUpdate | perl process_fills.pl | grep -v HTC | perl calculate_pnl.pl > pnl_${date}.csv");
-
-system("cat trades_*  |  grep -v HTC | perl calculate_pnl.pl > cumlpnl_${date}.csv");
-
-system("cat $filename | grep OrderUpdate | perl process_fills.pl | perl generate_dropfile.pl");
+if (-e "/var/jsi/atalogs/corrections_${date}.csv"){
+    system("cat trades_${date}.csv corrections_${date}.csv | grep -v HTC | perl calculate_pnl.pl > pnl_${date}.csv");
+    system("cat trades_* corrections_* |  grep -v HTC | perl calculate_pnl.pl > cumlpnl_${date}.csv");
+    system("cat trades_${date}.csv corrections_${date}.csv | perl generate_dropfile.pl");
+} else {
+    system("cat trades_${date}.csv | grep -v HTC | perl calculate_pnl.pl > pnl_${date}.csv");
+    system("cat trades_* |  grep -v HTC | perl calculate_pnl.pl > cumlpnl_${date}.csv");
+    system("cat trades_${date}.csv | perl generate_dropfile.pl");
+}
 
 move("F96TR${tstamp}1.csv", "/var/jsi/pensonfiles/");
 move("F96TR${tstamp}2.csv", "/var/jsi/pensonfiles/");
 
 system("cat /var/jsi/torcfiles/JacobSecurities_${date} | perl rollup_torc.pl | perl generate_dropfile.pl");
 
-system("diff F96TR${tstamp}2 /var/jsi/pensonfiles/F96TR${tstamp}2");
+#system("diff F96TR${tstamp}2 /var/jsi/pensonfiles/F96TR${tstamp}2");
 
-system("rm F96TR${tstamp}2");
+#system("rm F96TR${tstamp}2");
 
 #my $ftp_h = Net::FTP->new($host, Debug => 0);
 #$ftp_h->login($user, $pass);
