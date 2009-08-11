@@ -56,8 +56,6 @@ foreach my $venue (sort keys %positions) {
 	    my $fills     = $positions{"$venue"}{"$symbol"}{"$side"}{"count"};
 	    my $shares    = $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"};
 	    my $avg_price = sprintf("%0.6f", $positions{"$venue"}{"$symbol"}{"$side"}{"money"} / $shares);
-	    
-	    #print "$venue,$symbol,$side,$shares,$avg_price\n";
 
 
 
@@ -78,8 +76,6 @@ foreach my $venue (sort keys %positions) {
 
              
 	    next if $venue =~ /CNX/;
-
-	    #$total_currency += $positions{"$venue"}{"$symbol"}{"$side"}{"money"} * ($side eq "BUY" ? -1 : 1);
 	}
     }
 
@@ -89,6 +85,5 @@ foreach my $venue (sort keys %positions) {
  
 
     close(FILE);
-    #print "\n$venue,${total_currency}\n\n" unless $venue =~ /CNX/;
 }
 

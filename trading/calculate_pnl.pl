@@ -11,10 +11,13 @@ my $ca_cashvolume = 0;
 my $us_cashvolume = 0;
 my $unhedged_pnl = 0;
 my $exchange_rate = 0;
+my $count = 0;
+my $offset;
 
 my $cad_fx = 0;
 my $usd_fx = 0;
 
+my %interlistedhash;
 my %ca_positions;
 my %us_positions;
 
@@ -42,7 +45,6 @@ while(my $line = <>) {
     }
 }
 
-
 foreach my $symbol (sort keys %ca_positions) {
     print $symbol . "," . $ca_positions{"$symbol"} . "\n"; 
 }
@@ -51,6 +53,37 @@ print "\n";
 
 foreach my $symbol (sort keys %us_positions) {
     print $symbol . "," . $us_positions{"$symbol"} . "\n"; 
+}
+
+print "\n";
+
+print "Not flat:\n";
+
+open(FILE, "InterlistedStocks.csv") || die ("Could not open file!");
+
+while(my $line = <FILE> ) {
+    my ($casymbol, $ussymbol) = split(",", $line);
+    $casymbol =~ s/"//g;
+    $ussymbol =~ s/"//g;
+    $casymbol =~ s/\n//g;
+    $ussymbol =~ s/\n//g;
+    $interlistedhash{$casymbol} = $ussymbol;     
+}
+
+close(FILE);
+
+foreach my $symbol (sort keys %ca_positions) {
+
+    my $ussymbol = $interlistedhash{$symbol};
+    $offset = $ca_positions{$symbol} + $us_positions{$ussymbol};
+    if ($offset != 0) {
+        print "$symbol,$interlistedhash{$symbol} : $offset\n";
+        $count = 1;
+    }
+}
+
+if ($count == 0) {
+    print "None";
 }
 
 $unhedged_pnl = $usd_cashflow * $exchange_rate + $cad_cashflow;

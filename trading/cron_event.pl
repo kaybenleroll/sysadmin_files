@@ -29,16 +29,19 @@ $filename = "/var/jsi/atalogs/ATA_correlator_${date}*";
 
 system("cat $filename | grep OrderUpdate | perl process_fills.pl > trades_${date}.csv");
 
-if (-e "/var/jsi/atalogs/corrections_${date}.csv"){
-    system("cat trades_${date}.csv corrections_${date}.csv | grep -v HTC | perl calculate_pnl.pl > pnl_${date}.csv");
-    system("cat trades_* corrections_* |  grep -v HTC | perl calculate_pnl.pl > cumlpnl_${date}.csv");
-    system("cat trades_${date}.csv corrections_${date}.csv | perl generate_dropfile.pl");
+if (-e "/var/jsi/tradefile_pnl/corrections/corrections_${date}.csv"){
+    system("cat trades_${date}.csv /var/jsi/tradefile_pnl/corrections/corrections_${date}.csv | grep -v HTC | perl calculate_pnl.pl > pnl_${date}.csv");
+    system("cat trades_* /var/jsi/tradefile_pnl/corrections/corrections_* |  grep -v HTC | perl calculate_pnl.pl > cumlpnl_${date}.csv");
+    system("cat trades_${date}.csv /var/jsi/tradefile_pnl/corrections/corrections_${date}.csv | perl generate_dropfile.pl");
 } else {
     system("cat trades_${date}.csv | grep -v HTC | perl calculate_pnl.pl > pnl_${date}.csv");
     system("cat trades_* |  grep -v HTC | perl calculate_pnl.pl > cumlpnl_${date}.csv");
     system("cat trades_${date}.csv | perl generate_dropfile.pl");
 }
 
+move("trades_${date}.csv","/var/jsi/tradefile_pnl/trades");
+move("pnl_${date}.csv","/var/jsi/tradefile_pnl/pnl");
+move("cumlpnl_${date}.csv","/var/jsi/tradefile_pnl/cumlpnl");
 move("F96TR${tstamp}1.csv", "/var/jsi/pensonfiles/");
 move("F96TR${tstamp}2.csv", "/var/jsi/pensonfiles/");
 

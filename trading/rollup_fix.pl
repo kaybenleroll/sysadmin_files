@@ -5,6 +5,8 @@ use warnings;
 
 my %positions;
 my %fieldhash;
+my %hash;
+my $k;
 
 while(my $line = <>) {
     
@@ -16,13 +18,31 @@ while(my $line = <>) {
             $field =~ /(\d+)=(.*)/;
             $fieldhash{$1} = $2;
         }
+        my $orderid   = undef;
+        my $symbol    = undef;
+        my $side      = undef;
+        my $executed  = undef;
+        my $price     = undef;
+        my $ordstatus = undef;
+        my $venue     = undef;
+        $orderid   = $fieldhash{11};
+        $symbol    = $fieldhash{55};
+        $side      = $fieldhash{54};
+        $ordstatus = $fieldhash{39};
+        $venue     = $fieldhash{56};
 
-        my $orderid   = $fieldhash{11};
-        my $symbol    = $fieldhash{55};
-        my $side      = $fieldhash{54};
-        my $executed  = $fieldhash{38};
-        my $price     = $fieldhash{44};
-        my $ordstatus = $fieldhash{39};
+
+
+        if ($venue eq "JACOB01"){
+            $venue = "US";
+            $price     = $fieldhash{31};
+            $executed  = $fieldhash{32};
+        }
+        elsif ($venue eq "PGR"){
+            $venue = "CA";
+            $price     = $fieldhash{44};
+            $executed  = $fieldhash{38};
+        }
 
         $symbol =~ s/"//g;
     
@@ -33,15 +53,18 @@ while(my $line = <>) {
             $side = "SELL";
         }
 
-        my $venue;
-
         my $printprice;
 
         $printprice = sprintf("%8.6f", $price);
-        if ($ordstatus = 2){
-            print "CA,$symbol,$side,$executed,0,$printprice,$orderid\n";
+ 
+        if ($ordstatus eq "2"){
+            $hash{$orderid} = "$venue,$symbol,$side,$executed,0,$printprice,$orderid";
         }
     }
+}
+
+foreach $k (sort keys %hash) {
+    print "$hash{$k}\n";
 }
 
 exit(0);
