@@ -11,11 +11,11 @@ my $k;
 
 #Takes every line given through standard input and pulls the venue symbol side quantity and price from it
 while(my $line = <>) {
+    chomp($line);
+    my ($venue, $symbol, $side, $qty, $left, $price) = split(",", $line);
     
-    my ($venue, $symbol, $side, $qty, $price) = split(",", $line);
-
     #If the quantity was not 100 ie the trade was a partial fill add the trade data to partial fill hash.
-    if ($qty != 100) 
+    if ($qty != 100) {
 
         $partialhash{$venue}{$symbol}{$side}{$price} += $qty;
 
