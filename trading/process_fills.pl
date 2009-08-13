@@ -5,20 +5,17 @@ use warnings;
 
 use Time::ParseDate;
 
-my %positions;
+#Declaration of variables
 my %hash;
 my $k;
 my $timestamp;
-my $epoch;
+my $epoch = 0;
+
 
 while(my $line = <>) {
-    
-    $line =~ /^(.*?) CRIT/;
-    $timestamp = $1;
-    $epoch = parsedate($timestamp);
-
+    #If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
     if ($line =~ /.*OrderUpdate\((.*)\)/){
-
+        
         my @data = split(",", $1);
 
         my $orderid   = $data[0];
@@ -29,15 +26,24 @@ while(my $line = <>) {
         my $price     = $data[18];
         my $status    = $data[19];
 
+        #Pulls timestamp from line and assigns it to variable
+        $line =~ /^(.*?) CRIT/;
+        $timestamp = $1;
+        #If a timstamp was pulled convert it to epoch for
+        $epoch = parsedate($timestamp);
+
+        #Makes sure that the order is a trade by checking orderif and status
         next unless $orderid =~ /^"[^_]/;
         next unless $status  =~ /Filled:/;
         next unless ($orderid && $orderid ne "\"\""); 
 
+        #Removes quatations from symbol and side
         $symbol =~ s/"//g;
         $side   =~ s/"//g;
 
         my $venue;
 
+        #Assigns the venue based on line content
         if($line =~ /TSX_TRADING/) {
 	    $venue = "CA";
         } elsif($line =~ /TORC_TRADING/) {
@@ -48,22 +54,19 @@ while(my $line = <>) {
 	    print "Error parsing entry $line";
         }
 
-        my $printprice;    
-        $printprice = sprintf("%8.6f", $price);
+        #Rounds the price to 6 decimal places
+        my $printprice = sprintf("%8.6f", $price);
     
+        #Assigns the information to a hash with the orderid as a key so that if an order is repeated it will no be printed out twice
         $hash{$orderid} = "$venue,$symbol,$side,$executed,$remaining,$printprice,$orderid,$timestamp,$epoch";
 
-        $positions{"$venue"}{"$symbol"}{"$side"}{"count"} += 1;
-        $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"} += $executed;
-        $positions{"$venue"}{"$symbol"}{"$side"}{"money"} += $executed * $price;
     }
 }
 
+#Prints out every entry in the hash
 foreach $k (sort keys %hash) {
     print "$hash{$k}\n";
 }
 
 exit(0);
-
-print "\n\nSummary:\n\n";
 
