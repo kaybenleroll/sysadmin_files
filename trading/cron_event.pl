@@ -66,7 +66,7 @@ chdir "/var/jsi/pensonfiles/";
 if ($ftpcheck){
     my $ftp_h = Net::FTP->new($host, Debug => 0);
     $ftp_h->login($user, $pass);
-    $ftp_h->cwd("/eod");
+    $ftp_h->cwd("/home/F96FTP01/eod");
     $ftp_h->put("F96TR${tstamp}1.csv");
     $ftp_h->put("F96TR${tstamp}2.csv");
 }
