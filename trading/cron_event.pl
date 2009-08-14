@@ -58,8 +58,9 @@ move("cumlpnl_${date}.csv","/var/jsi/tradefile_pnl/cumlpnl");
 move("F96TR${tstamp}1.csv", "/var/jsi/pensonfiles/");
 move("F96TR${tstamp}2.csv", "/var/jsi/pensonfiles/");
 
-#cat's torcfiles through rollup torc and generatedropfile to create the torc comparison file
+#cat's torcfiles and fix logs through rollup and generate dropfile to create the torc and fix comparison file
 system("cat /var/jsi/torcfiles/JacobSecurities_${date} | perl rollup_torc.pl | perl generate_dropfile.pl");
+system("cat /var/jsitmp/FIX_${date}/FIX.4.2-PGR-TSXPROD.messages.log | perl rollup_fix.pl | perl generate_dropfile.pl");
 
 #If Ftp has been enabled through get option, upload files ftp server
 chdir "/var/jsi/pensonfiles/";
