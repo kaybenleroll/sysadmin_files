@@ -1,0 +1,45 @@
+#!/usr/bin/perl -w
+
+use strict;
+use warnings;
+use diagnostics;
+
+use Locale::Currency::Format;
+use Getopt::Long;
+
+my $create_symbolset = 0;
+my $notrade          = 0;
+
+my $username          = "mcooney";
+my $create_filename   = undef;
+my $input_file        = undef;
+my $start_instance_id = undef;
+
+GetOptions('create_filename=s' => \$create_filename,
+           'username=s'        => \$username,
+           'start_id=s'        => \$start_instance_id,
+           'input_file=s'      => \$input_file);
+
+open(INPUTFILE, "$input_file") or die("Cannot open $input_file for reading\n");
+
+my $scenario_name = <INPUTFILE>;
+chomp($scenario_name);
+
+open(CREATEFILE, ">$create_filename") or die("Cannot create file ${create_filename}");
+
+my $scenario_id = $start_instance_id ? $start_instance_id : (1000000000000 + int(rand(100000000)) * 100000);
+
+while(my $line = <INPUTFILE>) {
+    chomp($line);
+    
+    $scenario_id++;
+    
+    my @input_data = map { "\"$_\"" } split(",", $line);
+    
+    my $input_params = join(",", @input_data);
+    
+    print CREATEFILE "com.apama.scenario.Create(\"Scenario_${scenario_name}\",${scenario_id},\"$username\",[${input_params}])\n";    
+}
+
+
+close(CREATEFILE);
