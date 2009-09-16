@@ -9,7 +9,7 @@ use Getopt::Long;
 my %scenario_params;
 
 
-my $symbols_file     = "symbols.txt";
+my $symbols_file     = "rebatetrading_symbols.txt";
 my $corrections_file = "rebatetrading_corrections.txt";
 my $optdists_file    = "optimal_dists.txt";
 
@@ -17,8 +17,8 @@ GetOptions('symbols_file=s'     => \$symbols_file,
            'optdists_file=s'    => \$optdists_file,
            'corrections_file=s' => \$corrections_file);
 
-my %symbol_list      = {};
-my %corrections_list = {};
+my %symbol_list      = ();
+my %corrections_list = ();
 
 
 open(FILE, $symbols_file);
@@ -55,8 +55,8 @@ foreach my $line (<FILE>) {
     my $symbol = $data[0];
     $symbol =~ s/\-(bid|ask)//g;
 
-    my $bid_dist = 10;
-    my $ask_dist = 10;
+    my $bid_dist = 10000;
+    my $ask_dist = 10000;
 
     if($symbol_list{"$symbol"}) {
         if(!$scenario_params{"$symbol"}) {
@@ -91,8 +91,8 @@ foreach my $line (<FILE>) {
             }
         }
                 
-        $scenario_params{"$symbol"}[2] = $bid_dist + $corrections_list{"$symbol"};
-        $scenario_params{"$symbol"}[3] = $ask_dist + $corrections_list{"$symbol"};
+        $scenario_params{"$symbol"}[2] = sprintf("%4.2f", $bid_dist + $corrections_list{"$symbol"} );
+        $scenario_params{"$symbol"}[3] = sprintf("%4.2f", $ask_dist + $corrections_list{"$symbol"} );
     }
 }
 
