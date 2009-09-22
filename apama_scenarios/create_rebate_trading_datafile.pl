@@ -12,14 +12,18 @@ my %scenario_params;
 my $symbols_file     = "rebatetrading_symbols.txt";
 my $corrections_file = "rebatetrading_corrections.txt";
 my $optdists_file    = "optimal_dists.txt";
+my $timer_file       = "order_times.txt";
+my $default_timer    = 30;
 
 GetOptions('symbols_file=s'     => \$symbols_file,
            'optdists_file=s'    => \$optdists_file,
+           'timer_file=s'       => \$timer_file,
+           'default_timer=s'    => \$default_timer,
            'corrections_file=s' => \$corrections_file);
 
 my %symbol_list      = ();
 my %corrections_list = ();
-
+my %timer_list       = ();
 
 open(FILE, $symbols_file);
 
@@ -43,6 +47,21 @@ if(-e $corrections_file) {
 
     close(FILE);
 }
+
+
+open(FILE, $timer_file) or die("Cannot open timer file $timer_file");
+
+while(my $line = <FILE>) {
+    chomp($line);
+    
+    my ($symbol, $value) = split(",", $line);
+    
+    my $time = ($value ne "NA") ? $value : 0;
+    
+    $timer_list{"$symbol"} = sprintf("%4.2f", $time);
+}
+
+close(FILE);
 
 
 open(FILE, $optdists_file);
@@ -78,6 +97,7 @@ foreach my $line (<FILE>) {
             $scenario_params{"$symbol"}[4] = 100;        ## Order size
             $scenario_params{"$symbol"}[5] = 100000;     ## Max Volume
             $scenario_params{"$symbol"}[6] = "false";    ## Send Orders
+            $scenario_params{"$symbol"}[7] = $timer_list{"$symbol"} ? $timer_list{"$symbol"} : $default_timer;
 
         } else {
             if($data[0] =~ /bid/) {
