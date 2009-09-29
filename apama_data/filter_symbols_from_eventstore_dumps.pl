@@ -14,7 +14,7 @@ my @symbols = split(",", $symbol_list);
 
 while(my $line = <>) {
     foreach my $symbol (@symbols) {
-	print $line if $line =~ /"$symbol"/;
+        print $line if $line =~ /"$symbol"/;
     }
 }
 
