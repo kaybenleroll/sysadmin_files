@@ -41,6 +41,8 @@ while(my $line = <>) {
         $symbol =~ s/"//g;
         $side   =~ s/"//g;
 
+        $side = ($side =~ /SELL/) ? "SELL" : "BUY";
+
         my $venue;
 
         #Assigns the venue based on line content

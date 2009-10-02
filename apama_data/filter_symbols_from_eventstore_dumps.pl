@@ -6,7 +6,7 @@ use diagnostics;
 
 use Getopt::Long;
 
-my $symbol_list = "ABX.TO,ABX.,RY.TO,RY.,G.TO,GG.,SU.TO,SU.,XIU.TO,CNQ.TO,CNQ.";
+my $symbol_list = "ABX.TO,ABX.,RY.TO,RY.,G.TO,GG.,SU.TO,SU.,XIU.TO,CNQ.TO,CNQ.,USD/CAD";
 
 
 my @symbols = split(",", $symbol_list);

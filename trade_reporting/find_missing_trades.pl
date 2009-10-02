@@ -55,7 +55,7 @@ close(RFILE);
 #If not it prints out the venue symbol side quantity price and the hash value.
 foreach my $venue (sort keys %testhash) {
     foreach my $symbol (sort keys %{ $testhash{"$venue"} }) {
-	foreach my $side (sort keys %{ $testhash{"$venue"}{"$symbol"} }) {
+        foreach my $side (sort keys %{ $testhash{"$venue"}{"$symbol"} }) {
             foreach my $qty (sort keys %{ $testhash{"$venue"}{"$symbol"}{"$side"} }) {
                 foreach my $price (sort keys %{ $testhash{"$venue"}{"$symbol"}{"$side"}{$qty} }) {                
                     if ($testhash{$venue}{$symbol}{$side}{$qty}{$price} != 0 && $venue ne "CNX"){
