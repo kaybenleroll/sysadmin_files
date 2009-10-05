@@ -80,9 +80,9 @@ foreach my $venue (sort keys %positions) {
             $count += 1;
             
             if($venue eq "US"){
-                print FILE "$count,2SDAAYF,,,XY,$shares,$avg_price,$side,P,$symbol,,,$date,,,,,,,,,N,,,,,,4PEC83D,4PAA,T,0,,,,,,,,N,\n";
+                print FILE "$count,2SDAAYF,,,XY,$shares,$avg_price,$side,P,$symbol,,,$date,,0,,,,,,,N,,,,,,4PEC83D,4PAA,T,0,,,,,,,,N,\n";
             } elsif ($venue eq "CA"){
-                print FILE "$count,2SDAAYE,,,T,$shares,$avg_price,$side,P,$symbol,,,$date,,,,,,,,,,,,,,,,,,,,,,,,\n";    
+                print FILE "$count,2SDAAYE,,,T,$shares,$avg_price,$side,P,$symbol,,,$date,,0,,,,,,,,,,,,,,,,,,,,,,\n";    
             }
 
              
