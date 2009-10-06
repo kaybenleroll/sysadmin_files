@@ -47,13 +47,6 @@ sub main {
     system("diff F96TR${tstamp}2 /var/jsi/pensonfiles/F96TR${tstamp}2");
 
     system("rm F96TR${tstamp}2");
-
-    #my $ftp_h = Net::FTP->new($host, Debug => 0);
-    #$ftp_h->login($user, $pass);
-    #$ftp_h->cwd("/eod");
-    #$ftp_h->put("F96TR${tstamp}1.csv");
-    #$ftp_h->put("F96TR${tstamp}2.csv");
-
 }
 
 sub process_fills {
@@ -62,54 +55,52 @@ sub process_fills {
     my %positions;
     while(my $line = <>) {
         if ($line =~ /.*OrderUpdate\((.*)\)/){
+            my @data = split(",", $1);
+            my %hash;
+
+            my $orderid   = $data[0];
+            my $symbol    = $data[1];
+            my $side      = $data[3];
+            my $executed  = $data[14];
+            my $remaining = $data[15];
+            my $price     = $data[18];
+            my $status    = $data[19];
 
 
-        my @data = split(",", $1);
-        my %hash;
+            next unless $orderid =~ /^"[^_]/;
+            next unless $status  =~ /Filled:/;
 
-        my $orderid   = $data[0];
-        my $symbol    = $data[1];
-        my $side      = $data[3];
-        my $executed  = $data[14];
-        my $remaining = $data[15];
-        my $price     = $data[18];
-        my $status    = $data[19];
+            $symbol =~ s/"//g;
+            $side   =~ s/"//g;
 
+            my $venue;
 
-        next unless $orderid =~ /^"[^_]/;
-        next unless $status  =~ /Filled:/;
+            if($line =~ /TSX_TRADING/) {
+                $venue = "CA";
+            } elsif($line =~ /TORC_TRADING/) {
+                $venue = "US";
+            } elsif($line =~ /CURRENEX_TRADING/) {
+                $venue = "CNX";
+            } else {
+                print "Error parsing entry $line";
+            }
 
-        $symbol =~ s/"//g;
-        $side   =~ s/"//g;
+            my $printprice;
 
-        my $venue;
-
-        if($line =~ /TSX_TRADING/) {
-	    $venue = "CA";
-        } elsif($line =~ /TORC_TRADING/) {
-	    $venue = "US";
-        } elsif($line =~ /CURRENEX_TRADING/) {
-	    $venue = "CNX";
-        } else {
-	    print "Error parsing entry $line";
-        }
-
-        my $printprice;
-
-        if($venue eq "CNX") {
-	    $printprice = sprintf("%8.6f", $price);
-        } else {
-	    $printprice = sprintf("%4.2f", $price);
-        }
+            if($venue eq "CNX") {
+	            $printprice = sprintf("%8.6f", $price);
+            } else {
+	            $printprice = sprintf("%4.2f", $price);
+            }
 
 
-        $hash{$orderid} = "$venue,$symbol,$side,$executed,$remaining,$printprice";
-        print "$hash{$orderid}\n";
+            $hash{$orderid} = "$venue,$symbol,$side,$executed,$remaining,$printprice";
+            print "$hash{$orderid}\n";
 
     
-        $positions{"$venue"}{"$symbol"}{"$side"}{"count"} += 1;
-        $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"} += $executed;
-        $positions{"$venue"}{"$symbol"}{"$side"}{"money"} += $executed * $price;
+            $positions{"$venue"}{"$symbol"}{"$side"}{"count"} += 1;
+            $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"} += $executed;
+            $positions{"$venue"}{"$symbol"}{"$side"}{"money"} += $executed * $price;
         }
     }
 
@@ -139,21 +130,21 @@ sub calculate_pnl {
         my ($venue, $symbol, $side, $qty, $remain, $price) = split(",", $line);
 
         if($venue eq "CNX") {
-	    $usd_fx                  += ($qty          * ($side eq "BUY" ?  1 : -1));
-	    $cad_fx                  += ($qty * $price * ($side eq "BUY" ? -1 :  1));
+            $usd_fx                  += ($qty          * ($side eq "BUY" ?  1 : -1));
+            $cad_fx                  += ($qty * $price * ($side eq "BUY" ? -1 :  1));
             $exchange_rate            = ($price        +(($side eq "BUY" ? -1 :  1)*0.00025));
         } elsif($venue eq "CA") {
-	    $ca_positions{"$symbol"} += ($qty          * ($side eq "BUY" ?  1 : -1));
-	    $cad_cashflow            += ($qty * $price * ($side eq "BUY" ? -1 :  1));
-	    $ca_volume               += ($qty         );
-	    $ca_cashvolume           += ($qty * $price);
+            $ca_positions{"$symbol"} += ($qty          * ($side eq "BUY" ?  1 : -1));
+            $cad_cashflow            += ($qty * $price * ($side eq "BUY" ? -1 :  1));
+            $ca_volume               += ($qty         );
+            $ca_cashvolume           += ($qty * $price);
         } elsif($venue eq "US") {
-	    $us_positions{"$symbol"} += ($qty          * ($side eq "BUY" ?  1 : -1));
-	    $usd_cashflow            += ($qty * $price * ($side eq "BUY" ? -1 :  1));
-	    $us_volume               += ($qty         );
-	    $us_cashvolume           += ($qty * $price); 
+            $us_positions{"$symbol"} += ($qty          * ($side eq "BUY" ?  1 : -1));
+            $usd_cashflow            += ($qty * $price * ($side eq "BUY" ? -1 :  1));
+            $us_volume               += ($qty         );
+            $us_cashvolume           += ($qty * $price); 
         } else {
-	    print "Error with line $line";
+            print "Error with line $line";
         }
     }
 
@@ -185,8 +176,6 @@ sub calculate_pnl {
     print "US Volume       " . sprintf("% 10.2f", $us_volume) . "\n";
     print "\n";
     print "Unhedged PNL: " . sprintf("%10.2f", $unhedged_pnl) . "\n";
-
-
 }
 
 sub generate_dropfile {
@@ -204,13 +193,11 @@ sub generate_dropfile {
     my %positions;
     my $input;
 
-    if ($filename){
+    if ($filename) {
         $input = "RFILE";
         open(RFILE, $filename) || die ("Could not open file!");
-
-    }else{
+    } else {
         $input = "STDIN";
-
     }
 
     while(my $line = <$input>) {
@@ -237,35 +224,30 @@ sub generate_dropfile {
         print FILE "#,A/C,Nam,RR,MKT,QTY,Price,B/S,TB,Symbol,Security,Cusip,TD,SD,Comm,F/X,CT,A01,A02,A03,A04,O/C,CXL,75,77,HM,INV/GB,BACCT,BRR,BT/B,BCOMM,BF/X,BCT,B75,B77,BINV/GB,BHM\n";
 
         foreach my $symbol (sort keys %{ $positions{"$venue"} }) {
-	    foreach my $side (sort keys %{ $positions{"$venue"}{"$symbol"} }) {
-	        my $fills     = $positions{"$venue"}{"$symbol"}{"$side"}{"count"};
-	        my $shares    = $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"};
-	        my $avg_price = sprintf("%0.6f", $positions{"$venue"}{"$symbol"}{"$side"}{"money"} / $shares);
-	    
-	        #print "$venue,$symbol,$side,$shares,$avg_price\n";
+            foreach my $side (sort keys %{ $positions{"$venue"}{"$symbol"} }) {
+                my $fills     = $positions{"$venue"}{"$symbol"}{"$side"}{"count"};
+                my $shares    = $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"};
+                my $avg_price = sprintf("%0.6f", $positions{"$venue"}{"$symbol"}{"$side"}{"money"} / $shares);
 
+                if($side eq "BUY"){
+                    $side = "B";
+	            } elsif ($side eq "SELL"){
+		            $side = "S";
+    	        } else {
+		            $side = "ERROR";
+	            }
 
+                $count += 1;
 
-	        if($side eq "BUY"){
-		    $side = "B";
-	        } elsif ($side eq "SELL"){
-		    $side = "S";
-	        }else {
-		    $side = "ERROR";
-	        }
-
-	        $count += 1;
-	        if($venue eq "US"){    
-		    print FILE "$count,4PABCRF,,,XY,$shares,$avg_price,$side,P,$symbol,,,$date,,,,,,,,,N,,,,,,4PEC83D,4PAA,T,0,,,,,,,,N,\n";
-    	        } elsif ($venue eq "CA"){
-		    print FILE "$count,4PABCRE,,,T,$shares,$avg_price,$side,P,$symbol,,,$date,,,,,,,,,,,,,,,,,,,,,,,,\n";	
-  	        }
+                if($venue eq "US") {    
+                    print FILE "$count,4PABCRF,,,XY,$shares,$avg_price,$side,P,$symbol,,,$date,,,,,,,,,N,,,,,,4PEC83D,4PAA,T,0,,,,,,,,N,\n";
+                } elsif ($venue eq "CA") {
+                    print FILE "$count,4PABCRE,,,T,$shares,$avg_price,$side,P,$symbol,,,$date,,,,,,,,,,,,,,,,,,,,,,,,\n";    
+                }
 
              
-	        next if $venue =~ /CNX/;
-
-	        #$total_currency += $positions{"$venue"}{"$symbol"}{"$side"}{"money"} * ($side eq "BUY" ? -1 : 1);
-	    }
+                next if $venue =~ /CNX/;
+            }
         }
 
         my $number = sprintf ("%05d", $count);
@@ -274,7 +256,6 @@ sub generate_dropfile {
  
 
         close(FILE);
-        #print "\n$venue,${total_currency}\n\n" unless $venue =~ /CNX/;
     }
 }
 
