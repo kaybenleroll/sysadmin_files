@@ -29,13 +29,20 @@ mkdir("$download_dir/$tstamp");
 chdir("$download_dir/$tstamp");
 
 
-#my $ftp_h = Net::FTP->new($host, Debug => 0);
-#$ftp_h->login($user, $pass);
+my $ftp_h = Net::FTP->new($host, Debug => 0);
+$ftp_h->login($user, $pass);
 
-#$ftp_h->cwd("/home/F96FTP01/Reports");
+$ftp_h->cwd("/home/F96FTP01/Reports");
 
-#my @file_list = $ftp_h->ls();
+my @full_file_list = $ftp_h->ls();
 
-#foreach my $file (@file_list) {
-#    print $file . "\n" if $file !~ /\./;
-#}
+my @download_list = ();
+
+foreach my $file (@full_file_list) {
+    push(@download_list, $file) if $file =~ /$tstamp/;
+}
+
+foreach my $file (@download_list) {
+    $ftp_h->get($file);
+}
+
