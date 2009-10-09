@@ -7,5 +7,5 @@ while(<>) {
     
     /(.*) Timestamp: (.*?) Symbol: (.*?) Last Price: (.*?) Interval Volume: (.*) Interval VWAP: (.*?)\n/;
     
-    print "$1,$2,$3,$4,$5,$6\n";
+    print "$1 $2,$3,$4,$5,$6\n";
 }

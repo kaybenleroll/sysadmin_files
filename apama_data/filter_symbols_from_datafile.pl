@@ -11,11 +11,10 @@ my $symbol_list = "ABX.TO,ABX.,RY.TO,RY.,G.TO,GG.,SU.TO,SU.,XIU.TO,XEG.TO,XIT.TO
 
 my @symbols = split(",", $symbol_list);
 
+my $regexp = "(," . join(",|,", @symbols) . ",)";
 
 while(my $line = <>) {
-    foreach my $symbol (@symbols) {
-        print $line if $line =~ /"$symbol"/;
-    }
+    print $line if $line =~ /$regexp/;
 }
 
 exit(0);
