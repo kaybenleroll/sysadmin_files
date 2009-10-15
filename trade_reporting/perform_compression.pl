@@ -44,7 +44,7 @@ foreach my $venue (sort keys %positions) {
 
 foreach my $venue (sort keys %positions) {
     foreach my $symbol (sort keys %{ $positions{"$venue"} }) {
-        print "$venue,$symbol," . $symbol_pnl{"$venue"}{"$symbol"} . "\n";
+        print sprintf("%s,%s,%4.2f\n", $venue, $symbol, $symbol_pnl{"$venue"}{"$symbol"});
     }
 }
         
