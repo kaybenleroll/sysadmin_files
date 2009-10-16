@@ -22,7 +22,8 @@ my $smtp_host    = 'smtp.1and1.com';
 my $smtp_user    = 'smtpusers@jacobsecurities.com';
 my $smtp_pass    = '98FrCup';
 
-my $target_email = 'dailypensontradingreports@jacobsecurities.com';
+my $target_email = 'mcooney@jacobsecurities.com';
+#my $target_email = 'dailypensontradingreports@jacobsecurities.com';
 
 
 GetOptions('date=s'         => \$date,
@@ -41,6 +42,7 @@ chdir("$download_dir/$tstamp");
 my $ftp_h = Net::FTP->new($host, Debug => 0);
 $ftp_h->login($user, $pass);
 
+$ftp_h->binary();
 $ftp_h->cwd("/home/F96FTP01/Reports");
 
 my @full_file_list = $ftp_h->ls();
