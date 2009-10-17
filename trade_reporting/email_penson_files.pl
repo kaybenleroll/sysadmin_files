@@ -16,7 +16,6 @@ my $host         = '207.35.239.17';
 my $user         = 'F96FTP01';
 my $pass         = 'VLZWR3IBK1';
 my $download_dir = '/var/jsi/pensonreports';
-my $email_addr   = 'testgroup@jacobsecurities.com';
 
 my $smtp_host    = 'smtp.1and1.com';
 my $smtp_user    = 'smtpusers@jacobsecurities.com';
@@ -28,7 +27,6 @@ my $target_email = 'mcooney@jacobsecurities.com';
 
 GetOptions('date=s'         => \$date,
            'target_email=s' => \$target_email,
-           'email_addr=s'   => \$email_addr,
            'download_dir=s' => \$download_dir);
 
 $tstamp      = UnixDate(DateCalc(ParseDate($date),"-1 business day"), "%Y-%m-%d");
@@ -62,10 +60,10 @@ foreach my $file (@download_list) {
 
 my $email_msg = MIME::Lite->new(
     From    => 'no-reply@jacobsecurities.com',
-    To      => 'testgroup@jacobsecurities.com',
-    Subject => 'Test Files Email',
+    To      => $target_email,
+    Subject => 'Daily Penson Files',
     Type    => 'TEXT',
-    Data    => 'This is a test email'
+    Data    => 'This is an automated email. If you have any issues, send an email to mcooney@jacobsecurities.com'
 );
 
 
