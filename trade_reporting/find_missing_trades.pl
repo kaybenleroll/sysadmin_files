@@ -36,7 +36,7 @@ while(my $line = <RFILE>) {
     chomp ($line);
     my ($venue, $symbol, $side, $qty, $remain, $price) = split(",", $line);
 
-    $testhash{$venue}{$symbol}{$side}{$qty}{$price} += 1;
+    $testhash{$venue}{$symbol}{$side}{$price} += $qty;
 }
 close(RFILE);
 
@@ -47,7 +47,7 @@ while(my $line = <RFILE>) {
     chomp ($line);
     my ($venue, $symbol, $side, $qty, $remain, $price) = split(",", $line);
 
-    $testhash{$venue}{$symbol}{$side}{$qty}{$price} -= 1;
+    $testhash{$venue}{$symbol}{$side}{$price} -= $qty;
 }
 close(RFILE);
 
@@ -56,11 +56,9 @@ close(RFILE);
 foreach my $venue (sort keys %testhash) {
     foreach my $symbol (sort keys %{ $testhash{"$venue"} }) {
         foreach my $side (sort keys %{ $testhash{"$venue"}{"$symbol"} }) {
-            foreach my $qty (sort keys %{ $testhash{"$venue"}{"$symbol"}{"$side"} }) {
-                foreach my $price (sort keys %{ $testhash{"$venue"}{"$symbol"}{"$side"}{$qty} }) {                
-                    if(($testhash{"$venue"}{"$symbol"}{"$side"}{"$qty"}{"$price"} != 0) and ($venue ne "CNX")){
-                        print"$venue,$symbol,$side,$qty,0,$price, = " . $testhash{"$venue"}{"$symbol"}{"$side"}{"$qty"}{"$price"} . "\n";
-                    }
+            foreach my $price (sort keys %{ $testhash{"$venue"}{"$symbol"}{"$side"} }) {
+                if(($testhash{"$venue"}{"$symbol"}{"$side"}{"$price"} != 0) and ($venue ne "CNX")){
+                    print"$venue,$symbol,$side,0,$price, = " . $testhash{"$venue"}{"$symbol"}{"$side"}{"$price"} . "\n";
                 }
             }
         }
