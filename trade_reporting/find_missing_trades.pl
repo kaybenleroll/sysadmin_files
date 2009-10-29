@@ -58,7 +58,7 @@ foreach my $venue (sort keys %testhash) {
         foreach my $side (sort keys %{ $testhash{"$venue"}{"$symbol"} }) {
             foreach my $price (sort keys %{ $testhash{"$venue"}{"$symbol"}{"$side"} }) {
                 if(($testhash{"$venue"}{"$symbol"}{"$side"}{"$price"} != 0) and ($venue ne "CNX")){
-                    print"$venue,$symbol,$side,0,$price, = " . $testhash{"$venue"}{"$symbol"}{"$side"}{"$price"} . "\n";
+                    print sprintf("%s,%s,%s,%d,0,%2.4f\n", $venue, $symbol, $side, $testhash{"$venue"}{"$symbol"}{"$side"}{"$price"}, $price);
                 }
             }
         }
