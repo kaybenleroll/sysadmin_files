@@ -7,7 +7,6 @@ use Getopt::Long;
 use File::Copy;
 use Net::FTP;
 use Date::Manip; 
-use MIME::Lite;
 
 
 my $date         = 'today';
@@ -57,22 +56,3 @@ foreach my $file (@download_list) {
     $ftp_h->get($file);
 }
 
-
-my $email_msg = MIME::Lite->new(
-    From    => 'no-reply@jacobsecurities.com',
-    To      => $target_email,
-    Subject => 'Daily Penson Files',
-    Type    => 'TEXT',
-    Data    => 'This is an automated email. If you have any issues, send an email to mcooney@jacobsecurities.com'
-);
-
-
-foreach my $file (@download_list) {
-    $email_msg->attach(
-        Path     => $download_dir . "/$tstamp/$file",
-        Filename => $file
-    );
-}
-
-
-$email_msg->send('smtp', $smtp_host, AuthUser => $smtp_user, AuthPass => $smtp_pass);

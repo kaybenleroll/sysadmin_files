@@ -68,17 +68,16 @@ while(my $line = <>) {
         @data = split(",",$1);
 
         if ($#data >= 12){
-      
             $Symbol         = $data[0];
-	    $bids           = $data[1];
+            $bids           = $data[1];
             #$bids           =~ s/[//g;
             #$bids           =~ s/]//g;
-	    $asks           = $data[2];
+            $asks           = $data[2];
             #$asks           =~ s/[//g;
             #$asks           =~ s/]//g;
             #$avg            = ($bids + $asks)/2;
-	    $bidquantities  = $data[3];
-	    $askquantities  = $data[4];
+            $bidquantities  = $data[3];
+            $askquantities  = $data[4];
             $time           = $data[6];
             $time           =~ /(\d{10}.\d)(\d{5})/;
             $time           = $1;
@@ -97,15 +96,15 @@ while(my $line = <>) {
         else{
 
             $Symbol         = $data[0];
-	    $bids           = $data[1];
+            $bids           = $data[1];
             #$bids           =~ s/[//g;
             #$bids           =~ s/]//g;
-	    $asks           = $data[2];
+            $asks           = $data[2];
             #$asks           =~ s/[//g;
             #$asks           =~ s/]//g;
             #$avg            = ($bids + $asks)/2;
-	    $bidquantities  = $data[3];
-	    $askquantities  = $data[4];
+            $bidquantities  = $data[3];
+            $askquantities  = $data[4];
             $time           = $data[6];
             $time           =~ /(\d{10}.\d)(\d{5})/;
             $time                  = $1;
@@ -117,14 +116,13 @@ while(my $line = <>) {
 
             print FILE "${time}00,internal,com.apama.marketdata.Depth($Symbol,$bids,$asks,[NUMBER],$bidquantities,$askquantities,{$Ask,$AskSize,\"requestType\":\"-8\"})\n";
         }
-    }
-    elsif ($line =~ /.*ActivMarketTick\((.*)\)/){
+    } elsif ($line =~ /.*ActivMarketTick\((.*)\)/){
 
         @data = split(",",$1);
              
-    	$Symbol                = $data[0];
-	$tradePrice            = $data[1];
-	$tradeQuantity         = $data[2];
+        $Symbol                = $data[0];
+        $tradePrice            = $data[1];
+        $tradeQuantity         = $data[2];
         $time                  = $data[4];        
         $time                  =~ /(\d{10}.\d)(\d{5})/;
         $time                  = $1;
