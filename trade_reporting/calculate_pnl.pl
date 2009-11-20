@@ -79,12 +79,21 @@ close(FILE);
 ### For every symbol, it adds it's canadian and us equivalents together to calculate their overall position
 ### If position is not 0, program outputs the position
 foreach my $symbol (sort keys %ca_positions) {
-    if (!$us_positions{$interlistedhash{$symbol}}){
-        $us_positions{$interlistedhash{$symbol}} = 0;
+    my $us_symbol;
+    
+    if($interlistedhash{"$symbol"}) {
+        $us_symbol = $interlistedhash{"$symbol"};
+    } else {
+        ($us_symbol = $symbol) =~ s/\.TO$//g;
     }
-    $offset = $ca_positions{$symbol} + $us_positions{$interlistedhash{$symbol}};
+    
+    if (!$us_positions{"$us_symbol"}){
+        $us_positions{"$us_symbol"} = 0;
+    }
+    $offset = $ca_positions{"$symbol"} + $us_positions{"$us_symbol"};
+    
     if ($offset != 0) {
-        print "$symbol\\$interlistedhash{$symbol} : $offset\n";
+        print "$symbol\\$us_symbol : $offset\n";
         $count = 1;
     }
 }
