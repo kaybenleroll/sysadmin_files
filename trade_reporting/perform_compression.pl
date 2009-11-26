@@ -39,7 +39,7 @@ foreach my $venue (sort keys %positions) {
         }
     }
 
-    print "\n$venue,${total_currency}\n\n" unless $venue =~ /CNX/;
+    print sprintf("\n%s, %9.2f\n\n", $venue, $total_currency) unless $venue =~ /CNX/;
 }
 
 
@@ -51,7 +51,7 @@ foreach my $venue (sort keys %positions) {
             $avg_price = abs($symbol_pnl{"$venue"}{"$symbol"}{"money"} / $symbol_pnl{"$venue"}{"$symbol"}{"position"});
         }
         
-        print sprintf("%s,%5s,% 4d,% 9.2f,% 9.4f\n",
+        print sprintf("%s,%5s,% 4d,% 9.2f,% 9.6f\n",
                       $venue, $symbol,
                       $symbol_pnl{"$venue"}{"$symbol"}{"position"},
                       $symbol_pnl{"$venue"}{"$symbol"}{"money"},
