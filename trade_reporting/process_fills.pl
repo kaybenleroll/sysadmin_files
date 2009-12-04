@@ -6,8 +6,8 @@ use warnings;
 use Time::ParseDate;
 
 #Declaration of variables
-my %hash;
-my $k;
+my %orderdata;
+
 my $timestamp;
 my $epoch = 0;
 
@@ -60,14 +60,14 @@ while(my $line = <>) {
         my $printprice = sprintf("%8.6f", $price);
     
         #Assigns the information to a hash with the orderid as a key so that if an order is repeated it will no be printed out twice
-        $hash{$orderid} = "$venue,$symbol,$side,$executed,$remaining,$printprice,$orderid,$timestamp,$epoch";
-
+        $orderdata{"$orderid"}{'value'}     = "$venue,$symbol,$side,$executed,$remaining,$printprice,$orderid,$timestamp,$epoch";
+        $orderdata{"$orderid"}{'timestamp'} = "$timestamp";
     }
 }
 
-#Prints out every entry in the hash
-foreach $k (sort keys %hash) {
-    print "$hash{$k}\n";
+# Prints out every entry in the hash
+foreach my $key (sort { $orderdata{$a}{'timestamp'} cmp $orderdata{$b}{'timestamp'} } keys %orderdata) {
+    print $orderdata{"$key"}{'value'} . "\n";
 }
 
 exit(0);
