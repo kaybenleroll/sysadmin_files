@@ -3,7 +3,8 @@
 use strict;
 use warnings;
 
-use Time::ParseDate;
+#use Time::ParseDate;
+use Date::Manip;
 
 #Declaration of variables
 my %orderdata;
@@ -29,8 +30,10 @@ while(my $line = <>) {
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) CRIT/;
         $timestamp = $1;
+
         #If a timstamp was pulled convert it to epoch for
-        $epoch = parsedate($timestamp);
+        my $datemanip = ParseDate($timestamp);
+        my $epoch     = UnixDate($datemanip, "%s");
 
         #Makes sure that the order is a trade by checking orderif and status
         next unless $orderid =~ /^"[^_]/;
@@ -47,18 +50,18 @@ while(my $line = <>) {
 
         #Assigns the venue based on line content
         if($line =~ /TSX_TRADING/) {
-	    $venue = "CA";
+            $venue = "CA";
         } elsif($line =~ /TORC_TRADING/) {
-	    $venue = "US";
+            $venue = "US";
         } elsif($line =~ /CURRENEX_TRADING/) {
-	    $venue = "CNX";
+            $venue = "CNX";
         } else {
-	    print "Error parsing entry $line";
+            print "Error parsing entry $line";
         }
 
         #Rounds the price to 6 decimal places
         my $printprice = sprintf("%8.6f", $price);
-    
+
         #Assigns the information to a hash with the orderid as a key so that if an order is repeated it will no be printed out twice
         $orderdata{"$orderid"}{'value'}     = "$venue,$symbol,$side,$executed,$remaining,$printprice,$orderid,$timestamp,$epoch";
         $orderdata{"$orderid"}{'timestamp'} = "$timestamp";
