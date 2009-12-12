@@ -7,7 +7,7 @@ use warnings;
 while(my $line = <>) {
     
     #Filters out all none data lines and splits data lines along commas
-    if ($line =~ /.*4PABCRF(.*).*/){
+    if ($line =~ /.*2SDAAYF(.*).*/){
 
         my @data = split(",", $1);
        
