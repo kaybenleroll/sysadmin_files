@@ -63,8 +63,8 @@ while(my $line = <>) {
         my $printprice = sprintf("%8.6f", $price);
 
         #Assigns the information to a hash with the orderid as a key so that if an order is repeated it will no be printed out twice
-        $orderdata{"$orderid"}{'value'}     = "$venue,$symbol,$side,$executed,$remaining,$printprice,$orderid,$timestamp,$epoch";
-        $orderdata{"$orderid"}{'timestamp'} = "$timestamp";
+        $orderdata{"$timestamp"}{'value'}     = "$venue,$symbol,$side,$executed,$remaining,$printprice,$orderid,$timestamp,$epoch";
+        $orderdata{"$timestamp"}{'timestamp'} = "$timestamp";
     }
 }
 
