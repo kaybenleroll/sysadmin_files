@@ -14,6 +14,7 @@ my $epoch = 0;
 
 
 while(my $line = <>) {
+    
     #If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
     if ($line =~ /.*com.apama.fix.NewOrderSingle\((.*)\)/){
         
@@ -40,10 +41,11 @@ while(my $line = <>) {
         $orderdata{"$fixorderid"}{'symbol'}         = $symbol;
         $orderdata{"$fixorderid"}{'actiom'}         = $action;
         $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
+        $orderdata{"$fixorderid"}{'latency'}        = $epoch;
+        $orderdata{"$fixorderid"}{'value'}          = "ERROR:  $orderdata{"$fixorderid"}{'symbol'},$orderdata{"$fixorderid"}{'action'},$orderdata{"$fixorderid"}{'timestamp'},$orderdata{"$fixorderid"}{'tsxorderid'},$orderdata{"$fixorderid"}{'fixorderid'},$orderdata{"$fixorderid"}{'latency'}";
 
     } elsif ($line =~ /.*com.apama.fix.OrderCancelReplaceRequest\((.*)\)/){
 
-        
         my @data = split(",", $1);
 
         my $fixorderid   = $data[4];
@@ -67,7 +69,10 @@ while(my $line = <>) {
         $orderdata{"$fixorderid"}{'tsxorderid'}     = $tsxorderid;
         $orderdata{"$fixorderid"}{'symbol'}         = $symbol;
         $orderdata{"$fixorderid"}{'actiom'}         = $action;
-        $orderdata{"$fixorderid"}{'timestamp'}      = $epoch;
+        $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
+        $orderdata{"$fixorderid"}{'latency'}        = $epoch;
+        $orderdata{"$fixorderid"}{'value'}          = "ERROR:  $orderdata{"$fixorderid"}{'symbol'},$orderdata{"$fixorderid"}{'action'},$orderdata{"$fixorderid"}{'timestamp'},$orderdata{"$fixorderid"}{'tsxorderid'},$orderdata{"$fixorderid"}{'fixorderid'},$orderdata{"$fixorderid"}{'latency'}";
+
 
     } elsif ($line =~ /.*com.apama.fix.ExecutionReport\((.*)\)/){
 
@@ -90,14 +95,14 @@ while(my $line = <>) {
         $symbol     =~ s/"//g;
         $tsxorderid =~ s/"//g;
 
-        $orderdata{"$fixorderid"}{'latency'}         = $orderdata{"$fixorderid"}{'latency'}
-
+        $orderdata{"$fixorderid"}{'latency'}         = $epoch - $orderdata{"$fixorderid"}{'latency'};
+        $orderdata{"$fixorderid"}{'value'}           = "LATENCY: $orderdata{"$fixorderid"}{'symbol'},$orderdata{"$fixorderid"}{'action'},$orderdata{"$fixorderid"}{'timestamp'},$orderdata{"$fixorderid"}{'tsxorderid'},$orderdata{"$fixorderid"}{'fixorderid'},$orderdata{"$fixorderid"}{'latency'}";
     }
 
 }
 
 # Prints out every entry in the hash
-foreach my $key (sort { $orderdata{$a}{'timestamp'} cmp $orderdata{$b}{'timestamp'} } keys %orderdata) {
+foreach my $key (sort { $orderdata{$a}{'fixorderid'} cmp $orderdata{$b}{'fixorderid'} } keys %orderdata) {
     print $orderdata{"$key"}{'value'} . "\n";
 }
 
