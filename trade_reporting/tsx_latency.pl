@@ -9,15 +9,17 @@ use Date::Manip;
 #Declaration of variables
 my %orderdata;
 
+my $ms;
 my $timestamp;
 my $epoch = 0;
 
 
 while(my $line = <>) {
+    chomp($line);
+
     
     #If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
-    if ($line =~ /.*com.apama.fix.NewOrderSingle\((.*)\)/){
-        
+    if ($line =~ /.*com.apama.fix.NewOrderSingle\((.*)\)/){        
         my @data = split(",", $1);
 
         my $fixorderid   = $data[2];
@@ -27,10 +29,13 @@ while(my $line = <>) {
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
         $timestamp    = $1;
+        
+        $timestamp =~ /\.(\d\d\d)$/;
+        $ms = $1 / 1000;
 
         #If a timstamp was pulled convert it to epoch for
         my $datemanip = ParseDate($timestamp);
-        my $epoch     = UnixDate($datemanip, "%s"); 
+        my $epoch     = UnixDate($datemanip, "%s") + $ms;
 
         #Removes quatations from symbol and side
         $fixorderid =~ s/"//g;
@@ -41,20 +46,16 @@ while(my $line = <>) {
         $orderdata{"$fixorderid"}{'symbol'}         = $symbol;
         $orderdata{"$fixorderid"}{'action'}         = $action;
         $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
-        $orderdata{"$fixorderid"}{'latency'}        = $epoch;
-        
-#        print "data is $fixorderid -> " . $orderdata{"$fixorderid"}{'fixorderid'} . "\n";
-        
-        $orderdata{"$fixorderid"}{'value'}          = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n",
+        $orderdata{"$fixorderid"}{'epochtime'}      = $epoch;
+
+        $orderdata{"$fixorderid"}{'value'}          = sprintf("ERROR:  %s,%s,%s,,%s,%6.4f\n",
                                                               $orderdata{"$fixorderid"}{'symbol'},
                                                               $orderdata{"$fixorderid"}{'action'},
                                                               $orderdata{"$fixorderid"}{'timestamp'},
-                                                              $orderdata{"$fixorderid"}{'tsxorderid'},
                                                               $orderdata{"$fixorderid"}{'fixorderid'},
-                                                              $orderdata{"$fixorderid"}{'latency'});
+                                                              $orderdata{"$fixorderid"}{'epochtime'});
 
     } elsif ($line =~ /.*com.apama.fix.OrderCancelReplaceRequest\((.*)\)/){
-
         my @data = split(",", $1);
 
         my $fixorderid   = $data[4];
@@ -65,10 +66,13 @@ while(my $line = <>) {
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
         $timestamp    = $1;
+        
+        $timestamp =~ /\.(\d\d\d)$/;
+        $ms = $1 / 1000;
 
         #If a timstamp was pulled convert it to epoch for
         my $datemanip = ParseDate($timestamp);
-        my $epoch     = UnixDate($datemanip, "%s");
+        my $epoch     = UnixDate($datemanip, "%s") + $ms;
 
         $fixorderid =~ s/"//g;
         $symbol     =~ s/"//g;  
@@ -79,7 +83,7 @@ while(my $line = <>) {
         $orderdata{"$fixorderid"}{'symbol'}         = $symbol;
         $orderdata{"$fixorderid"}{'action'}         = $action;
         $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
-        $orderdata{"$fixorderid"}{'latency'}        = $epoch;
+        $orderdata{"$fixorderid"}{'epochtime'}      = $epoch;
 
         $orderdata{"$fixorderid"}{'value'}          = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n",
                                                               $orderdata{"$fixorderid"}{'symbol'},
@@ -87,46 +91,52 @@ while(my $line = <>) {
                                                               $orderdata{"$fixorderid"}{'timestamp'},
                                                               $orderdata{"$fixorderid"}{'tsxorderid'},
                                                               $orderdata{"$fixorderid"}{'fixorderid'},
-                                                              $orderdata{"$fixorderid"}{'latency'});
+                                                              $orderdata{"$fixorderid"}{'epochtime'});
 
     } elsif ($line =~ /.*com.apama.fix.ExecutionReport\((.*)\)/){
-
-        
         my @data = split(",", $1);
 
+        my $tsxorderid   = $data[2];
         my $fixorderid   = $data[3];
         my $symbol       = $data[10];
-        my $tsxorderid   = $data[2];
 
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
         $timestamp    = $1;
 
+        $timestamp =~ /\.(\d\d\d)$/;
+        $ms = $1 / 1000;
+
         #If a timstamp was pulled convert it to epoch for
         my $datemanip = ParseDate($timestamp);
-        my $epoch     = UnixDate($datemanip, "%s");
+        my $epoch     = UnixDate($datemanip, "%s") + $ms;
 
         $fixorderid =~ s/"//g;
         $symbol     =~ s/"//g;
         $tsxorderid =~ s/"//g;
 
-        $orderdata{"$fixorderid"}{'latency'} = $epoch - $orderdata{"$fixorderid"}{'latency'};
+        $orderdata{"$fixorderid"}{'latency'}    = $epoch - $orderdata{"$fixorderid"}{'epochtime'};
+        $orderdata{"$fixorderid"}{'tsxorderid'} = $orderdata{"$fixorderid"}{'tsxorderid'} ? $orderdata{"$fixorderid"}{'tsxorderid'} : '';
         
-        $orderdata{"$fixorderid"}{'value'}   = sprintf("LATENCY: %s,%s,%s,%s,%s,%6.4f\n",
+        $orderdata{"$fixorderid"}{'value'}   = sprintf("LATENCY: %s,%s,%s,%s,%s,%5.3f",
                                                        $orderdata{"$fixorderid"}{'symbol'},
                                                        $orderdata{"$fixorderid"}{'action'},
                                                        $orderdata{"$fixorderid"}{'timestamp'},
                                                        $orderdata{"$fixorderid"}{'tsxorderid'},
                                                        $orderdata{"$fixorderid"}{'fixorderid'},
                                                        $orderdata{"$fixorderid"}{'latency'});
+                                                       
+        print $orderdata{"$fixorderid"}{'value'} . "\n";
+        
+#        delete $orderdata{"$fixorderid"};
     }
 
 }
 
 # Prints out every entry in the hash
-foreach my $key (sort { $orderdata{$a}{'fixorderid'} cmp $orderdata{$b}{'fixorderid'} } keys %orderdata) {
-    print $orderdata{"$key"}{'value'} . "\n";
-}
+#foreach my $key (sort { $orderdata{$a}{'fixorderid'} cmp $orderdata{$b}{'fixorderid'} } keys %orderdata) {
+#    print $orderdata{"$key"}{'value'} . "\n";
+#}
 
 exit(0);
 
