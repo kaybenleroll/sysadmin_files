@@ -11,7 +11,7 @@ my $k;
 while(my $line = <>) {
     
     ### Filters out trade lines by matching for 35=8
-    if ($line =~ /.*35=8(.*).*/) {
+    if ($line =~ /.* 35=8 (.*).*/) {
 
         ### Splits data in fields along the divider
         my @data = split("\x01", $1);
