@@ -42,7 +42,13 @@ while(my $line = <>) {
         $orderdata{"$fixorderid"}{'actiom'}         = $action;
         $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
         $orderdata{"$fixorderid"}{'latency'}        = $epoch;
-        $orderdata{"$fixorderid"}{'value'}          = "ERROR:  $orderdata{"$fixorderid"}{'symbol'},$orderdata{"$fixorderid"}{'action'},$orderdata{"$fixorderid"}{'timestamp'},$orderdata{"$fixorderid"}{'tsxorderid'},$orderdata{"$fixorderid"}{'fixorderid'},$orderdata{"$fixorderid"}{'latency'}";
+        $orderdata{"$fixorderid"}{'value'}          = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n",
+                                                              $orderdata{"$fixorderid"}{'symbol'},
+                                                              $orderdata{"$fixorderid"}{'action'},
+                                                              $orderdata{"$fixorderid"}{'timestamp'},
+                                                              $orderdata{"$fixorderid"}{'tsxorderid'},
+                                                              $orderdata{"$fixorderid"}{'fixorderid'},
+                                                              $orderdata{"$fixorderid"}{'latency'});
 
     } elsif ($line =~ /.*com.apama.fix.OrderCancelReplaceRequest\((.*)\)/){
 
@@ -71,7 +77,13 @@ while(my $line = <>) {
         $orderdata{"$fixorderid"}{'actiom'}         = $action;
         $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
         $orderdata{"$fixorderid"}{'latency'}        = $epoch;
-        $orderdata{"$fixorderid"}{'value'}          = "ERROR:  $orderdata{"$fixorderid"}{'symbol'},$orderdata{"$fixorderid"}{'action'},$orderdata{"$fixorderid"}{'timestamp'},$orderdata{"$fixorderid"}{'tsxorderid'},$orderdata{"$fixorderid"}{'fixorderid'},$orderdata{"$fixorderid"}{'latency'}";
+        $orderdata{"$fixorderid"}{'value'}          = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n",
+                                                              $orderdata{"$fixorderid"}{'symbol'},
+                                                              $orderdata{"$fixorderid"}{'action'},
+                                                              $orderdata{"$fixorderid"}{'timestamp'},
+                                                              $orderdata{"$fixorderid"}{'tsxorderid'},
+                                                              $orderdata{"$fixorderid"}{'fixorderid'},
+                                                              $orderdata{"$fixorderid"}{'latency'});
 
 
     } elsif ($line =~ /.*com.apama.fix.ExecutionReport\((.*)\)/){
@@ -95,8 +107,14 @@ while(my $line = <>) {
         $symbol     =~ s/"//g;
         $tsxorderid =~ s/"//g;
 
-        $orderdata{"$fixorderid"}{'latency'}         = $epoch - $orderdata{"$fixorderid"}{'latency'};
-        $orderdata{"$fixorderid"}{'value'}           = "LATENCY: $orderdata{"$fixorderid"}{'symbol'},$orderdata{"$fixorderid"}{'action'},$orderdata{"$fixorderid"}{'timestamp'},$orderdata{"$fixorderid"}{'tsxorderid'},$orderdata{"$fixorderid"}{'fixorderid'},$orderdata{"$fixorderid"}{'latency'}";
+        $orderdata{"$fixorderid"}{'latency'} = $epoch - $orderdata{"$fixorderid"}{'latency'};
+        $orderdata{"$fixorderid"}{'value'}   = sprintf("LATENCY: %s,%s,%s,%s,%s,%6.4f\n",
+                                                       $orderdata{"$fixorderid"}{'symbol'},
+                                                       $orderdata{"$fixorderid"}{'action'},
+                                                       $orderdata{"$fixorderid"}{'timestamp'},
+                                                       $orderdata{"$fixorderid"}{'tsxorderid'},
+                                                       $orderdata{"$fixorderid"}{'fixorderid'},
+                                                       $orderdata{"$fixorderid"}{'latency'});
     }
 
 }
