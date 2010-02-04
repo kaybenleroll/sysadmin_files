@@ -20,9 +20,9 @@ while(my $line = <>) {
         
         my @data = split(",", $1);
 
-        my $fixorderid   = $data[3];
+        my $fixorderid   = $data[2];
         my $symbol       = $data[5];
-        my $action       = "NewOrderSingle";
+        my $action       = 'NewOrderSingle';
 
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
@@ -36,12 +36,15 @@ while(my $line = <>) {
         $fixorderid =~ s/"//g;
         $symbol     =~ s/"//g;
 
-        #Assigns the information to a hash with the orderid as a key so that if an order is repeated it will no be printed out twice
+        #Assigns the information to a hash with the orderid as a key so that if an order is repeated it will not be printed out twice
         $orderdata{"$fixorderid"}{'fixorderid'}     = $fixorderid;
         $orderdata{"$fixorderid"}{'symbol'}         = $symbol;
-        $orderdata{"$fixorderid"}{'actiom'}         = $action;
+        $orderdata{"$fixorderid"}{'action'}         = $action;
         $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
         $orderdata{"$fixorderid"}{'latency'}        = $epoch;
+        
+#        print "data is $fixorderid -> " . $orderdata{"$fixorderid"}{'fixorderid'} . "\n";
+        
         $orderdata{"$fixorderid"}{'value'}          = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n",
                                                               $orderdata{"$fixorderid"}{'symbol'},
                                                               $orderdata{"$fixorderid"}{'action'},
@@ -57,7 +60,7 @@ while(my $line = <>) {
         my $fixorderid   = $data[4];
         my $symbol       = $data[7];
         my $tsxorderid   = $data[2];
-        my $action       = "OrderCancelReplaceRequest";
+        my $action       = 'OrderCancelReplaceRequest';
 
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
@@ -74,9 +77,10 @@ while(my $line = <>) {
         $orderdata{"$fixorderid"}{'fixorderid'}     = $fixorderid;
         $orderdata{"$fixorderid"}{'tsxorderid'}     = $tsxorderid;
         $orderdata{"$fixorderid"}{'symbol'}         = $symbol;
-        $orderdata{"$fixorderid"}{'actiom'}         = $action;
+        $orderdata{"$fixorderid"}{'action'}         = $action;
         $orderdata{"$fixorderid"}{'timestamp'}      = $timestamp;
         $orderdata{"$fixorderid"}{'latency'}        = $epoch;
+
         $orderdata{"$fixorderid"}{'value'}          = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n",
                                                               $orderdata{"$fixorderid"}{'symbol'},
                                                               $orderdata{"$fixorderid"}{'action'},
@@ -84,7 +88,6 @@ while(my $line = <>) {
                                                               $orderdata{"$fixorderid"}{'tsxorderid'},
                                                               $orderdata{"$fixorderid"}{'fixorderid'},
                                                               $orderdata{"$fixorderid"}{'latency'});
-
 
     } elsif ($line =~ /.*com.apama.fix.ExecutionReport\((.*)\)/){
 
@@ -108,6 +111,7 @@ while(my $line = <>) {
         $tsxorderid =~ s/"//g;
 
         $orderdata{"$fixorderid"}{'latency'} = $epoch - $orderdata{"$fixorderid"}{'latency'};
+        
         $orderdata{"$fixorderid"}{'value'}   = sprintf("LATENCY: %s,%s,%s,%s,%s,%6.4f\n",
                                                        $orderdata{"$fixorderid"}{'symbol'},
                                                        $orderdata{"$fixorderid"}{'action'},
