@@ -93,8 +93,8 @@ while(my $line = <>) {
 
         $orderdata{"$fixorderid"}{"$action"}{'value'} = $value;
 
-    } elsif ($line =~ /.*com.apama.fix.ExecutionReport\((.*)\)/){
-        my @data = split(",", $1);
+    } elsif ($line =~ /.*com.apama.fix.ExecutionReport\(\"(.*),\{(.*)\}\)/){
+        my @data = split('","', $1);
 
         my $tsxorderid   = $data[2];
         my $fixorderid   = $data[3];
@@ -105,16 +105,18 @@ while(my $line = <>) {
         my $status = '';
         my $action = '';
 
+        next unless(($execType eq '0') or ($execType eq '5') or ($execType eq 'E'));
+
         if($execType eq '0') {
             $action = 'NewOrderSingle';
-        } elsif(($execType eq 'E') or ($execType eq '5')) {
+        } else {
             $action = 'OrderCancelReplaceRequest';
         }
 
+        next if(($action eq 'OrderCancelReplaceRequest') and ($ordStatus eq '5'));
+
         if($ordStatus eq 'E') {
-            $status = 'Pending';            
-        } elsif($ordStatus eq '5') {
-            $status = 'Replaced';
+            $status = 'Pending';
         } else {
             $status = 'New';
         }
@@ -135,7 +137,7 @@ while(my $line = <>) {
         $tsxorderid =~ s/"//g;
 
         $orderdata{"$fixorderid"}{"$action"}{'latency'}    = $epoch - $orderdata{"$fixorderid"}{"$action"}{'epochtime'};
-        $orderdata{"$fixorderid"}{"$action"}{'tsxorderid'} = $orderdata{"$fixorderid"}{"$action"}{'tsxorderid'} ? $orderdata{"$fixorderid"}{"$action"}{'tsxorderid'} : '';
+        $orderdata{"$fixorderid"}{"$action"}{'tsxorderid'} = $tsxorderid;
 
         my $value = sprintf("LATENCY: %s,%s,%s,%s,%s,%s,%5.3f", $orderdata{"$fixorderid"}{"$action"}{'symbol'},
                                                                 $action,
@@ -149,7 +151,7 @@ while(my $line = <>) {
 
         print $orderdata{"$fixorderid"}{'value'} . "\n";
 
-#        delete $orderdata{"$fixorderid"};
+        delete $orderdata{"$fixorderid"} if $ordStatus ne 'E';
     }
 
 }
