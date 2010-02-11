@@ -8,41 +8,47 @@ my %fieldhash;
 my %hash;
 my $k;
 
-while(my $line = <>) {
-    
+while(my $line = <>) {    
     ### Filters out trade lines by matching for 35=8
-    if ($line =~ /.* 35=8 (.*).*/) {
-
+    if ($line =~ /35=8/) {
         ### Splits data in fields along the divider
-        my @data = split("\x01", $1);
+        my @data = split("\x01", $line);
     
         ### Takes every field in data array and splits data along equals signs, uses first value as hash key and second as hash value
         foreach my $field (@data) {
             $field =~ /(\d+)=(.*)/;
-            $fieldhash{$1} = $2;
+            $fieldhash{"$1"} = $2;
         }
 
+        next unless ($fieldhash{"35"} eq "8");
+        next unless (($fieldhash{"150"} eq "1") or ($fieldhash{"150"} eq "2"));
+
         ### Assigns data to their given variables
-        my $orderid   = $fieldhash{"11"};
+        my $clorderid = $fieldhash{'11'};
+        my $orderid   = $fieldhash{'37'};
         my $symbol    = $fieldhash{"55"};
         my $side      = $fieldhash{"54"};
-        my $executed  = undef;
-        my $price     = undef;
+        my $price     = $fieldhash{"31"};
+        my $executed  = $fieldhash{"32"};
         my $ordstatus = $fieldhash{"39"};
         my $compid    = $fieldhash{"56"};
-
+        my $execid    = $fieldhash{"17"};
+        my $timestamp = $fieldhash{"60"};
+        
         ### Checks to see if the venue is US or CA and assigns the correct venue to venue variable
         ### Also assigns price and executed to their given variable as they key differs depending on the venue 
         my $venue;
-        
-        if ($compid eq "JACOB01") {
-            $venue = "US";
-            $price     = $fieldhash{"31"};
-            $executed  = $fieldhash{"32"};
-        } elsif(($compid eq "PGR") or ($compid eq "JACOB")) {
+        my $liquidity = '';
+
+        if($compid eq "JACOB") {
             $venue = "CA";
-            $price     = $fieldhash{"44"};
-            $executed  = $fieldhash{"38"};
+            $liquidity = $fieldhash{'6780'};
+            
+        } elsif($compid eq "JACOB01") {
+            $venue = "US";
+            $liquidity = $fieldhash{'9730'};
+        } else {
+            $venue = "ERROR-" . $compid;
         }
 
         ### Removes any quotation marks from symbol
@@ -59,22 +65,12 @@ while(my $line = <>) {
 
         ### Rounds price to 6 decimal places
         my $printprice = sprintf("%8.6f", $price);
- 
-        ### If the order status is 1 (partial fill) or 2 (full fill) add the data to a hash with the key being the orderid.
-        ### Therefore if same order appears twice it will overwrite the previous order and only be printed once
-        if ($ordstatus eq "1") {
-            $hash{$orderid} = "$venue,$symbol,$side,$executed,0,$printprice,$orderid";
-        } 
         
-        if ($ordstatus eq "2") {
-            $hash{$orderid} = "$venue,$symbol,$side,$executed,0,$printprice,$orderid";
-        }
+        (my $printline = $line) =~ s/\x01/ /g;
+        
+        print "$venue,$symbol,$side,$executed,0,$printprice,$clorderid,$execid,$timestamp,$orderid,$liquidity\n";
     }
 }
 
-### Prints out the entire hash with all the orders
-foreach my $key (sort keys %hash) {
-    print $hash{"$key"} . "\n";
-}
 
 exit(0);
