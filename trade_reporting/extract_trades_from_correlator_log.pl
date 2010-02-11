@@ -15,9 +15,18 @@ my $epoch = 0;
 
 while(my $line = <>) {
     #If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
-    if ($line =~ /.*OrderUpdate\((.*)\)/){
+    if ($line =~ /.*OrderUpdate\((.*),\{(.*)\}\)/){
+
+        my %extraParams = ();
         
-        my @data = split(",", $1);
+        my @data = split(',', $1);
+        my $extraParamsString = $2;
+
+        foreach my $datum (split(",", $extraParamsString)) {
+            $datum =~ /\"(.*)\":\"(.*)\"/;
+            
+            $extraParams{"$1"} = $2;
+        }
 
         my $orderid      = $data[0];
         my $symbol       = $data[1];
@@ -30,6 +39,13 @@ while(my $line = <>) {
         my $price        = $data[18];
         my $status       = $data[19];
 
+     
+        #Makes sure that the order is a trade by checking orderid and status
+        next unless $orderid =~ /^\"[^_]/;
+        next unless ($orderid && $orderid ne ""); 
+        next unless (($extraParams{'ExecType'} eq '1') or ($extraParams{'ExecType'} eq '2'));
+
+
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) CRIT/;
         $timestamp = $1;
@@ -38,15 +54,12 @@ while(my $line = <>) {
         my $datemanip = ParseDate($timestamp);
         my $epoch     = UnixDate($datemanip, "%s");
 
-        #Makes sure that the order is a trade by checking orderif and status
-        next unless $orderid =~ /^"[^_]/;
-        next unless $qtyExecuted > 0;
-        next unless ($orderid && $orderid ne "\"\""); 
 
 
-        #Removes quatations from symbol and side
-        $symbol =~ s/"//g;
-        $side   =~ s/"//g;
+        #Removes quatations from entries
+        $orderid =~ s/"//g;
+        $symbol  =~ s/"//g;
+        $side    =~ s/"//g;
 
         $side = ($side =~ /SELL/) ? "SELL" : "BUY";
 
@@ -66,11 +79,7 @@ while(my $line = <>) {
         #Rounds the price to 6 decimal places
         my $printprice = sprintf("%8.6f", $price);
 
-        if((($qtyExecuted > 0) and ($qtyRemaining == 0)) or ($orderdata{"$orderid"}{'qtyExecuted'} and $qtyExecuted > $orderdata{"$orderid"}{'qtyExecuted'})) {
-            print "$venue,$symbol,$side,$lastShares,$qtyRemaining,$lastPrice,$orderid,$timestamp,$epoch,$quantity,$qtyExecuted\n";
-        } else {
-            $orderdata{"$orderid"}{'qtyExecuted'} = $qtyExecuted;
-        }
+        print "$venue,$symbol,$side,$lastShares,$qtyRemaining,$lastPrice,$orderid,$timestamp\n";
     }
 }
 
