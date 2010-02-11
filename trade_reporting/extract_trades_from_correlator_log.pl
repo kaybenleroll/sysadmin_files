@@ -13,8 +13,12 @@ my $timestamp;
 my $epoch = 0;
 
 
+### TODO [mcooney] At moment fill and partial fill updates are identified via FIX tags,
+### so the assumption is that the OMS communication is done via FIX. It may be necessary
+### to change this in the future.
+
 while(my $line = <>) {
-    #If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
+    ## If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
     if ($line =~ /.*OrderUpdate\((.*),\{(.*)\}\)/){
 
         my %extraParams = ();
@@ -28,35 +32,29 @@ while(my $line = <>) {
             $extraParams{"$1"} = $2;
         }
 
-        my $orderid      = $data[0];
-        my $symbol       = $data[1];
-        my $side         = $data[3];
-        my $quantity     = $data[5];
-        my $qtyExecuted  = $data[14];
-        my $qtyRemaining = $data[15];
-        my $lastShares   = $data[16];
-        my $lastPrice    = $data[17];
-        my $price        = $data[18];
-        my $status       = $data[19];
+        my $orderid       = $data[0];
+        my $symbol        = $data[1];
+        my $side          = $data[3];
+        my $marketorderid = $data[13];
+        my $qtyRemaining  = $data[15];
+        my $lastShares    = $data[16];
+        my $lastPrice     = $data[17];
+        my $price         = $data[18];
 
-     
-        #Makes sure that the order is a trade by checking orderid and status
+        ## Makes sure that the order is a trade by checking orderid and status
         next unless $orderid =~ /^\"[^_]/;
         next unless ($orderid && $orderid ne ""); 
         next unless (($extraParams{'ExecType'} eq '1') or ($extraParams{'ExecType'} eq '2'));
 
-
-        #Pulls timestamp from line and assigns it to variable
+        ## Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) CRIT/;
         $timestamp = $1;
 
-        #If a timstamp was pulled convert it to epoch for
+        ## If a timstamp was pulled convert it to epoch for
         my $datemanip = ParseDate($timestamp);
         my $epoch     = UnixDate($datemanip, "%s");
 
-
-
-        #Removes quatations from entries
+        ## Removes quatations from entries
         $orderid =~ s/"//g;
         $symbol  =~ s/"//g;
         $side    =~ s/"//g;
@@ -65,7 +63,7 @@ while(my $line = <>) {
 
         my $venue;
 
-        #Assigns the venue based on line content
+        ## Assigns the venue based on line content
         if($line =~ /TSX_TRADING/) {
             $venue = "CA";
         } elsif($line =~ /TORC_TRADING/) {
@@ -76,12 +74,11 @@ while(my $line = <>) {
             print "Error parsing entry $line";
         }
 
-        #Rounds the price to 6 decimal places
+        ## Rounds the price to 6 decimal places
         my $printprice = sprintf("%8.6f", $price);
 
-        print "$venue,$symbol,$side,$lastShares,$qtyRemaining,$lastPrice,$orderid,$timestamp\n";
+        print "$venue,$symbol,$side,$lastShares,$qtyRemaining,$lastPrice,$orderid,$marketorderid,$timestamp\n";
     }
 }
 
 exit(0);
-
