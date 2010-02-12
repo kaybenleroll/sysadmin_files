@@ -24,6 +24,8 @@ my $epoch = 0;
 
 my $status = '';
 
+print "label,symbol,messagetype,status,timestamp,exchangeorderid,fixorderid,intlatency,extlatency\n";
+
 
 while(my $line = <>) {
     chomp($line);
