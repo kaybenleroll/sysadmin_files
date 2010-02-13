@@ -47,6 +47,8 @@ while(my $line = <>) {
         } elsif($compid eq "JACOB01") {
             $venue = "US";
             $liquidity = $fieldhash{'9730'};
+        } elsif($compid eq "pfsc1802") {
+            $venue = "CNX";
         } else {
             $venue = "ERROR-" . $compid;
         }

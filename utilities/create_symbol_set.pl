@@ -10,9 +10,9 @@ use Getopt::Long;
 my $create_symbolset = 0;
 my $notrade          = 0;
 
-my $symbolset_name  = "DefaultSet";
-my $input_filename  = "SymbolList.csv";
-my $oms_market      = 'NEED_OMS_MARKET';
+my $symbolset_name  = 'DefaultSet';
+my $input_filename  = 'SymbolList.csv';
+my $oms_market      = '__##NEED_OMS_MARKET##__';
 
 GetOptions('symbolset_name=s'  => \$symbolset_name,
            'input_filename=s'  => \$input_filename,
@@ -23,10 +23,13 @@ my @oms_list;
 
 open(FILE, $input_filename) or die("Cannot open ${input_filename} for reading");
 
-my %suffix_hash = ('TSXV' => '.TV',
-                   'TSX'  => '.TO',
-                   'US'   => '.');
-
+my %suffix_hash = ('TSXV'   => '.TV',
+                   'TSX'    => '.TO',
+                   'US'     => '.',
+                   'ARCA'   => '.EA',
+                   'NYSE'   => '.N',
+                   'NASDAQ' => '.Q',
+                   'AMEX'   => '.A');
 
 
 while(my $line = <FILE>) {
