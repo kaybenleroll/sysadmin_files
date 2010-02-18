@@ -12,6 +12,9 @@ my $date;
 my $tstamp;
 my $err;
 
+my $file_path = '/var/jsi/storage/apama/logfiles';
+
+
 ### Intializes variables and reformats them to their correct format
 $today  = UnixDate(ParseDate('today'), "%Y%m%d");
 $today  = DateCalc($today,"+ 1 days",\$err);
@@ -24,8 +27,8 @@ chdir "/var/jsi/atalogs";
 
 ### If there exists an apamalog for the given date extract correlator file or files for tar ball
 while ($date != $today){
-    if (-e "/var/jsi/apama/logfiles/apamalogs_${date}.tar.bz2") {
-        system("tar xvjpf /var/jsi/apama/logfiles/apamalogs_${date}.tar.bz2 --wildcards \"*correlator_${date}*\"");
+    if (-e "${file_path}/apamalogs_${date}.tar.bz2") {
+        system("tar xvjpf ${file_path}/apamalogs_${date}.tar.bz2 --wildcards \"*correlator_${date}*\"");
     }
     
     ### Increase the date by 1 and reformat the date back to correct format. Continue until current date is reached
