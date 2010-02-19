@@ -18,17 +18,19 @@ my $epoch = 0;
 ### to change this in the future.
 
 while(my $line = <>) {
+    next if $line =~ /com\.jacobsecurities\.oms/;
+
     ## If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
     if ($line =~ /.*OrderUpdate\((.*),\{(.*)\}\)/){
 
         my %extraParams = ();
-        
+
         my @data = split(',', $1);
         my $extraParamsString = $2;
 
         foreach my $datum (split(",", $extraParamsString)) {
             $datum =~ /\"(.*)\":\"(.*)\"/;
-            
+
             $extraParams{"$1"} = $2;
         }
 
@@ -43,7 +45,8 @@ while(my $line = <>) {
 
         ## Makes sure that the order is a trade by checking orderid and status
         next unless $orderid =~ /^\"[^_]/;
-        next unless ($orderid && $orderid ne ""); 
+        next unless ($orderid and $orderid ne '""');
+        next unless defined $extraParams{'ExecType'};
         next unless (($extraParams{'ExecType'} eq '1') or ($extraParams{'ExecType'} eq '2'));
 
         ## Pulls timestamp from line and assigns it to variable
@@ -55,9 +58,10 @@ while(my $line = <>) {
         my $epoch     = UnixDate($datemanip, "%s");
 
         ## Removes quatations from entries
-        $orderid =~ s/"//g;
-        $symbol  =~ s/"//g;
-        $side    =~ s/"//g;
+        $orderid       =~ s/"//g;
+        $marketorderid =~ s/"//g;
+        $symbol        =~ s/"//g;
+        $side          =~ s/"//g;
 
         $side = ($side =~ /SELL/) ? "SELL" : "BUY";
 
@@ -77,7 +81,7 @@ while(my $line = <>) {
         ## Rounds the price to 6 decimal places
         my $printprice = sprintf("%8.6f", $price);
 
-        print "$venue,$symbol,$side,$lastShares,$qtyRemaining,$lastPrice,$orderid,$marketorderid,$timestamp\n";
+        print "$venue,$symbol,$side,$lastShares,$lastPrice,$orderid,$marketorderid,$timestamp\n";
     }
 }
 

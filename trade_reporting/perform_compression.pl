@@ -8,12 +8,12 @@ my %positions;
 my %symbol_pnl;
 
 while(my $line = <>) {
-    my ($venue, $symbol, $side, $qty, $remain, $price) = split(",", $line);
+    my ($venue, $symbol, $side, $qty, $price) = split(",", $line);
 
     $positions{"$venue"}{"$symbol"}{"$side"}{"count"}    += 1;
     $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"} += $qty;
     $positions{"$venue"}{"$symbol"}{"$side"}{"money"}    += $qty * $price;
-    
+
     $symbol_pnl{"$venue"}{"$symbol"}{"position"} += ($side eq "SELL" ? -1 :  1) * $qty;
     $symbol_pnl{"$venue"}{"$symbol"}{"money"}    += ($side eq "SELL" ?  1 : -1) * ($qty * $price);
 }
@@ -46,11 +46,11 @@ foreach my $venue (sort keys %positions) {
 foreach my $venue (sort keys %positions) {
     foreach my $symbol (sort keys %{ $positions{"$venue"} }) {
         my $avg_price = 0;
-        
+
         if($symbol_pnl{"$venue"}{"$symbol"}{"position"} != 0) {
             $avg_price = abs($symbol_pnl{"$venue"}{"$symbol"}{"money"} / $symbol_pnl{"$venue"}{"$symbol"}{"position"});
         }
-        
+
         print sprintf("%s,%5s,% 4d,% 9.2f,% 9.6f\n",
                       $venue, $symbol,
                       $symbol_pnl{"$venue"}{"$symbol"}{"position"},
@@ -58,5 +58,4 @@ foreach my $venue (sort keys %positions) {
                       $avg_price);
     }
 }
-        
-        
+

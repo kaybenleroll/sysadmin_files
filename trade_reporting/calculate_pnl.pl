@@ -25,7 +25,7 @@ my %us_positions;
 
 ### While statement that takes every line passed into the program through standard input and adds their volumes and premiums to their respective venue's variables
 while(my $line = <>) {
-    my ($venue, $symbol, $side, $qty, $remain, $price) = split(",", $line);
+    my ($venue, $symbol, $side, $qty, $price) = split(",", $line);
 
     if($venue eq "CNX") {
         $usd_fx                  += ($qty          * ($side eq "BUY" ?  1 : -1));
@@ -40,7 +40,7 @@ while(my $line = <>) {
         $us_positions{"$symbol"} += ($qty          * ($side eq "BUY" ?  1 : -1));
         $usd_cashflow            += ($qty * $price * ($side eq "BUY" ? -1 :  1));
         $us_volume               += ($qty         );
-        $us_cashvolume           += ($qty * $price); 
+        $us_cashvolume           += ($qty * $price);
     } else {
         print "Error with line $line";
     }
@@ -48,14 +48,14 @@ while(my $line = <>) {
 
 ### Prints out every canadian symbol and their respective positions
 foreach my $symbol (sort keys %ca_positions) {
-    print $symbol . "," . $ca_positions{"$symbol"} . "\n"; 
+    print $symbol . "," . $ca_positions{"$symbol"} . "\n";
 }
 
 print "\n";
 
 ### Prints out every us symbol and their respective positions
 foreach my $symbol (sort keys %us_positions) {
-    print $symbol . "," . $us_positions{"$symbol"} . "\n"; 
+    print $symbol . "," . $us_positions{"$symbol"} . "\n";
 }
 
 print "\n";
@@ -71,7 +71,7 @@ while(my $line = <FILE> ) {
     $ussymbol =~ s/"//g;
     $casymbol =~ s/\n//g;
     $ussymbol =~ s/\n//g;
-    $interlistedhash{$casymbol} = $ussymbol;     
+    $interlistedhash{$casymbol} = $ussymbol;
 }
 
 close(FILE);
@@ -80,21 +80,20 @@ close(FILE);
 ### If position is not 0, program outputs the position
 foreach my $symbol (sort keys %ca_positions) {
     my $us_symbol;
-    
+
     if($interlistedhash{"$symbol"}) {
         $us_symbol = $interlistedhash{"$symbol"};
-    } else {
-        ($us_symbol = $symbol) =~ s/\.TO$//g;
-    }
-    
-    if (!$us_positions{"$us_symbol"}){
-        $us_positions{"$us_symbol"} = 0;
-    }
-    $offset = $ca_positions{"$symbol"} + $us_positions{"$us_symbol"};
-    
-    if ($offset != 0) {
-        print "$symbol\\$us_symbol : $offset\n";
-        $count = 1;
+
+        if (!$us_positions{"$us_symbol"}){
+            $us_positions{"$us_symbol"} = 0;
+        }
+
+        $offset = $ca_positions{"$symbol"} + $us_positions{"$us_symbol"};
+
+        if ($offset != 0) {
+            print "$symbol\\$us_symbol : $offset\n";
+            $count = 1;
+        }
     }
 }
 

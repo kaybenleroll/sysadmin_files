@@ -27,6 +27,9 @@ $tstamp = UnixDate(ParseDate($date), "%m%d");
 #Set the workign directory to tradefile_pnl
 chdir "/var/jsi/tradefile_pnl";
 
+
+
+
 #Continue to run code until the date hits today
 while ($date != $today){
 
@@ -36,7 +39,7 @@ while ($date != $today){
         if (-e "/var/jsi/tradefile_pnl/corrections/corrections_${date}.csv"){
             #Create trades file by cating the correlator files for the day through process fills
             #Create pnl file by cating newly created tradefile and corrections file through calculate pnl filtering out and HTC trades
-            system("cat /var/jsi/atalogs/*correlator_${date}* | grep OrderUpdate | perl process_fills.pl > /var/jsi/tradefile_pnl/trades/trades_${date}.csv");   
+            system("cat /var/jsi/atalogs/*correlator_${date}* | grep OrderUpdate | perl process_fills.pl > /var/jsi/tradefile_pnl/trades/trades_${date}.csv");
             system("cat /var/jsi/tradefile_pnl/trades/trades_${date}.csv /var/jsi/tradefile_pnl/corrections/corrections_${date}.csv | grep -v HTC | perl calculate_pnl.pl > /var/jsi/tradefile_pnl/pnl/pnl_${date}.csv");
             #Add the trades file and corrections to their respective arrays and increase their array counters
             $array[$count] = "/var/jsi/tradefile_pnl/trades/trades_${date}.csv ";
@@ -47,11 +50,11 @@ while ($date != $today){
             system("cat @array @array2 | grep -v HTC | perl calculate_pnl.pl > /var/jsi/tradefile_pnl/cumlpnl/cumlpnl_${date}.csv");
         } else {
             #Executes the same as above except does not cat any corrections files
-            system("cat /var/jsi/atalogs/*correlator_${date}* | grep OrderUpdate | perl process_fills.pl > /var/jsi/tradefile_pnl/trades/trades_${date}.csv");   
+            system("cat /var/jsi/atalogs/*correlator_${date}* | grep OrderUpdate | perl process_fills.pl > /var/jsi/tradefile_pnl/trades/trades_${date}.csv");
             system("cat /var/jsi/tradefile_pnl/trades/trades_${date}.csv | grep -v HTC | perl calculate_pnl.pl > /var/jsi/tradefile_pnl/pnl/pnl_${date}.csv");
             $array[$count] = "/var/jsi/tradefile_pnl/trades/trades_${date}.csv ";
             $count = $count + 1;
-            system("cat @array @array2 | grep -v HTC | perl calculate_pnl.pl > /var/jsi/tradefile_pnl/cumlpnl/cumlpnl_${date}.csv")            
+            system("cat @array @array2 | grep -v HTC | perl calculate_pnl.pl > /var/jsi/tradefile_pnl/cumlpnl/cumlpnl_${date}.csv")
         }
     }
 
