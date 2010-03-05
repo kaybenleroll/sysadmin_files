@@ -12,7 +12,7 @@ while(my $line = <>) {
 
     my ($driver_pos, $driver_cash, $quoter_pos, $quoter_cash) = split(',', $2);
 
-    next unless (($driver_pos != 0) and ($quoter_pos != 0));
+#    next unless (($driver_pos != 0) and ($quoter_pos != 0));
 
     my $message_key = "STATARB-POSITIONS-${scenario_label}";
 
