@@ -21,7 +21,13 @@ my @symbols = split(",", $symbol_list);
 my $regexp = "(\"" . join("\"|\"", @symbols) . "\")";
 
 while(my $line = <STDIN>) {
-    print $line if $line =~ /$regexp/;
+    next unless $line =~ /$regexp/;
+
+    if(!($line =~ /SERVICE_NAME/ or $line =~ /USD\/CAD/)) {
+        $line =~ s/\}/\"Exchange\":\"\",\"Market\":\"ActivTransport\",\"SERVICE_NAME\":\"ACTIV\"\}/g unless $line =~ /SERVICE_NAME/;
+    }
+
+    print $line;
 }
 
 exit(0);
