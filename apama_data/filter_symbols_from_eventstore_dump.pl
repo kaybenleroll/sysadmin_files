@@ -20,14 +20,22 @@ my @symbols = split(",", $symbol_list);
 
 my $regexp = "(\"" . join("\"|\"", @symbols) . "\")";
 
+my %inputdata;
+
 while(my $line = <STDIN>) {
     next unless $line =~ /$regexp/;
 
+    my ($timestamp, @data) = split(",", $line);
+
     if(!($line =~ /SERVICE_NAME/ or $line =~ /USD\/CAD/)) {
-        $line =~ s/\}/\"Exchange\":\"\",\"Market\":\"ActivTransport\",\"SERVICE_NAME\":\"ACTIV\"\}/g unless $line =~ /SERVICE_NAME/;
+        $line =~ s/\}/,\"Exchange\":\"\",\"Market\":\"ActivTransport\",\"SERVICE_NAME\":\"ACTIV\"\}/g unless $line =~ /SERVICE_NAME/;
     }
 
-    print $line;
+    $inputdata{"$timestamp"} = $line
+}
+
+foreach my $timestamp (sort keys %inputdata) {
+    print $inputdata{"$timestamp"};
 }
 
 exit(0);
