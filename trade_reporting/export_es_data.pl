@@ -22,3 +22,4 @@ my $input_date = UnixDate(ParseDate($date), "%Y.%m.%d");
 
 my $cmd_string = "esutil -d ${es_db_dir} -dir ${output_dir} --name BaseFileName --value dump_${file_date} --startTime ${input_date}:09:20:00 --endTime ${input_date}:16:30:00";
 print "$cmd_string\n";
+system($cmd_string);

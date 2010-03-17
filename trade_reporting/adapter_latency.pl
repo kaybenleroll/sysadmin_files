@@ -18,16 +18,23 @@ my $action;
 my $execType;
 my $ordStatus;
 
+my $replace_measure;
+my $replace_ignore;
+
 my $ms;
 my $timestamp;
 my $epoch = 0;
 
 my $status = '';
 
+my $pending = $ARGV[0];
+
+
+
 print "label,symbol,messagetype,status,timestamp,exchangeorderid,fixorderid,intlatency,extlatency\n";
 
 
-while(my $line = <>) {
+while(my $line = <STDIN>) {
     chomp($line);
     
     #If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
@@ -91,9 +98,9 @@ while(my $line = <>) {
         my $datemanip = ParseDate($timestamp);
         my $epoch     = UnixDate($datemanip, "%s") + $ms;
 
-        $fixorderid =~ s/"//g;
-        $symbol     =~ s/"//g;  
-        $exchorderid =~ s/"//g;
+        $fixorderid =~ s/\"//g;
+        $symbol     =~ s/\"//g;  
+        $exchorderid =~ s/\"//g;
 
         $orderdata{"$fixorderid"}{"$action"}{'fixorderid'}  = $fixorderid;
         $orderdata{"$fixorderid"}{"$action"}{'exchorderid'} = $exchorderid;
@@ -129,13 +136,30 @@ while(my $line = <>) {
             $action = 'OrderCancelReplaceRequest';
         }
 
-        next if(($action eq 'OrderCancelReplaceRequest') and ($ordStatus eq 'E'));
+        if($pending) {
+            $replace_measure = '5';
+	    $replace_ignore  = 'E';
+        } else {
+            $replace_measure = 'E';
+	    $replace_ignore  = '5';
+        }
 
-        if($ordStatus eq '5') {
-            $status = 'Replaced';
+#        next if(($action eq 'OrderCancelReplaceRequest') and ($ordStatus eq 'E'));
+
+#        if($ordStatus eq '5') {
+#            $status = 'Replaced';
+#        } else {
+#            $status = 'New';
+#        }
+
+        next if(($action eq 'OrderCancelReplaceRequest') and ($ordStatus eq $replace_ignore));
+
+        if($ordStatus eq $replace_measure) {
+            $status = $pending ? 'Pending Replace' : 'Replaced';
         } else {
             $status = 'New';
         }
+
  
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;

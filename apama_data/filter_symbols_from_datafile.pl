@@ -15,7 +15,7 @@ my @symbols = split(",", $symbol_list);
 
 my $regexp = "(," . join(",|,", @symbols) . ",)";
 
-while(my $line = <>) {
+while(my $line = <STDIN>) {
     print $line if $line =~ /$regexp/;
 }
 

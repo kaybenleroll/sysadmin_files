@@ -40,7 +40,7 @@ while(my $line = <>) {
         my $venue;
         my $liquidity = '';
 
-        if(($compid eq "JACOB") or ($compid eq "PGR")) {
+        if(($compid eq "JACOB") or ($compid eq "01102031") or ($compid eq "PGR")) {
             $venue = "CA";
             $liquidity = $fieldhash{'6780'};
 
