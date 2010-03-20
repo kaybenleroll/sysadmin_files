@@ -81,7 +81,7 @@ while(my $line = <>) {
         ## Rounds the price to 6 decimal places
         my $printprice = sprintf("%8.6f", $price);
 
-        print "$venue,$symbol,$side,$lastShares,$lastPrice,$orderid,$marketorderid,$timestamp\n";
+        print "CORR,$venue,$symbol,$side,$lastShares,$lastPrice,$orderid,$marketorderid,$timestamp\n";
     }
 }
 

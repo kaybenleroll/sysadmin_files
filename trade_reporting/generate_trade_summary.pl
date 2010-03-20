@@ -3,6 +3,14 @@
 use strict;
 use warnings;
 
+my (%ca_positions,  %us_positions);
+my ($ca_volume,     $us_volume);
+my ($ca_cashvolume, $us_cashvolume);
+
+my ($cad_fx,         $usd_fx);
+my ($cad_cashflow,   $usd_cashflow);
+
+my $exchange_rate = 1.2;
 
 
 ### While statement that takes every line passed into the program through standard input and adds their volumes and premiums to their respective venue's variables
@@ -28,6 +36,8 @@ while(my $line = <STDIN>) {
 }
 
 ### Open's the csv file InterlistedStocks and greats a hash with the key the canadian symbol and the value the us symbol
+my %interlistedhash;
+
 print "Not flat:\n";
 
 open(FILE, "InterlistedStocks.csv") || die ("Could not open file InterlistedStocks.csv");
@@ -45,6 +55,9 @@ close(FILE);
 
 ### For every symbol, it adds it's canadian and us equivalents together to calculate their overall position
 ### If position is not 0, program outputs the position
+my $count;
+my $offset;
+
 foreach my $symbol (sort keys %ca_positions) {
     my $us_symbol;
 
@@ -70,7 +83,7 @@ if ($count == 0) {
 }
 
 ### Calculates unhedged pnl
-$unhedged_pnl = $usd_cashflow * $exchange_rate + $cad_cashflow;
+my $unhedged_pnl = $usd_cashflow * $exchange_rate + $cad_cashflow;
 
 ### Prints out US and Canadian Cash Volume, Volume, Cashflow, FX and Total as well as the Unhedged PNL
 print "\n\n";

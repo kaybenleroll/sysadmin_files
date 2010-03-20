@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use diagnostics;
 
-use Locale::Currency::Format;
 use Getopt::Long;
 
 my $create_symbolset = 0;

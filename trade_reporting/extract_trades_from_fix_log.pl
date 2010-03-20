@@ -70,7 +70,7 @@ while(my $line = <>) {
 
         (my $printline = $line) =~ s/\x01/ /g;
 
-        print "$venue,$symbol,$side,$executed,0,$printprice,$clorderid,$execid,$timestamp,$orderid,$liquidity\n";
+        print "FIX,$venue,$symbol,$side,$executed,0,$printprice,$clorderid,$execid,$timestamp,$orderid,$liquidity\n";
     }
 }
 
