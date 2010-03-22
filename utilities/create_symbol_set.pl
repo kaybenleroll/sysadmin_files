@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use diagnostics;
 
-use Locale::Currency::Format;
 use Getopt::Long;
 
 my $create_symbolset = 0;
@@ -34,7 +33,7 @@ my %suffix_hash = ('TSXV'   => '.TV',
 
 while(my $line = <FILE>) {
     chomp($line);
-    
+
     my ($symbol, $venue) = split(",", $line);
 
     my $data_suffix = $suffix_hash{"$venue"} ? $suffix_hash{"$venue"} : "";

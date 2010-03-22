@@ -7,8 +7,8 @@ use warnings;
 my %positions;
 my %symbol_pnl;
 
-while(my $line = <>) {
-    my ($venue, $symbol, $side, $qty, $price) = split(",", $line);
+while(my $line = <STDIN>) {
+    my ($entrysrc, $venue, $symbol, $side, $qty, $price, $clorderid, $execid, $timestamp, $exchorderid, $liquidity) = split(",", $line);
 
     $positions{"$venue"}{"$symbol"}{"$side"}{"count"}    += 1;
     $positions{"$venue"}{"$symbol"}{"$side"}{"quantity"} += $qty;
@@ -43,6 +43,8 @@ foreach my $venue (sort keys %positions) {
 }
 
 
+print "Price Summary:\n";
+
 foreach my $venue (sort keys %positions) {
     foreach my $symbol (sort keys %{ $positions{"$venue"} }) {
         my $avg_price = 0;
@@ -51,11 +53,14 @@ foreach my $venue (sort keys %positions) {
             $avg_price = abs($symbol_pnl{"$venue"}{"$symbol"}{"money"} / $symbol_pnl{"$venue"}{"$symbol"}{"position"});
         }
 
-        print sprintf("%s,%5s,% 4d,% 9.2f,% 9.6f\n",
-                      $venue, $symbol,
+        print sprintf("%3s,%10s,% 9d,% 12.2f,% 11.6f\n",
+                      $venue,
+                      $symbol,
                       $symbol_pnl{"$venue"}{"$symbol"}{"position"},
                       $symbol_pnl{"$venue"}{"$symbol"}{"money"},
                       $avg_price);
     }
+
+    print "\n";
 }
 
