@@ -25,9 +25,10 @@ my $ticket_count = 0;
 my (%ca_positions,  %us_positions);
 my ($ca_volume,     $us_volume);
 my ($ca_cashvolume, $us_cashvolume);
-
-my ($cad_fx,        $usd_fx);
 my ($cad_cashflow,  $usd_cashflow);
+
+my $cad_fx = 0;
+my $usd_fx = 0;
 
 my $ca_active  = 0;
 my $ca_passive = 0;
@@ -39,7 +40,16 @@ my $us_passive = 0;
 
 ### While statement that takes every line passed into the program through standard input and adds their volumes and premiums to their respective venue's variables
 while(my $line = <STDIN>) {
-    my ($entrysrc, $venue, $symbol, $side, $qty, $price, $clorderid, $execid, $timestamp, $exchorderid, $liquidity) = split(",", $line);
+    my ($entrysrc, $venue, $symbol, $side, $qty, $price, $clorderid, $execid, $timestamp, $exchorderid, $liquidity);
+
+    if($line =~ /^FIX/) {
+        ($entrysrc, $venue, $symbol, $side, $qty, $price, $clorderid, $execid, $timestamp, $exchorderid, $liquidity) = split(",", $line);
+    } elsif($line =~ /^PW/) {
+        ($entrysrc, $venue, $symbol, $side, $qty, $price, $clorderid, $execid, $timestamp, $exchorderid, $liquidity) = split(",", $line);
+    } else {
+        print "Invalid line - $line";
+        next;
+    }
 
     if($venue eq "CNX") {
         $usd_fx                  += ($qty          * ($side eq "BUY" ?  1 : -1));
@@ -148,14 +158,14 @@ print "USD Cashflow:      " . sprintf("% 10.2f", $usd_cashflow) . "\n";
 print "USD FX:            " . sprintf("% 10.2f", $usd_fx) . "\n";
 print "USD Total:         " . sprintf("% 10.2f", $usd_fx + $usd_cashflow) . "\n";
 print "\n";
-print "CA Active Volume:  " . sprintf("% 10d", $ca_active) . "\n";
-print "CA Passive Volume: " . sprintf("% 10d", $ca_passive) . "\n";
-print "CA Volume:         " . sprintf("% 10d", $ca_volume) . "\n";
+print "CA Active Volume:  " . sprintf("% 10d",   $ca_active) . "\n";
+print "CA Passive Volume: " . sprintf("% 10d",   $ca_passive) . "\n";
+print "CA Volume:         " . sprintf("% 10d",   $ca_volume) . "\n";
 print "CA Cash Volume:    " . sprintf("% 10.2f", $ca_cashvolume) . "\n";
-print "US Active Volume:  " . sprintf("% 10d", $us_active) . "\n";
-print "US Passive Volume: " . sprintf("% 10d", $us_passive) . "\n";
-print "US Volume:         " . sprintf("% 10d", $us_volume) . "\n";
-print "US Cash Volume:    " . sprintf("% 10d", $us_cashvolume) . "\n";
+print "US Active Volume:  " . sprintf("% 10d",   $us_active) . "\n";
+print "US Passive Volume: " . sprintf("% 10d",   $us_passive) . "\n";
+print "US Volume:         " . sprintf("% 10d",   $us_volume) . "\n";
+print "US Cash Volume:    " . sprintf("% 10.2f", $us_cashvolume) . "\n";
 print "\n";
 print "Unhedged PNL:      " . sprintf("%10.2f", $unhedged_pnl) . "\n";
 print "\n";
