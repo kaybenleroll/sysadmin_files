@@ -36,9 +36,9 @@ print "label,symbol,messagetype,status,timestamp,exchangeorderid,fixorderid,intl
 
 while(my $line = <STDIN>) {
     chomp($line);
-    
+
     #If the line is an orderupdate inserts the information into the data array and assigns data to their respective variables
-    if($line =~ /.*com.apama.fix.NewOrderSingle\((.*)\)/) {        
+    if($line =~ /.*com.apama.fix.NewOrderSingle\((.*)\)/) {
         my @data = split(",", $1);
 
         $fixorderid   = $data[2];
@@ -49,7 +49,7 @@ while(my $line = <STDIN>) {
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
         $timestamp    = $1;
-        
+
         $timestamp =~ /\.(\d\d\d)$/;
         $ms = $1 / 1000;
 
@@ -70,12 +70,13 @@ while(my $line = <STDIN>) {
         $orderdata{"$fixorderid"}{"$action"}{'latency'}        = -1;
         $orderdata{"$fixorderid"}{"$action"}{'adapterlatency'} = 0;
 
-        my $value = sprintf("ERROR:  %s,%s,%s,,%s,%6.4f\n", $orderdata{"$fixorderid"}{"$action"}{'symbol'},
-                                                            $action,
-                                                            $orderdata{"$fixorderid"}{"$action"}{'timestamp'},
-                                                            $orderdata{"$fixorderid"}{"$action"}{'fixorderid'},
-                                                            $orderdata{"$fixorderid"}{"$action"}{'epochtime'});
-                                                         
+        my $value = sprintf("ERROR:  %s,%s,%s,,%s,%6.4f\n",
+                            $orderdata{"$fixorderid"}{"$action"}{'symbol'},
+                            $action,
+                            $orderdata{"$fixorderid"}{"$action"}{'timestamp'},
+                            $orderdata{"$fixorderid"}{"$action"}{'fixorderid'},
+                            $orderdata{"$fixorderid"}{"$action"}{'epochtime'});
+
         $orderdata{"$fixorderid"}{'$action'}{'value'} = $value;
 
     } elsif($line =~ /.*com.apama.fix.OrderCancelReplaceRequest\((.*)\)/) {
@@ -90,7 +91,7 @@ while(my $line = <STDIN>) {
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
         $timestamp    = $1;
-        
+
         $timestamp =~ /\.(\d\d\d)$/;
         $ms = $1 / 1000;
 
@@ -99,7 +100,7 @@ while(my $line = <STDIN>) {
         my $epoch     = UnixDate($datemanip, "%s") + $ms;
 
         $fixorderid =~ s/\"//g;
-        $symbol     =~ s/\"//g;  
+        $symbol     =~ s/\"//g;
         $exchorderid =~ s/\"//g;
 
         $orderdata{"$fixorderid"}{"$action"}{'fixorderid'}  = $fixorderid;
@@ -110,12 +111,13 @@ while(my $line = <STDIN>) {
         $orderdata{"$fixorderid"}{"$action"}{'latency'}     = -1;
         $orderdata{"$fixorderid"}{"$action"}{'adapterlatency'} = 0;
 
-        my $value = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n", $orderdata{"$fixorderid"}{"$action"}{'symbol'},
-                                                              $action,
-                                                              $orderdata{"$fixorderid"}{"$action"}{'timestamp'},
-                                                              $orderdata{"$fixorderid"}{"$action"}{'exchorderid'},
-                                                              $orderdata{"$fixorderid"}{"$action"}{'fixorderid'},
-                                                              $orderdata{"$fixorderid"}{"$action"}{'epochtime'});
+        my $value = sprintf("ERROR:  %s,%s,%s,%s,%s,%6.4f\n",
+                            $orderdata{"$fixorderid"}{"$action"}{'symbol'},
+                            $action,
+                            $orderdata{"$fixorderid"}{"$action"}{'timestamp'},
+                            $orderdata{"$fixorderid"}{"$action"}{'exchorderid'},
+                            $orderdata{"$fixorderid"}{"$action"}{'fixorderid'},
+                            $orderdata{"$fixorderid"}{"$action"}{'epochtime'});
 
         $orderdata{"$fixorderid"}{"$action"}{'value'} = $value;
 
@@ -138,19 +140,11 @@ while(my $line = <STDIN>) {
 
         if($pending) {
             $replace_measure = '5';
-	    $replace_ignore  = 'E';
+        $replace_ignore  = 'E';
         } else {
             $replace_measure = 'E';
-	    $replace_ignore  = '5';
+        $replace_ignore  = '5';
         }
-
-#        next if(($action eq 'OrderCancelReplaceRequest') and ($ordStatus eq 'E'));
-
-#        if($ordStatus eq '5') {
-#            $status = 'Replaced';
-#        } else {
-#            $status = 'New';
-#        }
 
         next if(($action eq 'OrderCancelReplaceRequest') and ($ordStatus eq $replace_ignore));
 
@@ -160,7 +154,7 @@ while(my $line = <STDIN>) {
             $status = 'New';
         }
 
- 
+
         #Pulls timestamp from line and assigns it to variable
         $line =~ /^(.*?) WARN/;
         $timestamp    = $1;
@@ -193,14 +187,12 @@ while(my $line = <STDIN>) {
 
         print $orderdata{"$fixorderid"}{'value'} . "\n";
 
-    } elsif($line =~ /Round-trip.* = (.*)/) {
-        
-        
+    } elsif($line =~ /Round-trip.* = (.*?) \(Order/) {
+
         my $adapter_latency = $1;
 
-        $orderdata{"$fixorderid"}{"$action"}{'adapterlatency'} += $adapter_latency;        
+        $orderdata{"$fixorderid"}{"$action"}{'adapterlatency'} += $adapter_latency;
     }
-
 }
 
 exit(0);
