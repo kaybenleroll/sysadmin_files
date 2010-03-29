@@ -23,9 +23,15 @@ my %tickets;
 my $ticket_count = 0;
 
 my (%ca_positions,  %us_positions);
-my ($ca_volume,     $us_volume);
-my ($ca_cashvolume, $us_cashvolume);
-my ($cad_cashflow,  $usd_cashflow);
+
+my $ca_volume = 0;
+my $us_volume = 0;
+
+my $ca_cashvolume = 0;
+my $us_cashvolume = 0;
+
+my $cad_cashflow = 0;
+my $usd_cashflow = 0;
 
 my $cad_fx = 0;
 my $usd_fx = 0;

@@ -47,12 +47,12 @@ close(FILE);
 print 'com.apama.ata.SymbolSet("' . $symbolset_name . '-NoTrade"' .
       ',"ACTIV","ActivTransport","",{"resultType":"BBO"},"__ObjectionBasedFirewallControllerExternal",' .
       '"","' . $oms_market . '","",{"Firewall.TargetService":""},["' .
-      join('","', @data_list) . '"],[],{})' . "\n";
+      join('","', @data_list) . '"],[],{"SIMULATION_MODE":"OLDSTYLE"})' . "\n";
 
 print 'com.apama.ata.SymbolSet("' . $symbolset_name . '"' .
       ',"ACTIV","ActivTransport","",{"resultType":"BBO"},"__ObjectionBasedFirewallControllerExternal",' .
       '"","' . $oms_market . '","",{"Firewall.TargetService":"FIX"},["' .
-      join('","', @data_list) . '"],["' . join('","', @oms_list) . '"],{})' . "\n";
+      join('","', @data_list) . '"],["' . join('","', @oms_list) . '"],{"SIMULATION_MODE":"OLDSTYLE"})' . "\n";
 
 
 exit(0);
