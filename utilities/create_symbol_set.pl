@@ -28,7 +28,9 @@ my %suffix_hash = ('TSXV'   => '.TV',
                    'ARCA'   => '.EA',
                    'NYSE'   => '.N',
                    'NASDAQ' => '.Q',
-                   'AMEX'   => '.A');
+                   'AMEX'   => '.A',
+                   'NYMEX'  => '.NX*',
+                   'COMEX'  => '.CXA');
 
 
 while(my $line = <FILE>) {
