@@ -13,7 +13,6 @@ while(my $line = <STDIN>) {
     my $md_symbols  = $1;
     my $oms_symbols = $2;
 
-    print $md_symbols . "\n";
     my @symbols = split(",", $md_symbols);
 
     map { s/\"//g; print $_ . "\n" } @symbols;
