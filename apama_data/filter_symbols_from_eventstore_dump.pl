@@ -18,7 +18,7 @@ print "#\n";
 
 my @symbols = split(",", $symbol_list);
 
-my $regexp = "(\"" . join("\"|\"", @symbols) . "\")";
+my $regexp = "(\"" . join("|\"", @symbols) . "\")";
 
 my %inputdata;
 
