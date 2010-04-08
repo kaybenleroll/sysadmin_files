@@ -27,7 +27,10 @@ while(my $line = <STDIN>) {
 
     my ($timestamp, @data) = split(",", $line);
 
-    if(!($line =~ /SERVICE_NAME/ or $line =~ /USD\/CAD/)) {
+
+    if($line =~ /USD\/CAD/) {
+        $line =~ s/\}/,\"Exchange\":\"\",\"SERVICE_NAME\":\"FIX\"\}/g unless $line =~ /SERVICE_NAME/;
+    } elsif($line !~ /SERVICE_NAME/) {
         $line =~ s/\}/,\"Exchange\":\"\",\"Market\":\"ActivTransport\",\"SERVICE_NAME\":\"ACTIV\"\}/g unless $line =~ /SERVICE_NAME/;
     }
 
