@@ -5,5 +5,6 @@ ATA_DIR=/apama/ATA116/Accelerators/AlgorithmicTradingAccelerator
 
 source ${APAMA_INSTALL_DIR}/bin/apama_env
 
-${ATA_DIR}/project.sh start
-engine_send -p 25903 ${ATA_DIR}/jsi_extras/jsievents/SubscribeToData.evt
+### Stop the ATA
+${ATA_DIR}/project.sh stop
+
