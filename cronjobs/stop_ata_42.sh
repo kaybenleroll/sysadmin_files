@@ -6,5 +6,6 @@ ATA_DIR=/apama/ATA116/Accelerators/AlgorithmicTradingAccelerator
 source ${APAMA_INSTALL_DIR}/bin/apama_env
 
 ### Stop the ATA
+cd ${ATA_DIR}
 ${ATA_DIR}/project.sh stop
 
