@@ -19,8 +19,8 @@ ${UTILS_DIR}/export_es_data.pl
 
 ### Archive the EventStore data
 cd ${ES_DATA_DIR}
-tar cvfp dump_${TSTAMP}.tar.bz2 --use-compress-program ${PBZIP_DIR}/pbzip2 *.sim
 
+tar cvfp dump_${TSTAMP}.tar.bz2 --use-compress-program ${PBZIP_DIR}/pbzip2 *.sim
 rm -fv *.sim
 
 
