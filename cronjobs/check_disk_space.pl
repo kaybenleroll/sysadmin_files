@@ -18,10 +18,12 @@ GetOptions('dir=s'    => \$dir,
 my ($fs_type, $fs_desc, $used, $avail, $fused, $favail) = df $dir;
 my @disk_data = df $dir;
 
-# calculate
-my $df_free = (($avail) / ($avail+$used)) * 100.0;
+print join(",", @disk_data) . "\n";
 
-if($avail < ($limit * 1024 * 1024)) {
+# calculate
+my $df_free = (($favail) / ($favail+$fused)) * 100.0;
+
+if($favail < ($limit * 1024 * 1024)) {
     print "Less than $limit Gb remaining on drive\n";
 } else {
     print "More than $limit Gb remaining on drive\n";
