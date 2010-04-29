@@ -1,5 +1,9 @@
 #!/bin/sh
 
+KEYFILE=id_dsa_transferuser_jcstny01
+
+APAMA41_INSTALL_DIR=/opt/apama_4.1
+
 APAMA41_WORK_DIR=/apama/apama-work
 APAMA42_WORK_DIR=/apama/apama-work-42
 
@@ -15,6 +19,7 @@ TSTAMP=`date +%Y%m%d`
 
 
 ### Export the EventStore data
+source ${APAMA41_INSTALL_DIR}/bin/apama_env
 ${UTILS_DIR}/export_es_data.pl
 
 ### Archive the EventStore data
@@ -42,4 +47,4 @@ mkdir ${APAMA42_WORK_DIR}/logs
 
 
 ### Copy the files to the JSI server
-rsync -acvz --progress -e 'ssh -i .ssh/id_dsa_transferuser_jcstny01' /apama/filestorage/ transferuser@secure.jacobsecurities.com:/var/jsi/storage/apama/
+rsync -acvz --progress -e "ssh -i .ssh/${KEYFILE}" /apama/filestorage/ transferuser@secure.jacobsecurities.com:/var/jsi/storage/apama/
