@@ -47,4 +47,4 @@ mkdir ${APAMA42_WORK_DIR}/logs
 
 
 ### Copy the files to the JSI server
-rsync -acvz --progress -e "ssh -i .ssh/${KEYFILE}" /apama/filestorage/ transferuser@secure.jacobsecurities.com:/var/jsi/storage/apama/
+rsync -rvz --size-only --progress -e "ssh -i /apama/.ssh/${KEYFILE}" /apama/filestorage/ transferuser@secure.jacobsecurities.com:/var/jsi/storage/apama/
