@@ -43,11 +43,10 @@ while(my $line = <>) {
         if(($compid eq "JACOB") or ($compid eq "01102031") or ($compid eq "PGR")) {
             $venue = "CA";
             $liquidity = $fieldhash{'6780'};
-
         } elsif($compid eq "JACOB01") {
             $venue = "US";
             $liquidity = $fieldhash{'9730'};
-        } elsif($compid eq "pfsc1802") {
+        } elsif(($compid eq "pfsc1802") or ($compid eq "pfsc5ftr")) {
             $venue = "CNX";
         } else {
             $venue = "ERROR-" . $compid;
