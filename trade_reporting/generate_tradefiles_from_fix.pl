@@ -21,13 +21,13 @@ $datemanip = ParseDate($end_date);
 $end_date = UnixDate($datemanip, "%Y%m%d");
 my $flag  = Date_Cmp($start_date,$end_date);
 
-while ($start_date ne $end_date){
-    if(-d "/var/jsi/storage/fixlogs/$start_date/"){
-	system("cat /var/jsi/storage/fixlogs/$start_date/FIX_Log/*.messages.log | perl $code_dir > $file_dir/trades_$start_date.csv");
+while ($start_date ne $end_date) {
+    if(-d "/var/jsi/storage/fixlogs/$start_date/") {
+        system("cat /var/jsi/storage/fixlogs/$start_date/FIX_Log/*.messages.log | perl $code_dir > $file_dir/trades_$start_date.csv");
     }
-		$start_date = DateCalc($start_date,'+ 1 business days',\$err);
+	$start_date = DateCalc($start_date,'+ 1 business days',\$err);
 	$datemanip  = ParseDate($start_date);
         $start_date = UnixDate($datemanip, "%Y%m%d");
-	$flag       = Date_Cmp($start_date,$end_date);
+        $flag       = Date_Cmp($start_date,$end_date);
 
 }
