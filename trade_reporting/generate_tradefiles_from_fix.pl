@@ -36,7 +36,7 @@ while ($start_date ne $end_date) {
     }
     
     if(-e "${file_dir}/trades/trades_${start_date}.csv" and $cumlpnl) {
-	$filearray[$count] = "${file_dir}/trades/trades_${start_date}.csv";
+	    $filearray[$count] = "${file_dir}/trades/trades_${start_date}.csv";
         $count++;
         system("cat @filearray | perl ${code_dir}/extract_pnl_from_tradefiles.pl > ${file_dir}/cumlpnl/cumlpnl_${start_date}.csv");
     }
