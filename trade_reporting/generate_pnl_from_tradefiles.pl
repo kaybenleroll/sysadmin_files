@@ -53,8 +53,10 @@ while(my $line = <>) {
     $dollarvlmtraded{$symbol}{$venue} += ($executed * $printprice);
 
     ### Calculating the colume of active and passive trades based on the liquidity
-    if ($liquidity eq 'TPPNN' || $liquidity eq 'XPPNN' ) {
+    if ($liquidity eq 'TPPNN' || $liquidity eq 'XPPNN' ||  $liquidity eq 'A') {
         $vlmpassive{$symbol}{$venue} += $executed;
+    } elsif ($liquidity eq '') {
+
     } else {
         $vlmactive{$symbol}{$venue} += $executed;
     }
