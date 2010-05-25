@@ -37,7 +37,7 @@ while(my $line = <>) {
     $dollarvlmtraded{"$venue"}{"$symbol"} += ($executed * $printprice);
     
     ### If trade is passive increase vlm passive and vice verse for active.
-    if (trade_type($liquidity, $venue)) {
+    if (is_passive_trade($liquidity, $venue)) {
         $vlmpassive{"$venue"}{"$symbol"} += $executed;
     } else {
         $vlmactive{"$venue"}{"$symbol"}  += $executed;
@@ -76,26 +76,20 @@ foreach my $venue (sort keys %lastprice) {
     }
 }
 
-sub trade_type {
+sub is_passive_trade {
     my ($liquidity, $venue) = @_;
+    my $returnval;
 
     ### Calculating the colume of active and passive trades based on the liquidity
     if ($venue eq 'CA') {
         my $tradetype = substr $liquidity, 2, 1;
-        if ($tradetype eq 'P') {
-            return 1;
-        } elsif ($tradetype = 'A') {
-            return 0;
-        }
+        $returnval = ($tradetype eq 'P');
     } elsif ($venue eq 'US') {
-        if ($liquidity eq 'A') {
-            return 1;
-        } else {
-            return 0;
-        }
+        $returnval = ($liquidity eq 'A');
     } else {
-        return 0;
+        $returnval = 0;
     }
+    return $tradetype;
 }
 
 exit(0);
