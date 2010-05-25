@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+### Declaring all global variables
 my %venues;
 my %vlmtraded;
 my %dollarvlmtraded;
@@ -33,6 +34,7 @@ while(my $line = <>) {
     my $orderid      = $data[9];
     my $liquidity    = $data[10];
 
+    ### Initializing variables to 0 if symbol is not yet been used
     if (!$vlmtraded{$symbol}{$venue}) {
         $venues{$symbol}{$venue} = 0;
         $vlmtraded{$symbol}{$venue} = 0;
@@ -45,16 +47,19 @@ while(my $line = <>) {
         $pnl{$symbol}{$venue} = 0;
     }
 
+    ### Assigning the most recent trade price to lastprice variable while also calculating the volume traded and dollar amountS
     $lastprice{$symbol}{$venue} = $printprice;
     $vlmtraded{$symbol}{$venue} += $executed;
     $dollarvlmtraded{$symbol}{$venue} += ($executed * $printprice);
 
-    if ($liquidity eq 'TPPNN'||$liquidity eq 'XPPNN' ) {
+    ### Calculating the colume of active and passive trades based on the liquidity
+    if ($liquidity eq 'TPPNN' || $liquidity eq 'XPPNN' ) {
         $vlmpassive{$symbol}{$venue} += $executed;
     } else {
         $vlmactive{$symbol}{$venue} += $executed;
     }
 
+    ### Calculating the net position and cash for each symbol based on whether the trade was a buy or sell
     if ($side eq 'BUY') {
         $netpos{$symbol}{$venue} += $executed;     
         $netcash{$symbol}{$venue} -= ($executed * $printprice);
@@ -65,6 +70,7 @@ while(my $line = <>) {
   
 }
 
+### Outputing all the calculated data to standard output as well as calculating the pnl and net position value for each symbol
 foreach my $symbol (sort keys %lastprice) {
     foreach my $venue (sort keys %{$lastprice{$symbol}}) {
         $netposvalue{$symbol}{$venue} = $netpos{$symbol}{$venue} * $lastprice{$symbol}{$venue};
