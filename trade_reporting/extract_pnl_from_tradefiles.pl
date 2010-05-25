@@ -89,7 +89,7 @@ sub is_passive_trade {
     } else {
         $returnval = 0;
     }
-    return $tradetype;
+    return $returnval;
 }
 
 exit(0);
