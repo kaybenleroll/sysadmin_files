@@ -28,7 +28,7 @@ $end_date = UnixDate(ParseDate($end_date), "%Y%m%d");
 
 while ($start_date ne $end_date) {
     if(-d "${file_dir}/fixlogs/${start_date}/" and $trades) {
-        system("cat ${file_dir}/fixlogs/${start_date}/FIX_Log/*.messages.log | perl ${code_dir}/extract_trades_from_fix_log.pl > $file_dir/trades/trades_${start_date}.csv");
+        system("cat ${file_dir}/fixlogs/${start_date}/FIX_Log/*.messages.log | perl ${code_dir}/extract_trades_from_fix_log.pl > ${file_dir}/trades/trades_${start_date}.csv");
     }
     
     if(-e "${file_dir}/trades/trades_${start_date}.csv" and $dailypnl) {
