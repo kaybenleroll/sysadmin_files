@@ -1,10 +1,9 @@
-#!/usr/bin/perl -w
+﻿#!/usr/bin/perl -w
 
 use strict;
 use warnings;
 
 ### Declaring all global variables
-my %venues;
 my %vlmtraded;
 my %dollarvlmtraded;
 my %vlmpassive;
@@ -15,67 +14,88 @@ my %netcash;
 my %pnl;
 my %lastprice;
 
-
 while(my $line = <>) {
 
     ### Splits data in fields along the divider
-    my @data = split(",", $line);
-
-    ### Assigns data to their given variables
-    my $trade_source = $data[0];
-    my $venue        = $data[1];
-    my $symbol       = $data[2];
-    my $side         = $data[3];
-    my $executed     = $data[4];
-    my $printprice   = $data[5];
-    my $clorderid    = $data[6];
-    my $execid       = $data[7];
-    my $timestamp    = $data[8];
-    my $orderid      = $data[9];
-    my $liquidity    = $data[10];
+    my ($trade_source,$venue,$symbol,$side,$executed,$printprice,$clorderid,$execid,$timestamp,$orderid,$liquidity) = split(",", $line);
 
     ### Initializing variables to 0 if symbol is not yet been used
-    if (!$vlmtraded{$symbol}{$venue}) {
-        $venues{$symbol}{$venue} = 0;
-        $vlmtraded{$symbol}{$venue} = 0;
-        $dollarvlmtraded{$symbol}{$venue} = 0;
-        $vlmpassive{$symbol}{$venue} = 0;
-        $vlmactive{$symbol}{$venue} = 0;
-        $netpos{$symbol}{$venue} = 0;
-        $netposvalue{$symbol}{$venue} = 0;
-        $netcash{$symbol}{$venue} = 0;
-        $pnl{$symbol}{$venue} = 0;
+    if (!$vlmtraded{"$venue"}{"$symbol"}) {
+        $vlmtraded{"$venue"}{"$symbol"}       = 0;
+        $dollarvlmtraded{"$venue"}{"$symbol"} = 0;
+        $vlmpassive{"$venue"}{"$symbol"}      = 0;
+        $vlmactive{"$venue"}{"$symbol"}       = 0;
+        $netpos{"$venue"}{"$symbol"}          = 0;
+        $netposvalue{"$venue"}{"$symbol"}     = 0;
+        $netcash{"$venue"}{"$symbol"}         = 0;
+        $pnl{"$venue"}{"$symbol"}             = 0;
     }
 
     ### Assigning the most recent trade price to lastprice variable while also calculating the volume traded and dollar amountS
-    $lastprice{$symbol}{$venue} = $printprice;
-    $vlmtraded{$symbol}{$venue} += $executed;
-    $dollarvlmtraded{$symbol}{$venue} += ($executed * $printprice);
-
-    ### Calculating the colume of active and passive trades based on the liquidity
-    if ($liquidity eq 'TPPNN' || $liquidity eq 'XPPNN' ||  $liquidity eq 'A') {
-        $vlmpassive{$symbol}{$venue} += $executed;
+    $lastprice{"$venue"}{"$symbol"}        = $printprice;
+    $vlmtraded{"$venue"}{"$symbol"}       += $executed;
+    $dollarvlmtraded{"$venue"}{"$symbol"} += ($executed * $printprice);
+    
+    ### If trade is passive increase vlm passive and vice verse for active.
+    if (trade_type($liquidity, $venue)) {
+        $vlmpassive{"$venue"}{"$symbol"} += $executed;
     } else {
-        $vlmactive{$symbol}{$venue} += $executed;
+        $vlmactive{"$venue"}{"$symbol"}  += $executed;
     }
+
 
     ### Calculating the net position and cash for each symbol based on whether the trade was a buy or sell
     if ($side eq 'BUY') {
-        $netpos{$symbol}{$venue} += $executed;     
-        $netcash{$symbol}{$venue} -= ($executed * $printprice);
+        $netpos{"$venue"}{"$symbol"}  += $executed;     
+        $netcash{"$venue"}{"$symbol"} -= ($executed * $printprice);
     } elsif ($side eq 'SELL') {
-        $netpos{$symbol}{$venue} -= $executed;
-        $netcash{$symbol}{$venue} += ($executed * $printprice);
+        $netpos{"$venue"}{"$symbol"}  -= $executed;
+        $netcash{"$venue"}{"$symbol"} += ($executed * $printprice);
     }
   
 }
 
 ### Outputing all the calculated data to standard output as well as calculating the pnl and net position value for each symbol
-foreach my $symbol (sort keys %lastprice) {
-    foreach my $venue (sort keys %{$lastprice{$symbol}}) {
-        $netposvalue{$symbol}{$venue} = $netpos{$symbol}{$venue} * $lastprice{$symbol}{$venue};
-        $pnl{$symbol}{$venue} = $netposvalue{$symbol}{$venue} + $netcash{$symbol}{$venue};
-        print "$venue,$symbol,$vlmtraded{$symbol}{$venue},$dollarvlmtraded{$symbol}{$venue},$vlmpassive{$symbol}{$venue},$vlmactive{$symbol}{$venue},$netpos{$symbol}{$venue},$netposvalue{$symbol}{$venue},$netcash{$symbol}{$venue},$pnl{$symbol}{$venue}\n";
+foreach my $venue (sort keys %lastprice) {
+    foreach my $symbol (sort keys %{$lastprice{$venue}}) {
+
+        $netposvalue{"$venue"}{"$symbol"} = $netpos{"$venue"}{"$symbol"} * $lastprice{"$venue"}{"$symbol"};
+        $pnl{"$venue"}{"$symbol"} = $netposvalue{"$venue"}{"$symbol"} + $netcash{"$venue"}{"$symbol"};
+
+        print sprintf ("%3s,%10s,%10.2f,% 10.2f,% 10.2f,% 10.2f,% 10.2f,% 10.2f,% 10.2f,% 10.2f\n",
+                            $venue,
+                            $symbol,
+                            $vlmtraded{"$venue"}{"$symbol"},
+                            $dollarvlmtraded{"$venue"}{"$symbol"},
+                            $vlmpassive{"$venue"}{"$symbol"},
+                            $vlmactive{"$venue"}{"$symbol"},
+                            $netpos{"$venue"}{"$symbol"},
+                            $netposvalue{"$venue"}{"$symbol"},
+                            $netcash{"$venue"}{"$symbol"},
+                            $pnl{"$venue"}{"$symbol"});
     }
 }
+
+sub trade_type {
+    my ($liquidity, $venue) = @_;
+
+    ### Calculating the colume of active and passive trades based on the liquidity
+    if ($venue eq 'CA') {
+        my $tradetype = substr $liquidity, 2, 1;
+        if ($tradetype eq 'P') {
+            return 1;
+        } elsif ($tradetype = 'A') {
+            return 0;
+        }
+    } elsif ($venue eq 'US') {
+        if ($liquidity eq 'A') {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
 exit(0);
