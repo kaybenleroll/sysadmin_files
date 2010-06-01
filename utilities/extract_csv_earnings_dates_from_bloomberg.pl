@@ -2,10 +2,9 @@
 
 use strict;
 use warnings;
+use Date::Manip;
 
 ### Declaration of variables
-my %hash;
-
 my $count = 0;
 my $line = <>;
 my @symbol = split(",", $line);
@@ -18,7 +17,13 @@ while($line = <>) {
         $symbol[$count] =~ s/\//\./;
         $symbol[$count] =~ s/-U/u/;
         if ($data[$count]) {
-            print "$symbol[$count],$data[$count],$data[$count+1]\n";
+            $data[$count] =~ m/(\d+)/g;           
+            my $date = $1;
+            $data[$count] =~ m/(\d+)/g;           
+            $date = $1 . "-" . $date;
+            $data[$count] =~ m/(\d+)/g;           
+            $date = $1 . "-" .$date;
+            print "$symbol[$count],$date,$data[$count+1]\n";
         }
     }
 }
