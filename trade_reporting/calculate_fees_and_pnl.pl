@@ -7,8 +7,8 @@ use Getopt::Long;
 
 my $exchange_rate = 1.05;
 
-my $ca_fee    = -0.0037;
-my $ca_rebate = +0.0029;
+my $ca_fee    = -0.0035;
+my $ca_rebate = +0.0031;
 
 my $us_fee    = -0.0040;
 my $us_rebate = +0.0014;
