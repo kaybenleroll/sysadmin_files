@@ -25,6 +25,8 @@ foreach my $file (@files) {
     if(-f $fullpath) {
         open(FILE, $fullpath);
 
+        binmode(*FILE);
+
         $md5calc->addfile(*FILE);
 
         print $md5calc->hexdigest() . "," . $fullpath . "\n";
