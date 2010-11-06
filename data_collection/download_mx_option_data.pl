@@ -5,6 +5,8 @@ use Date::Manip;
 
 use strict;
 
+$|++;
+
 my $namefile = $ARGV[0];
 
 open(FILE, $namefile);
