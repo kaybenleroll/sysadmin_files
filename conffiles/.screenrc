@@ -1,0 +1,27 @@
+shell -${SHELL}
+
+# Now, let's override with our customizations
+startup_message off
+vbell on
+msgwait 1
+
+
+hardstatus alwayslastline
+
+# Turns off alternate screen switching in xterms,
+# so that text in screen will go into the xterm's scrollback buffer:
+termcapinfo xterm* ti@:te@
+altscreen on
+
+# Log 10000 lines
+defscrollback 10000
+
+
+# Window tabs, second to last line
+caption always "%{=b dw}:%{-b dw}:%{=b dk}[ %{-b dw}%{-b dg}$USER%{-b dw}@%{-b dg}%H %{=b dk}] [ %= %?%{-b dg}%-Lw%?%{+b dk}(%{+b dw}%n:%t%{+b dk})%?(%u)%?%{-b dw}%?%{-b dg}%+Lw%? %{=b dk}]%{-b dw}:%{+b dw}:"
+
+# Status string, last line
+hardstatus string '%99`%{= kw} %100`%112`%= %102`%101`%114`%115`%108`%113`%119`%117`%118`%116`%106`%104`%103`%105`%107`%Y-%m-%d %0c:%s'
+
+
+

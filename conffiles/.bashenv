@@ -1,0 +1,8 @@
+export LESS="-deiP--- File\: ?f{%f}:{PIPE}. -- [?eeof:?pB%pB\%:input..] -- [%i/%m] -- ?ltLine\: %lt:no line count. ---"
+#export LC_CTYPE=iso_8859_1
+export PGPPATH=~/.pgp
+export PAGER="less"
+export VISUAL="emacs"
+export EDITOR="emacs"
+
+export PERL5LIB=/home/mcooney/workspace/dbmanagement
