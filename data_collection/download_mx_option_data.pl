@@ -16,8 +16,8 @@ chomp(@symbols);
 
 close(FILE);
 
-my @start_dates = ( ParseRecur('first day of every month in 2009'), ParseRecur('first day of every month in 2010') );
-my @end_dates   = ( ParseRecur('last day of every month in 2009'),  ParseRecur('last day of every month in 2010') );
+my @start_dates = (ParseRecur('first day of every month in 2009'), ParseRecur('first day of every month in 2010') );
+my @end_dates   = (ParseRecur('last day of every month in 2009'),  ParseRecur('last day of every month in 2010') );
 
 print "Dates\n";
 print join(' ', @start_dates) . "\n";

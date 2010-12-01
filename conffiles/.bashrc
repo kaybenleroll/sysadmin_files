@@ -4,11 +4,10 @@
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-#
+
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
 export TERM=xterm-color
-
 
 
 # check the window size after each command and, if necessary,
@@ -25,7 +24,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-xterm-color|rxvt|screen)
+xterm-color)
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
     ;;
 *)
@@ -59,19 +58,6 @@ if [ -f ~/.bashenv ]; then
 fi
 
 
-# enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
-    alias dir='ls --color=auto --format=vertical'
-    alias vdir='ls --color=auto --format=long'
-fi
-
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -82,8 +68,5 @@ fi
 export HISTTIMEFORMAT="%s "
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history'
 
-[ -z "$SSH_CLIENT" ] && . $HOME/.ssh-agent
+source $HOME/.ssh-agent
 
-alias keyon='ssh-add -t 21600'
-alias keyoff='ssh-add -D'
-alias keylist='ssh-add -l'

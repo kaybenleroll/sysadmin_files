@@ -44,9 +44,13 @@ while(my $line = <$fh_read>) {
 
     my $date = UnixDate(ParseDate($datestr), '%Y%m%d');
 
-    my $label = ($split_venue ? "${venue}_" : "") .
-                ($split_date  ? "${date}_"   : "") .
-                ($split_name  ? "${name}"  : "");
+    my @labelbuild = ();
+
+    push(@labelbuild, $venue) if $split_venue;
+    push(@labelbuild, $date)  if $split_date;
+    push(@labelbuild, $name)  if $split_name;
+
+    my $label = join("_", @labelbuild);
 
     if($label ne $oldlabel) {
         $oldlabel = $label;
@@ -63,5 +67,7 @@ while(my $line = <$fh_read>) {
         print "Handle closed: " . $line if !$fh_write;
     }
 }
+
+print "File: " . $datafile . " finished\n";
 
 close($fh_write) if $fh_write;
