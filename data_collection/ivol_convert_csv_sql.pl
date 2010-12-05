@@ -24,7 +24,7 @@ my %keylist;
 while(my $line = <FILE>) {
     chomp($line);
 
-    my @data = split(",",$line);
+    my @data = split(",", $line);
 
     my $name         = $data[0];
     my $venue        = $data[1];
@@ -55,9 +55,9 @@ while(my $line = <FILE>) {
 
     next if $name eq "PRS";
 
-    $name = ($name eq "TUI1") ? "TUI"  : $name;
-    $name = ($name eq "QQQ")  ? "QQQQ" : $name;
-    $name = ($name eq "SOXX") ? "SOX"  : $name;
+    $name = ($name eq "TUI1")  ? "TUI"  : $name;
+    $name = ($name eq "QQQ")   ? "QQQQ" : $name;
+    $name = ($name eq "SOXX")  ? "SOX"  : $name;
 
     my $key = join('_', $name, $date, $expiry, sprintf('%4.2f', $strike), $callput);
 

@@ -8,7 +8,7 @@
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
 export TERM=xterm-color
-
+export HOSTNAME=`hostname -s`
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -65,8 +65,8 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-export HISTTIMEFORMAT="%s "
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history'
+export HISTTIMEFORMAT="[%Y-%m-%d %T] "
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $HOSTNAME $USER "$(history 1)" >> ~/.bash_eternal_history'
 
 source $HOME/.ssh-agent
 
