@@ -39,6 +39,7 @@ options(defaultPackages = c(getOption('defaultPackages'), 'ProjectTemplate'));
                                 'Optimization',
                                 'ReproducibleResearch',
                                 'Robust',
+                                'SocialSciences',
                                 'Survival',
                                 'TimeSeries');
 

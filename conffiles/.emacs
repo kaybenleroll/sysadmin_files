@@ -11,3 +11,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
 
+(add-to-list 'load-path "~/.emacs.d/library")
+
+(require 'textile-mode)
+
+(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
