@@ -16,7 +16,7 @@
 
 options(lib             = '/usr/local/lib/R/site-library');
 options(CRAN            = c("http://ftp.heanet.ie/mirrors/cran.r-project.org/", "http://www.stats.bris.ac.uk/R/"));
-options(repos           = c("http://ftp.heanet.ie/mirrors/cran.r-project.org/", "http://www.stats.bris.ac.uk/R/", "http://r-forge.r-project.org"));
+options(repos           = c("http://ftp.heanet.ie/mirrors/cran.r-project.org/", "http://www.stats.bris.ac.uk/R/"));
 options(width           = '180');
 options(digits          = 15);
 options(digits.secs     = 3);
@@ -25,39 +25,28 @@ options(defaultPackages = c(getOption('defaultPackages'), 'ProjectTemplate'));
 
 .custom.env <- new.env();
 
-.custom.env$cran.view.list <- c('Bayesian',
-                                'Cluster',
-                                'Distributions',
-                                'Econometrics',
-                                'Finance',
-                                'Graphics',
-                                'gR',
-                                'HighPerformanceComputing',
-                                'MachineLearning',
-                                'Multivariate',
-                                'OfficialStatistics',
-                                'Optimization',
-                                'ReproducibleResearch',
-                                'Robust',
-                                'SocialSciences',
-                                'Survival',
-                                'TimeSeries');
+.custom.env$cran.nox.view.list <- c('Bayesian',
+                                    'Cluster',
+                                    'Distributions',
+                                    'Econometrics',
+                                    'Finance',
+                                    'HighPerformanceComputing',
+                                    'MachineLearning',
+                                    'Multivariate',
+                                    'OfficialStatistics',
+                                    'Optimization',
+                                    'ReproducibleResearch',
+                                    'Robust',
+                                    'SocialSciences',
+                                    'Survival',
+                                    'TimeSeries');
 
-.custom.env$headless.views <- c('Bayesian',
-                                'Cluster',
-                                'Distributions',
-                                'Econometrics',
-                                'Finance',
-                                'HighPerformanceComputing',
-                                'MachineLearning',
-                                'Multivariate',
-                                'OfficialStatistics',
-                                'Optimization',
-                                'ReproducibleResearch',
-                                'Robust',
-                                'SocialSciences',
-                                'Survival',
-                                'TimeSeries');
+
+.custom.env$cran.view.list <- c(.custom.env$cran.nox.view.list,
+                                'Graphics',
+                                'gR');
+
+
 
 
 
