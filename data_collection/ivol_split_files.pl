@@ -38,6 +38,8 @@ my $oldlabel = "";
 while(my $line = <$fh_read>) {
     next if $line =~ /^$/;
 
+    $line =~ s/\0//g;
+
     my ($name, $venue, $datestr, @data) = split(",", $line);
 
     $venue = $replace_venue if $venue =~ /\//;

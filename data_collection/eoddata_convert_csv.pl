@@ -22,6 +22,10 @@ my %month_code = ('F' => 'Jan',
                   'X' => 'Nov',
                   'Z' => 'Dec');
 
+my $exchange = '';
+
+GetOptions('exchange=s'    => \$exchange);
+
 
 while(my $line = <>) {
     chomp($line);
@@ -31,7 +35,7 @@ while(my $line = <>) {
     next if $line =~ '/^Symbol,/';
 
     if($fullsymbol =~ /(.+)([A-Z])(\d+)/) {
-        my $symbol         = $1;
+        my $symbol         = $1 . ".$exchange";
         my $delivery       = $2;
         my $year           = ($3 >= 90 ? 1900 : 2000) + $3;
 
