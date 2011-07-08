@@ -20,7 +20,7 @@ options(repos           = c("http://ftp.heanet.ie/mirrors/cran.r-project.org/", 
 options(width           = '180');
 options(digits          = 15);
 options(digits.secs     = 3);
-options(defaultPackages = c(getOption('defaultPackages'), 'ProjectTemplate'));
+#options(defaultPackages = c(getOption('defaultPackages'), 'ProjectTemplate'));
 
 
 .custom.env <- new.env();
@@ -99,6 +99,8 @@ options(defaultPackages = c(getOption('defaultPackages'), 'ProjectTemplate'));
     .ls.objects(..., order.by = "Size", decreasing = TRUE, head = TRUE, n = n);
 }
 
+
+.custom.env$startup <- function() { library(ProjectTemplate); load.project(); }
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
 attach(.custom.env);
