@@ -36,8 +36,10 @@ my $oldlabel = "";
 
 
 while(my $line = <$fh_read>) {
+    ### Skip blank lines
     next if $line =~ /^$/;
 
+    ### Remove the NUL characters from the data
     $line =~ s/\0//g;
 
     my ($name, $venue, $datestr, @data) = split(",", $line);
@@ -46,6 +48,7 @@ while(my $line = <$fh_read>) {
 
     my $date = UnixDate(ParseDate($datestr), '%Y%m%d');
 
+    ### We need to build a new label for the data depending on how we are splitting the data
     my @labelbuild = ();
 
     push(@labelbuild, $venue) if $split_venue;
@@ -54,6 +57,8 @@ while(my $line = <$fh_read>) {
 
     my $label = join("_", @labelbuild);
 
+
+    ### If our splitting label has changed, create a new output file.
     if($label ne $oldlabel) {
         $oldlabel = $label;
 
