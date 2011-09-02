@@ -84,8 +84,6 @@ options(digits.secs     = 3);
 
     if (!missing(order.by)) {
         out        <- out[order(out[[order.by]], decreasing=decreasing), ]
-#        out        <- out[c("Type", "PrettySize", "Rows", "Columns")]
-#        names(out) <- c("Type", "Size", "Rows", "Columns")
     }
 
     if (head) { out <- head(out, n) }

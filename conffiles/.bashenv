@@ -6,3 +6,5 @@ export VISUAL="emacs"
 export EDITOR="emacs"
 
 export PERL5LIB=/home/mcooney/workspace/dbmanagement
+
+export R_HISTSIZE=10000
