@@ -60,7 +60,13 @@ foreach my $symbol (@symbols) {
 
         my $url = "http://www.m-x.ca/nego_cotes_csv.php?symbol=${symbol}&lang_txt=en&jj=${start_day}&mm=${start_month}&aa=${start_year}&jjF=${end_day}&mmF=${end_month}&aaF=${end_year}";
 
-        my $outputfile = "mxoptiondata_${symbol}_" . UnixDate($start_date, '%Y%m%d') . '_' . UnixDate($end_date , '%Y%m%d') . '.csv';
+        my $outputfile;
+
+        if(Date_Cmp($start_date, $end_date)) {
+            $outputfile = "mxoptiondata_${symbol}_" . UnixDate($start_date, '%Y%m%d') . '_' . UnixDate($end_date , '%Y%m%d') . '.csv';
+        } else {
+            $outputfile = "mxoptiondata_${symbol}_" . UnixDate($start_date, '%Y%m%d') . '.csv';
+        }
 
         print $url . "\t" . $outputfile . "\n";
 
