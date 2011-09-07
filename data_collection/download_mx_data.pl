@@ -27,6 +27,9 @@ my @symbols;
 if($namefile) {
     open(FILE, $namefile);
 
+    ### Strip out the first line
+    my $junk = <FILE>;
+
     @symbols = <FILE>;
     chomp(@symbols);
 
