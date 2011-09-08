@@ -14,11 +14,13 @@ $|++;
 
 my $namefile;
 my $name       = 'XIU,ABX,SU,RY';
-my $start_date = '2009-01-01';
-my $end_date   = '2009-01-31';
+my $start_date;
+my $end_date;
+my $date;
 
 GetOptions('namefile=s'    => \$namefile,
            'name=s'        => \$name,
+           'date=s'        => \$date,
            'start_date=s'  => \$start_date,
            'end_date=s'    => \$end_date);
 
@@ -40,8 +42,17 @@ if($namefile) {
     die("Need to supply either a name or namefile parameter\n");
 }
 
-my @start = split(",", $start_date);
-my @end   = split(",", $end_date);
+
+my @start;
+my @end;
+
+if($date) {
+    @start = split(",", $date);
+    @end   = split(",", $date);
+} else {
+    @start = split(",", $start_date);
+    @end   = split(",", $end_date);
+}
 
 if(@start != @end) {
     die("The start and end lists need to be of equal length\n");
