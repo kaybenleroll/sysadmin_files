@@ -94,7 +94,7 @@ foreach my $symbol (@symbols) {
         print FILE $response->content();
         close(FILE);
 
-        my $delay = int(rand(5) + 1);
+        my $delay = int(rand(3) + 1);
         print("Waiting for $delay secs\n\n");
         sleep($delay);
     }
