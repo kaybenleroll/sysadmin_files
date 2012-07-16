@@ -15,8 +15,8 @@
 # .Last <- function()  cat("\n   Goodbye!\n\n")
 
 options(lib             = '/usr/local/lib/R/site-library');
-options(CRAN            = c("http://ftp.heanet.ie/mirrors/cran.r-project.org/", "http://www.stats.bris.ac.uk/R/"));
-options(repos           = c("http://ftp.heanet.ie/mirrors/cran.r-project.org/", "http://www.stats.bris.ac.uk/R/", "http://www.bioconductor.org/packages/release/bioc"));
+options(CRAN            = c('http://probability.ca/cran/', 'http://ftp.heanet.ie/mirrors/cran.r-project.org/', 'http://www.stats.bris.ac.uk/R/'));
+options(repos           = c('http://probability.ca/cran/', 'http://ftp.heanet.ie/mirrors/cran.r-project.org/', 'http://www.stats.bris.ac.uk/R/', 'http://www.bioconductor.org/packages/release/bioc'));
 options(width           = '180');
 options(digits          = 15);
 options(digits.secs     = 3);
@@ -27,6 +27,7 @@ options(digits.secs     = 3);
 
 .custom.env$cran.nox.view.list <- c('Bayesian',
                                     'Cluster',
+                                    'DifferentialEquations',
                                     'Distributions',
                                     'Econometrics',
                                     'Finance',
