@@ -22,6 +22,7 @@ options(digits          = 15);
 options(digits.secs     = 3);
 #options(defaultPackages = c(getOption('defaultPackages'), 'ProjectTemplate'));
 
+Sys.setenv(R_HISTSIZE = '100000');
 
 .custom.env <- new.env();
 
