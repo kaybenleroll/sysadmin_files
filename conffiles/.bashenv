@@ -2,8 +2,8 @@ export LESS="-deiP--- File\: ?f{%f}:{PIPE}. -- [?eeof:?pB%pB\%:input..] -- [%i/%
 #export LC_CTYPE=iso_8859_1
 export PGPPATH=~/.pgp
 export PAGER="less"
-export VISUAL="emacs"
-export EDITOR="emacs"
+export VISUAL="emacs -nw"
+export EDITOR="emacs -nw"
 
 export PERL5LIB=/home/mcooney/workspace/dbmanagement
 
