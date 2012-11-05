@@ -29,3 +29,5 @@
 (auto-fill-mode 1)
 (if (eq window-system 'x)
 (font-lock-mode 1))))
+
+(define-key key-translation-map [?\C-h] [?\C-?])
