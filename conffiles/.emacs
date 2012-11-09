@@ -31,6 +31,7 @@
 (if (eq window-system 'x)
 (font-lock-mode 1))))
 
+<<<<<<< HEAD
 
 ;;; Configuration options for ESS
 
@@ -47,3 +48,8 @@
     (setq ess-indent-level 4))
 
 (add-hook 'ess-mode-hook 'myindent-ess-hook)
+=======
+(define-key key-translation-map [?\C-h] [?\C-?])
+
+(setq comint-input-ring-size 100000)
+>>>>>>> 84ca31b... Added a line to .emacs to allow the .Rhistory file not be truncated
