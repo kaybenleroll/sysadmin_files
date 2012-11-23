@@ -7,7 +7,6 @@
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
-export TERM=xterm-color
 export HOSTNAME=`hostname -s`
 
 # check the window size after each command and, if necessary,
