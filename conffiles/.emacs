@@ -30,12 +30,12 @@
 
 ;Set the indent size to 4 spaces
 (defun myindent-ess-hook ()
-    (setq ess-indent-level 4))
+  (setq ess-indent-level 4))
 
 (add-hook 'ess-mode-hook 'myindent-ess-hook)
 
 (autoload 'ess-rdired "ess-rdired"  
-   "View *R* objects in a dired-like buffer." t) ;Enable ess-rdired
+  "View *R* objects in a dired-like buffer." t) ;Enable ess-rdired
 
 
 
