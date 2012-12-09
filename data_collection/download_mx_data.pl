@@ -7,6 +7,7 @@ use diagnostics;
 use LWP::UserAgent;
 use Date::Manip;
 use Getopt::Long;
+use HTML::TableExtract;
 
 use strict;
 
@@ -64,15 +65,10 @@ foreach my $symbol (@symbols) {
         my $start_date = $start[$i];
         my $end_date   = $end[$i];
 
-        my $start_day   = UnixDate($start_date, '%d');
-        my $start_month = UnixDate($start_date, '%m');
-        my $start_year  = UnixDate($start_date, '%Y');
+	my $start_fetch = UnixDate($start_date, '%Y-%m-%d');
+	my $end_fetch   = UnixDate($end_date,   '%Y-%m-%d');
 
-        my $end_day     = UnixDate($end_date, '%d');
-        my $end_month   = UnixDate($end_date, '%m');
-        my $end_year    = UnixDate($end_date, '%Y');
-
-        my $url = "http://www.m-x.ca/nego_cotes_csv.php?symbol=${symbol}&lang_txt=en&jj=${start_day}&mm=${start_month}&aa=${start_year}&jjF=${end_day}&mmF=${end_month}&aaF=${end_year}";
+        my $url = "http://www.m-x.ca/nego_cotes_xls.php?symbol=${symbol}&from=${start_fetch}&to=${end_fetch}";
 
         my $outputfile;
 
@@ -90,8 +86,19 @@ foreach my $symbol (@symbols) {
             warn("URL: " . $response->status_line() . " not available\n");
         }
 
+	### Since the data is now returned in a Excel HTML format we need to change the data to CSV
+	my $csv_data = "";
+
+	my $te = HTML::TableExtract->new();
+	$te->parse($response->content());
+
+	foreach my $t_row ($te->rows) {
+	    $csv_data .= join(';', @$t_row) . "\n";
+	}
+
+
         open(FILE, ">" . $outputfile);
-        print FILE $response->content();
+        print FILE $csv_data;
         close(FILE);
 
         my $delay = int(rand(3) + 1);
