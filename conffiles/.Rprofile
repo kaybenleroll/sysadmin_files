@@ -14,13 +14,26 @@
 # .First <- function() cat("\n   Welcome to R!\n\n")
 # .Last <- function()  cat("\n   Goodbye!\n\n")
 
-options(lib             = '/usr/local/lib/R/site-library');
-options(CRAN            = c('http://probability.ca/cran/', 'http://ftp.heanet.ie/mirrors/cran.r-project.org/', 'http://www.stats.bris.ac.uk/R/'));
-options(repos           = c('http://probability.ca/cran/', 'http://ftp.heanet.ie/mirrors/cran.r-project.org/', 'http://www.stats.bris.ac.uk/R/', 'http://www.bioconductor.org/packages/release/bioc'));
-options(width           = '180');
-options(digits          = 15);
-options(digits.secs     = 3);
-#options(defaultPackages = c(getOption('defaultPackages'), 'ProjectTemplate'));
+options(
+    lib               = '/usr/local/lib/R/site-library',
+    CRAN              = c('http://probability.ca/cran/',
+                          'http://ftp.heanet.ie/mirrors/cran.r-project.org/',
+                          'http://www.stats.bris.ac.uk/R/'),
+    repos             = c('http://probability.ca/cran/',
+                          'http://ftp.heanet.ie/mirrors/cran.r-project.org/',
+                          'http://www.stats.bris.ac.uk/R/',
+                          'http://www.bioconductor.org/packages/release/bioc'),
+    browserNLdisabled = TRUE,
+    width             = '180',
+    digits            = 15,
+    digits.secs       = 3,
+    deparse.max.lines = 2
+);
+
+if (interactive()) {
+    suppressMessages(require(devtools))
+}
+
 
 Sys.setenv(R_HISTSIZE = '100000');
 
@@ -85,7 +98,7 @@ Sys.setenv(R_HISTSIZE = '100000');
     names(out) <- c("Type", "Size", "PrettySize", "Rows", "Columns")
 
     if (!missing(order.by)) {
-        out        <- out[order(out[[order.by]], decreasing=decreasing), ]
+        out    <- out[order(out[[order.by]], decreasing=decreasing), ]
     }
 
     if (head) { out <- head(out, n) }
@@ -99,7 +112,7 @@ Sys.setenv(R_HISTSIZE = '100000');
 }
 
 
-.custom.env$startup <- function() { library(ProjectTemplate); load.project(); }
+.custom.env$startup <- function() { require(ProjectTemplate); load.project(); }
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
 attach(.custom.env);
