@@ -23,10 +23,13 @@
 
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
+
 ;;; Configuration options for ESS
 (setq ess-eval-visibly-p nil)        ;otherwise C-c C-r (eval region) takes forever
-(setq ess-ask-for-ess-directory nil) ;otherwise you are prompted each time you start an interactive R session
+;(setq ess-ask-for-ess-directory nil) ;otherwise you are prompted each time you start an interactive R session
 
+(define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
+(define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
 
 ;Set the indent size to 4 spaces
 (defun myindent-ess-hook ()
@@ -36,8 +39,6 @@
 
 (autoload 'ess-rdired "ess-rdired"  
   "View *R* objects in a dired-like buffer." t) ;Enable ess-rdired
-
-
 
 
 ;;; Enable Octave support
@@ -52,3 +53,10 @@
     (if (eq window-system 'x)
       (font-lock-mode 1))))
 
+
+;;; Enable ido mode
+(require 'ido)
+
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode t)
