@@ -24,7 +24,7 @@ options(
                           'http://www.stats.bris.ac.uk/R/',
                           'http://www.bioconductor.org/packages/release/bioc'),
     browserNLdisabled = TRUE,
-    width             = '180',
+    width             = '160',
     digits            = 15,
     digits.secs       = 3,
     deparse.max.lines = 2
