@@ -64,5 +64,5 @@
 (ido-mode t)
 
 
-;;; Replace buffer functionality with ibuffer
+;;; Replace buffer functionality with iBuffer
 (defalias 'list-buffers 'ibuffer)
