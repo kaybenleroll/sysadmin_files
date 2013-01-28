@@ -31,6 +31,8 @@
 (define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
 (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
 
+(setq-default comint-input-ring-size 100000)
+
 ;Set the indent size to 4 spaces
 (defun myindent-ess-hook ()
   (setq ess-indent-level 4))
@@ -60,3 +62,7 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode t)
+
+
+;;; Replace buffer functionality with ibuffer
+(defalias 'list-buffers 'ibuffer)
