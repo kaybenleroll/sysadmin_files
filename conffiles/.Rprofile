@@ -114,5 +114,7 @@ Sys.setenv(R_HISTSIZE = '100000');
 
 .custom.env$startup <- function() { require(ProjectTemplate); load.project(); }
 
+.custom.env$startdev <- function() { dev_mode(TRUE); load('.RData'); startup(); }
+
 while('.custom.env' %in% search()) { detach('.custom.env') }
 attach(.custom.env);
