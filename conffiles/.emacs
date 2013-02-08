@@ -16,6 +16,9 @@
 (define-key key-translation-map [?\C-h] [?\C-?])
 
 
+;;; Remove trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;;; Enable textile support
 (add-to-list 'load-path "~/.emacs.d/library")
 
@@ -28,7 +31,7 @@
 (setq ess-eval-visibly-p nil)        ;otherwise C-c C-r (eval region) takes forever
 ;(setq ess-ask-for-ess-directory nil) ;otherwise you are prompted each time you start an interactive R session
 
-(define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
+(define-key comint-mode-map [C-up]   'comint-previous-matching-input-from-input)
 (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
 
 (setq-default comint-input-ring-size 100000)
