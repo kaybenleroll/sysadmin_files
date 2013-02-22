@@ -53,6 +53,8 @@ Sys.setenv(R_HISTSIZE = '100000');
                                     'ReproducibleResearch',
                                     'Robust',
                                     'SocialSciences',
+                                    'Spatial',
+                                    'SpatioTemporal',
                                     'Survival',
                                     'TimeSeries');
 
