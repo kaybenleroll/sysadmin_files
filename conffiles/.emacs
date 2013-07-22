@@ -39,11 +39,16 @@
 ;Set the indent size to 4 spaces
 (defun myindent-ess-hook ()
   (setq ess-indent-level 4))
-
 (add-hook 'ess-mode-hook 'myindent-ess-hook)
 
-(autoload 'ess-rdired "ess-rdired"  
-  "View *R* objects in a dired-like buffer." t) ;Enable ess-rdired
+;Enable ess-rdired
+(autoload 'ess-rdired "ess-rdired"
+  "View *R* objects in a dired-like buffer." t)
+
+;Enable syntax highlighting for JAGS
+(require 'ess-jags-d)
+
+
 
 
 ;;; Enable Octave support
@@ -69,3 +74,11 @@
 
 ;;; Replace buffer functionality with iBuffer
 (defalias 'list-buffers 'ibuffer)
+
+
+;;; Configure org mode
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
