@@ -1,3 +1,5 @@
 [user]
 	name = Mick Cooney
-	email = mcooney@kaybensoft.com
+	email = mickcooney@gmail.com
+[push]
+	default = simple
