@@ -56,7 +56,8 @@ Sys.setenv(R_HISTSIZE = '100000');
                                     'Spatial',
                                     'SpatioTemporal',
                                     'Survival',
-                                    'TimeSeries');
+                                    'TimeSeries',
+                                    'WebTechnologies');
 
 
 .custom.env$cran.view.list <- c(.custom.env$cran.nox.view.list,
