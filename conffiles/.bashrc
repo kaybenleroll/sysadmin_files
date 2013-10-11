@@ -26,17 +26,16 @@ fi
 case "$TERM" in
 xterm-color)
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
     ;;
 *)
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
     ;;
 esac
-PS1='\u@\h:\W\$ '
-
 
 # Comment in the above and uncomment this below for a color prompt
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+#PS1='\u@\h:\W\$ '
+
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -46,6 +45,17 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+case "$TERMINFO" in
+*emacs*)
+    PROMPT_COMMAND=
+    PS1='\u@\h:\W\$ '
+    ;;
+*)
+    ;;
+esac
+
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -72,4 +82,3 @@ export HISTTIMEFORMAT="[%Y-%m-%d %T] "
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $HOSTNAME $USER "$(history 1)" >> ~/.bash_eternal_history'
 
 source $HOME/.ssh-agent
-
