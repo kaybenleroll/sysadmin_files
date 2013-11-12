@@ -115,8 +115,21 @@ Sys.setenv(R_HISTSIZE = '100000');
 }
 
 
-.custom.env$startup <- function() { require(ProjectTemplate); load.project(); }
+.custom.env$mem <- function() {
+    bit <- 8L * .Machine$sizeof.pointer;
+    if(!(bit == 32L || bit == 64L)) {
+        stop("Unknown architecture", call. = FALSE)
+    }
 
+    node_size <- if(bit == 32L) 28L else 56L;
+
+    usage <- gc();
+    sum(usage[, 1] * c(node_size, 8)) / (1024 ^ 2);
+}
+
+
+
+.custom.env$startup <- function()  { require(ProjectTemplate); load.project(); }
 .custom.env$startdev <- function() { dev_mode(TRUE); load('.RData'); startup(); }
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
