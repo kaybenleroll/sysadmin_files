@@ -97,7 +97,6 @@ foreach my $symbol (@symbols) {
 		$csv_data .= join(';', @$t_row) . "\n";
 	    }
 
-
 	    open(FILE, ">" . $outputfile);
 	    print FILE $csv_data;
 	    close(FILE);
