@@ -92,18 +92,20 @@ foreach my $symbol (@symbols) {
 	my $te = HTML::TableExtract->new();
 	$te->parse($response->content());
 
-	foreach my $t_row ($te->rows) {
-	    $csv_data .= join(';', @$t_row) . "\n";
+        if($response->is_success()) {
+	    foreach my $t_row ($te->rows) {
+		$csv_data .= join(';', @$t_row) . "\n";
+	    }
+
+
+	    open(FILE, ">" . $outputfile);
+	    print FILE $csv_data;
+	    close(FILE);
 	}
 
-
-        open(FILE, ">" . $outputfile);
-        print FILE $csv_data;
-        close(FILE);
-
-        my $delay = int(rand(3) + 1);
-        print("Waiting for $delay secs\n\n");
-        sleep($delay);
+	my $delay = int(rand(3) + 1);
+	print("Waiting for $delay secs\n\n");
+	sleep($delay);
     }
 }
 
