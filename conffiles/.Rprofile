@@ -48,6 +48,7 @@ Sys.setenv(R_HISTSIZE = '100000');
                                     'HighPerformanceComputing',
                                     'MachineLearning',
                                     'Multivariate',
+                                    'NumericalMathematics',
                                     'OfficialStatistics',
                                     'Optimization',
                                     'ReproducibleResearch',
