@@ -50,9 +50,12 @@ my @end;
 if($date) {
     @start = split(",", $date);
     @end   = split(",", $date);
-} else {
+} elsif($start_date) {
     @start = split(",", $start_date);
     @end   = split(",", $end_date);
+} else {
+    @start = UnixDate(ParseDate("yesterday"), '%Y-%m-%d');
+    @end   = UnixDate(ParseDate("yesterday"), '%Y-%m-%d');
 }
 
 if(@start != @end) {
