@@ -27,6 +27,11 @@
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
 
+;;; Enable Markdown mode
+(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
 ;;; Configuration options for ESS
 (setq ess-eval-visibly-p nil)        ;otherwise C-c C-r (eval region) takes forever
 ;(setq ess-ask-for-ess-directory nil) ;otherwise you are prompted each time you start an interactive R session
