@@ -27,7 +27,8 @@ options(
     width             = '160',
     digits            = 15,
     digits.secs       = 3,
-    deparse.max.lines = 2
+    deparse.max.lines = 2,
+    defaultPackages   = c(getOption('defaultPackages'), 'data.table')
 );
 
 if (interactive()) {
