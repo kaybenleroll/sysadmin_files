@@ -1,0 +1,26 @@
+# channels to use when looking for packages
+channels:
+  - appliedai
+  - mickc
+  - defaults
+
+# binstar.org upload when package built locally
+binstar_upload: True
+
+# when creating new environments add these packages by default
+create_default_packages:
+  - python
+  - ipython 
+  - ipython-notebook 
+  - ipython-qtconsole 
+  - numpy
+  - scipy
+  - matplotlib 
+  - pandas
+
+# disallowed specification names
+disallow:
+  - anaconda
+
+# show channel URLs when displaying what is going to be downloaded
+show_channel_urls: True
