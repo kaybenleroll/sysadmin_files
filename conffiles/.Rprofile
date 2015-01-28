@@ -25,7 +25,7 @@ options(
                           'http://www.bioconductor.org/packages/release/bioc'),
     browserNLdisabled = TRUE,
     width             = '160',
-    digits            = 15,
+    digits            = 4,
     digits.secs       = 3,
     deparse.max.lines = 2
 );
