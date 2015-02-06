@@ -53,7 +53,8 @@
 ;Enable syntax highlighting for JAGS
 (require 'ess-jags-d)
 
-
+;Disable the replacement of '_' with ' <- '
+(ess-toggle-underscore nil)
 
 
 ;;; Enable Octave support
@@ -87,3 +88,7 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+
+;;; Configure emacs for python
+;(require 'ipython)
