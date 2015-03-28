@@ -3,6 +3,7 @@ channels:
   - appliedai
   - mickc
   - defaults
+  - kaybenleroll
 
 # binstar.org upload when package built locally
 binstar_upload: True
@@ -10,12 +11,12 @@ binstar_upload: True
 # when creating new environments add these packages by default
 create_default_packages:
   - python
-  - ipython 
-  - ipython-notebook 
-  - ipython-qtconsole 
+  - ipython
+  - ipython-notebook
+  - ipython-qtconsole
   - numpy
   - scipy
-  - matplotlib 
+  - matplotlib
   - pandas
 
 # disallowed specification names
