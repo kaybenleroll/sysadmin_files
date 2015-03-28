@@ -19,14 +19,6 @@
 ;;; Remove trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;;; Enable textile support
-(add-to-list 'load-path "~/.emacs.d/library")
-
-(require 'textile-mode)
-
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
-
-
 ;;; Enable Markdown mode
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -92,3 +84,4 @@
 
 ;;; Configure emacs for python
 ;(require 'ipython)
+(put 'downcase-region 'disabled nil)
