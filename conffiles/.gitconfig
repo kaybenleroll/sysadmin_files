@@ -3,3 +3,5 @@
 	email = mickcooney@gmail.com
 [push]
 	default = simple
+[alias]
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit
