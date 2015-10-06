@@ -15,21 +15,22 @@
 # .Last <- function()  cat("\n   Goodbye!\n\n")
 
 options(
-    lib               = '/usr/local/lib/R/site-library',
-    CRAN              = c('http://probability.ca/cran/',
-                          'http://ftp.heanet.ie/mirrors/cran.r-project.org/',
-                          'http://www.stats.bris.ac.uk/R/'),
-    repos             = c('http://probability.ca/cran/',
-                          'http://ftp.heanet.ie/mirrors/cran.r-project.org/',
-                          'http://www.stats.bris.ac.uk/R/',
-                          'http://www.bioconductor.org/packages/release/bioc',
-                          'http://irkernel.github.io/'),
-    browserNLdisabled = TRUE,
-    width             = 160,
-    max.print         = 1000,
-    digits            = 6,
-    digits.secs       = 3,
-    deparse.max.lines = 2
+    lib                  = '/usr/local/lib/R/site-library'
+  , CRAN                 = c('http://ftp.heanet.ie/mirrors/cran.r-project.org/'
+                           , 'http://www.stats.bris.ac.uk/R/'
+                             )
+  , repos                = c('http://ftp.heanet.ie/mirrors/cran.r-project.org/'
+                           , 'http://www.stats.bris.ac.uk/R/'
+                           , 'http://www.bioconductor.org/packages/release/bioc'
+                           , 'http://irkernel.github.io/'
+                          )
+  , browserNLdisabled    = TRUE
+  , width                = 160
+  , max.print            = 1000
+  , digits               = 6
+  , digits.secs          = 3
+  , deparse.max.lines    = 2
+  , shiny.launch.browser = FALSE
 );
 
 
@@ -42,31 +43,34 @@ Sys.setenv(R_HISTSIZE = '1000000');
 
 .custom.env <- new.env();
 
-.custom.env$cran.nox.view.list <- c('Bayesian',
-                                    'Cluster',
-                                    'DifferentialEquations',
-                                    'Distributions',
-                                    'Econometrics',
-                                    'Finance',
-                                    'HighPerformanceComputing',
-                                    'MachineLearning',
-                                    'Multivariate',
-                                    'NumericalMathematics',
-                                    'OfficialStatistics',
-                                    'Optimization',
-                                    'ReproducibleResearch',
-                                    'Robust',
-                                    'SocialSciences',
-                                    'Spatial',
-                                    'SpatioTemporal',
-                                    'Survival',
-                                    'TimeSeries',
-                                    'WebTechnologies');
+.custom.env$cran.nox.view.list <- c(
+    'Bayesian'
+  , 'Cluster'
+  , 'DifferentialEquations'
+  , 'Distributions'
+  , 'Econometrics'
+  , 'Finance'
+  , 'HighPerformanceComputing'
+  , 'MachineLearning'
+  , 'Multivariate'
+  , 'NumericalMathematics'
+  , 'OfficialStatistics'
+  , 'Optimization'
+  , 'ReproducibleResearch'
+  , 'Robust'
+  , 'SocialSciences'
+  , 'Spatial'
+  , 'SpatioTemporal'
+  , 'Survival'
+  , 'TimeSeries'
+  , 'WebTechnologies'
+);
 
 
-.custom.env$cran.view.list <- c(.custom.env$cran.nox.view.list,
-                                'Graphics',
-                                'gR');
+.custom.env$cran.view.list <- c(.custom.env$cran.nox.view.list
+                              , 'Graphics'
+                              , 'gR'
+                                );
 
 
 
