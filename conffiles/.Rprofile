@@ -45,31 +45,31 @@ Sys.setenv(R_HISTSIZE = '1000000');
 
 .custom.env$cran.nox.view.list <- c(
     'Bayesian'
-  , 'Cluster'
-  , 'DifferentialEquations'
-  , 'Distributions'
-  , 'Econometrics'
-  , 'Finance'
-  , 'HighPerformanceComputing'
-  , 'MachineLearning'
-  , 'Multivariate'
-  , 'NumericalMathematics'
-  , 'OfficialStatistics'
-  , 'Optimization'
-  , 'ReproducibleResearch'
-  , 'Robust'
-  , 'SocialSciences'
-  , 'Spatial'
-  , 'SpatioTemporal'
-  , 'Survival'
-  , 'TimeSeries'
-  , 'WebTechnologies'
+   ,'Cluster'
+   ,'DifferentialEquations'
+   ,'Distributions'
+   ,'Econometrics'
+   ,'Finance'
+   ,'HighPerformanceComputing'
+   ,'MachineLearning'
+   ,'Multivariate'
+   ,'NumericalMathematics'
+   ,'OfficialStatistics'
+   ,'Optimization'
+   ,'ReproducibleResearch'
+   ,'Robust'
+   ,'SocialSciences'
+   ,'Spatial'
+   ,'SpatioTemporal'
+   ,'Survival'
+   ,'TimeSeries'
+   ,'WebTechnologies'
 );
 
 
 .custom.env$cran.view.list <- c(.custom.env$cran.nox.view.list
-                              , 'Graphics'
-                              , 'gR'
+                               ,'Graphics'
+                               ,'gR'
                                 );
 
 
@@ -141,7 +141,7 @@ Sys.setenv(R_HISTSIZE = '1000000');
 
 
 
-.custom.env$startup <- function()  { require(ProjectTemplate); load.project(); }
+.custom.env$startup  <- function() { require(ProjectTemplate); load.project(); }
 .custom.env$startdev <- function() { dev_mode(TRUE); load('.RData'); startup(); }
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
