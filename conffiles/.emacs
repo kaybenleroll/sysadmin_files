@@ -13,15 +13,31 @@
   `((".*" ,user-temporary-file-directory t)))
 
 
-(define-key key-translation-map [?\C-h] [?\C-?])
+
+;(define-key key-translation-map [?\C-h] [?\C-?])
+
+;;; Add in ESS
+(load "/home/mcooney/githubrepos/ESS/lisp/ess-site")
+(setq inferior-julia-program-name "/usr/bin/julia")
+
+;;; Julia mode
+(add-to-list 'load-path "/home/mcooney/.emacs.d/library")
+(require 'julia-mode)
+
 
 
 ;;; Remove trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;;; Show the column number
+(setq column-number-mode t)
+
 ;;; Enable Markdown mode
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
+
 
 
 ;;; Configuration options for ESS
@@ -81,7 +97,27 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+;; Set to the location of your Org files on your local system
+;(setq org-directory "~/games/magegame")
+(setq org-mobile-files (list "~/games/magegame/consilium_london.org" "~/games/magegame/session_notes.org"))
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+
 
 ;;; Configure emacs for python
 ;(require 'ipython)
 (put 'downcase-region 'disabled nil)
+
+
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
+       	                           ("marmalade" . "http://marmalade-repo.org/packages/")
+			           ("melpa"     . "http://melpa.milkbox.net/packages/")
+				   )))
+(package-initialize) ;; You might already have this line
+
+
+(require 'stan-mode)
