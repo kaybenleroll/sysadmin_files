@@ -1,3 +1,5 @@
+build-essential
+emacs-nox
 htop
 latex-beamer
 libcurl4-openssl-dev
@@ -15,3 +17,4 @@ texlive
 texlive-generic-extra
 texlive-latex-extra
 texlive-math-extra
+
