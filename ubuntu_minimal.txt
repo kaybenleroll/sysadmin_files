@@ -1,0 +1,17 @@
+htop
+latex-beamer
+libcurl4-openssl-dev
+libpq-dev
+libquantlib0-dev
+libssl-dev
+ncftp
+postgis
+postgis-doc
+postgresql-9.4-postgis-2.1
+postgresql-9.4-postgis-2.1-scripts
+python-gpgme
+quantlib-examples
+texlive
+texlive-generic-extra
+texlive-latex-extra
+texlive-math-extra
