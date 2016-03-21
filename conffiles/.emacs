@@ -33,8 +33,8 @@
 (setq column-number-mode t)
 
 ;;; Enable Markdown mode
-(require 'markdown-mode)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;(require 'markdown-mode)
+;(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 
 
