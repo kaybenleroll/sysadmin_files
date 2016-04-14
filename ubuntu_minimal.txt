@@ -7,7 +7,6 @@ coinor-libsymphony-dev
 coinor-libvol-dev
 emacs-nox
 htop
-latex-beamer
 libcurl4-openssl-dev
 libglpk-dev
 libpq-dev
@@ -27,4 +26,5 @@ texinfo
 texlive
 texlive-generic-extra
 texlive-latex-extra
+texlive-latex-recommended
 texlive-math-extra
