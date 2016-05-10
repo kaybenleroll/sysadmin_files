@@ -29,8 +29,24 @@
 ;;; Remove trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;;; Ensure tabs are added as spaces
+(setq-default indent-tabs-mode nil)
+
 ;;; Show the column number
 (setq column-number-mode t)
+
+
+
+;;; Enable polymode for Rmd files
+(setq load-path
+  (append '("/home/mcooney/githubrepos/polymode/"  "/home/mcooney/githubrepos/polymode/modes")
+    load-path))
+
+(require 'poly-R)
+(require 'poly-markdown)
+
+(add-to-list 'auto-mode-alist '("\\.md" .  poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
 ;;; Enable Markdown mode
 ;(require 'markdown-mode)
