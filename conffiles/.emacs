@@ -17,8 +17,8 @@
 ;(define-key key-translation-map [?\C-h] [?\C-?])
 
 ;;; Add in ESS
-(load "/home/mcooney/githubrepos/ESS/lisp/ess-site")
-(setq inferior-julia-program-name "/usr/bin/julia")
+;(load "/home/mcooney/githubrepos/ESS/lisp/ess-site")
+;(setq inferior-julia-program-name "/usr/bin/julia")
 
 ;;; Julia mode
 (add-to-list 'load-path "/home/mcooney/.emacs.d/library")
