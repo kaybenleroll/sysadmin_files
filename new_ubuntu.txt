@@ -19,7 +19,7 @@ dieharder
 djview4
 djvulibre-bin
 emacs-nox
-flashplugin-nonfree
+flashplugin-installer
 ggobi
 git
 git-core
@@ -40,7 +40,7 @@ libgd-dev
 libgdal-dev
 libglpk-dev
 libglu1-mesa-dev
-libgsl0-dev
+libgsl-dev
 libhtml-tableextract-perl
 libmpfr-dev
 libmysqlclient-dev
