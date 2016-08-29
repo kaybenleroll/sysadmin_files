@@ -32,6 +32,7 @@ htop
 jags
 libarmadillo-dev
 libboost-dev
+libcairo-dev
 libdate-manip-perl
 libdieharder-dev
 libfftw3-3
@@ -42,6 +43,7 @@ libglpk-dev
 libglu1-mesa-dev
 libgsl-dev
 libhtml-tableextract-perl
+libhunspell-dev
 libmpfr-dev
 libmysqlclient-dev
 liboctave-dev
@@ -78,8 +80,8 @@ postgresql-plr
 pvm-dev
 rar
 sudo
+tk-dev
 tk-table
-tk-tile
 unixodbc-dev
 unrar
 vim
