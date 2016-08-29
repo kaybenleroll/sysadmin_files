@@ -37,16 +37,28 @@
 
 
 
+;;; Enable support for Rmarkdown
+(autoload 'markdown-mode "markdown-mode"
+     "Major mode for editing Markdown files" t)
+
+(defun rmd-mode ()
+  (ess-noweb-mode)
+  (setq ess-noweb-default-code-mode 'ess-r-mode)
+  (setq ess-noweb-doc-mode 'markdown-mode))
+
+(setq auto-mode-alist (append (list (cons "\\.Rmd$" 'rmd-mode))
+                                                 auto-mode-alist))
+
 ;;; Enable polymode for Rmd files
-(setq load-path
-  (append '("/home/mcooney/githubrepos/polymode/"  "/home/mcooney/githubrepos/polymode/modes")
-    load-path))
+;(setq load-path
+;  (append '("/home/mcooney/githubrepos/polymode/"  "/home/mcooney/githubrepos/polymode/modes")
+;    load-path))
 
-(require 'poly-R)
-(require 'poly-markdown)
+;(require 'poly-R)
+;(require 'poly-markdown)
 
-(add-to-list 'auto-mode-alist '("\\.md" .  poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+;(add-to-list 'auto-mode-alist '("\\.md" .  poly-markdown-mode))
+;(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
 ;;; Enable Markdown mode
 ;(require 'markdown-mode)
