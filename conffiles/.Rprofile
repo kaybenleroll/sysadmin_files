@@ -1,3 +1,4 @@
+
 ##						Emacs please make this -*- R -*-
 ## empty Rprofile.site for R on Debian
 ##
@@ -11,26 +12,24 @@
 # setHook(packageEvent("grDevices", "onLoad"),
 #         function(...) grDevices::ps.options(horizontal=FALSE))
 # set.seed(1234)
-# .First <- function() cat("\n   Welcome to R!\n\n")
+
+.First <- function() { if(interactive()) fortunes::fortune() }
+
 # .Last <- function()  cat("\n   Goodbye!\n\n")
 
 options(
     lib                  = '/usr/local/lib/R/site-library'
-  , CRAN                 = c('http://ftp.heanet.ie/mirrors/cran.r-project.org/'
-                           , 'http://www.stats.bris.ac.uk/R/'
-                             )
-  , repos                = c('http://ftp.heanet.ie/mirrors/cran.r-project.org/'
-                           , 'http://www.stats.bris.ac.uk/R/'
-                           , 'http://www.bioconductor.org/packages/release/bioc'
-                           , 'http://irkernel.github.io/'
+   ,CRAN                 = c('http://cran.rstudio.com')
+   ,repos                = c('http://cran.rstudio.com'
+                            ,'http://www.bioconductor.org/packages/release/bioc'
                           )
-  , browserNLdisabled    = TRUE
-  , width                = 160
-  , max.print            = 1000
-  , digits               = 6
-  , digits.secs          = 3
-  , deparse.max.lines    = 2
-  , shiny.launch.browser = FALSE
+   ,browserNLdisabled    = TRUE
+   ,width                = 160
+   ,max.print            = 1000
+   ,digits               = 6
+   ,digits.secs          = 3
+   ,deparse.max.lines    = 2
+   ,shiny.launch.browser = FALSE
 );
 
 
