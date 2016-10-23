@@ -1,4 +1,16 @@
 
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
+       	                           ("marmalade" . "http://marmalade-repo.org/packages/")
+			           ("melpa"     . "http://melpa.milkbox.net/packages/")
+				   )))
+(package-initialize) ;; You might already have this line
+
+
 ;;; Save all backup files to a specific directory in the home dir
 (defvar user-temporary-file-directory "/home/mcooney/.emacs.d/backups")
 
@@ -65,9 +77,6 @@
 ;Disable the replacement of '_' with ' <- '
 (ess-toggle-underscore nil)
 
-(require 'stan-mode)
-
-
 (require 'poly-R)
 (require 'poly-markdown)
 
@@ -83,6 +92,9 @@
 
 (setq auto-mode-alist (append (list (cons "\\.mdw$" 'mdw-mode))
                                                  auto-mode-alist))
+
+(require 'stan-mode)
+
 
 
 ;;; Enable Octave support
@@ -127,15 +139,3 @@
 ;;; Configure emacs for python
 ;(require 'ipython)
 (put 'downcase-region 'disabled nil)
-
-
-(require 'package) ;; You might already have this line
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
-       	                           ("marmalade" . "http://marmalade-repo.org/packages/")
-			           ("melpa"     . "http://melpa.milkbox.net/packages/")
-				   )))
-(package-initialize) ;; You might already have this line
