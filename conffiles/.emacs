@@ -16,9 +16,13 @@
 
 ;(define-key key-translation-map [?\C-h] [?\C-?])
 
+
+(load "/home/mcooney/githubrepos/ESS/lisp/ess-site")
+(setq inferior-julia-program-name "/usr/local/bin/julia")
+
 ;;; Add in ESS
-;(load "/home/mcooney/githubrepos/ESS/lisp/ess-site")
-;(setq inferior-julia-program-name "/usr/bin/julia")
+(require 'ess-site)
+
 
 ;;; Julia mode
 (add-to-list 'load-path "/home/mcooney/.emacs.d/library")
@@ -34,37 +38,6 @@
 
 ;;; Show the column number
 (setq column-number-mode t)
-
-
-
-;;; Enable support for Rmarkdown
-(autoload 'markdown-mode "markdown-mode"
-     "Major mode for editing Markdown files" t)
-
-(defun rmd-mode ()
-  (ess-noweb-mode)
-  (setq ess-noweb-default-code-mode 'ess-r-mode)
-  (setq ess-noweb-doc-mode 'markdown-mode))
-
-(setq auto-mode-alist (append (list (cons "\\.Rmd$" 'rmd-mode))
-                                                 auto-mode-alist))
-
-;;; Enable polymode for Rmd files
-;(setq load-path
-;  (append '("/home/mcooney/githubrepos/polymode/"  "/home/mcooney/githubrepos/polymode/modes")
-;    load-path))
-
-;(require 'poly-R)
-;(require 'poly-markdown)
-
-;(add-to-list 'auto-mode-alist '("\\.md" .  poly-markdown-mode))
-;(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-
-;;; Enable Markdown mode
-;(require 'markdown-mode)
-;(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-
 
 
 
@@ -91,6 +64,25 @@
 
 ;Disable the replacement of '_' with ' <- '
 (ess-toggle-underscore nil)
+
+(require 'stan-mode)
+
+
+(require 'poly-R)
+(require 'poly-markdown)
+
+(add-to-list 'auto-mode-alist '("\\.md" .  poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+
+
+(defun mdw-mode ()
+  (ess-noweb-mode)
+  (setq ess-noweb-default-code-mode 'ess-julia-mode)
+  (setq ess-noweb-doc-mode 'markdown-mode))
+
+(setq auto-mode-alist (append (list (cons "\\.mdw$" 'mdw-mode))
+                                                 auto-mode-alist))
 
 
 ;;; Enable Octave support
@@ -127,7 +119,8 @@
 
 ;; Set to the location of your Org files on your local system
 ;(setq org-directory "~/games/magegame")
-(setq org-mobile-files (list "~/games/magegame/consilium_london.org" "~/games/magegame/session_notes.org"))
+(setq org-mobile-files (list "~/games/magegame/consilium_london.org"
+                             "~/games/magegame/session_notes.org"))
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 
 
@@ -138,7 +131,7 @@
 
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+	     '("melpa" . "http://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
@@ -146,6 +139,3 @@
 			           ("melpa"     . "http://melpa.milkbox.net/packages/")
 				   )))
 (package-initialize) ;; You might already have this line
-
-
-(require 'stan-mode)

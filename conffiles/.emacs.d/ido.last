@@ -1,0 +1,124 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/mcooney/work/generate_lifeinsurance_book/" . "assets/")
+ ("/home/mcooney/work/" . "stancasestudy_losscurves/")
+ ("/home/mcooney/tmp/" . "revealdemo/")
+ ("/home/mcooney/work/training_courses/" . "sdpsm_intro/")
+ ("/home/mcooney/DublinR/drcomp_islandgold/" . "submission/")
+ ("/home/mcooney/htnr_work/" . "htnr_working/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/mcooney/work/carinsurance_pricing/"
+ "/home/mcooney/work/generate_lifeinsurance_book/data/"
+ "/home/mcooney/DublinR/drcomp_islandgold/"
+ "/home/mcooney/work/generate_lifeinsurance_book/assets/"
+ "/home/mcooney/work/stancasestudy_losscurves/"
+ "/home/mcooney/work/stancasestudy_losscurves/.git/"
+ "/home/mcooney/work/stancasestudy_losscurves/data/"
+ "/home/mcooney/DublinR/drcomp_islandgold/submission/"
+ "/home/mcooney/work/survival_dashboard/"
+ "/home/mcooney/DublinR/dublin_r_workshops/jltalk_dsge_201609/"
+ "/home/mcooney/work/training_courses/"
+ "/home/mcooney/work/training_courses/sdpsm_intro/"
+ "/home/mcooney/DublinR/dublin_r_workshops/talk_lossmodels_201608/"
+ "/home/mcooney/githubrepos/datadriven/"
+ "/home/mcooney/applied.ai/appliedai_carinspricing/"
+ "/home/mcooney/htnr_work/bond_cashflows/"
+ "/home/mcooney/htnr_work/bond_cashflows/data/"
+ "/home/mcooney/DublinR/dublin_r_workshops/talk_pgminsurance_201607/"
+ "/home/mcooney/htnr_work/htnr_working/src/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "40_carpricing_modelcheck.Rmd"
+ "20_carinspricing_initmodel.Rmd"
+ "cluster_policy_proportions.csv"
+ "10_competition_site.Rmd"
+ "02_create_geological_data.Rmd"
+ "styles.css"
+ "README.md"
+ "config"
+ "data_README.md"
+ "submission_README.md"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/mcooney/work/carinsurance_pricing/" (22531 46230 857267 695000) "30_carinspricing_calcprices.Rmd" "30_carinspricing_calcprices.html" "LICENSE" "./" "20_carinspricing_initmodel.Rmd" ".gitignore" "40_carpricing_modelcheck.Rmd" ".git/" "../" "render_workbooks.R" ".Rhistory" "10_carinspricing_exploration.html" "custom_functions.R" "README.md" "40_carpricing_modelcheck.html" "styles.css" "data/" ".RData" "10_carinspricing_exploration.Rmd" "20_carinspricing_initmodel.html")
+
+ ("/home/mcooney/work/training_courses/sdpsm_intro/" (22525 25104 348795 47000) "sdpsm_worksheet_probpyr.log" "sdpsm_worksheet_git.out" "./" ".gitignore" "sdpsm_worksheet_git.pdf" "sdpsm_worksheet_probpyr.Rnw" "sdpsm_worksheet_probpyr.aux" "sdpsm_worksheet_git.aux" "../" "sdpsm_worksheet_shell.pdf" "sdpsm_worksheet_shell.aux" "sdpsm_worksheet_probpyr.tex" "sdpsm_worksheet_shell.log" ".Rhistory" "sdpsm_worksheet_shell.out" "sdpsm_worksheet_probpyr.out" "sdpsm_worksheet_git.log" "sdpsm_worksheet_shell.Rnw" "sdpsm_worksheet_git.tex" "sdpsm_worksheet_probpyr.pdf" "sdpsm_worksheet_shell.tex" "data/" ".RData" "sdpsm_worksheet_git.Rnw" "sdpsm_worksheet_modeling.Rnw" "sdpsm_workshop_outline.org")
+
+ ("/home/mcooney/work/survival_dashboard/" (22505 5512 556238 548000) "LICENSE" "./" ".gitignore" "10_calculate_data.html" "server.R" "10_calculate_data.Rmd" ".git/" "../" "create_data.R" ".Rhistory" "custom_functions.R" "README.md" "ui.R" "data/" ".RData")
+
+ ("/home/mcooney/DublinR/drcomp_islandgold/submission/" (22503 40681 44657 136000) "./" "test_submission/" "../" "submission_README.md" "actual_submission/")
+
+ ("/home/mcooney/work/stancasestudy_losscurves/data/" (22504 14393 677589 137000) "comauto_pos.csv" "./" "prodliab_pos.csv" "medmal_pos.csv" "othliab_pos.csv" "data_README.md" "../" "ppauto_pos.csv" "casact_read_data.R" "wkcomp_pos.csv")
+
+ ("/home/mcooney/work/stancasestudy_losscurves/.git/" (22504 15825 463283 157000) "HEAD" "branches/" "./" "description" "objects/" "FETCH_HEAD" "info/" "ORIG_HEAD" "index" "../" "COMMIT_EDITMSG" "refs/" "config" "hooks/" "logs/")
+
+ ("/home/mcooney/work/generate_lifeinsurance_book/data/" (22513 33616 608114 793000) "product_duration_data.csv" "./" "cluster_product_mapping.csv" "product_input_data.csv" "data_README.md" "cluster_policy_proportions.csv" "../" "smallarea_gisdb.csv" "aai_censusclusterids.csv" "lifemorb_tables.rda")
+
+ ("/home/mcooney/work/generate_lifeinsurance_book/" (22517 30392 665302 49000) "10_create_life_policy_data.html" "LICENSE" "./" ".gitignore" "11_create_life_policy_lapses.html" "output/" "12_create_life_policy_latlng.Rmd" ".git/" "../" ".#10_create_life_policy_data.Rmd" "11_create_life_policy_lapses.Rmd" ".Rhistory" "custom_functions.R" "assets/" "10_create_life_policy_data_files/" "README.md" "10_create_life_policy_data.Rmd" "data/")
+
+ ("/home/mcooney/people/siobhanmcnamara/" (22514 55889 808795 16000) "./" "../" "R2010.csv")
+
+ ("/home/mcooney/applied.ai/appliedai_lifebook/r/" (22514 49769 85912 347000) "01a_DataTransfer.Rmd" "11_NewBusinessResampling.html" "10_CashflowSimulation.html" "00_Overview.html" "./" "01_DataTransfer.Rmd" "11_NewBusinessResampling.Rmd" "custom_functions_pricing.R" "91_custom_css.css" "20_LifeBookPricing.html" "10_CashflowSimulation.Rmd" "render_markdown.R" "../" "01a_DataTransfer.html" ".Rhistory" "02_SurvivalRedux.html" "custom_functions.R" "assets/" "OLD_scripts.R" "11_NewBusinessResampling_files/" "90_custom_markdown.R" "00_Overview.Rmd" ".RData" "20_LifeBookPricing.Rmd" "01_DataTransfer.html" "02_SurvivalRedux.Rmd" "99_utilities.r")
+
+ ("/home/mcooney/DublinR/drcomp_islandgold/" (22512 23538 126565 843000) "11_create_fake_submissions.Rmd" "submission/" "50_eldorado_competition.html" "./" ".gitignore" "server.R" "01_create_island_stats.Rmd" "01_create_island_stats.html" ".git/" "../" "porel/" ".Rhistory" "10_competition_site.Rmd" "custom_functions.R" "assets/" "20_resolve_submissions.Rmd" "02_create_geological_data.html" "README.md" "51_eldorado_final.html" "50_eldorado_competition.Rmd" "10_competition_site.html" "20_resolve_submissions.html" "images/" "ui.R" "data/" ".RData" "02_create_geological_data.Rmd" "test_submission.csv" "11_create_fake_submissions.html" "51_eldorado_final.Rmd" "contributors.txt")
+
+ ("/home/mcooney/work/generate_lifeinsurance_book/assets/" (22513 33616 608114 793000) "./" "../" "styles.css")
+
+ ("/home/mcooney/work/stancasestudy_losscurves/" (22505 5516 32135 168000) "LICENSE" "./" "losscurves_casestudy.Rmd" ".gitignore" ".git/" "losscurves_multiple.stan" "../" ".Rhistory" "assets/" "README.md" "losscurves_casestudy.html" "data/" ".RData" "losscurves_single.stan" "contributors.txt")
+
+ ("/home/mcooney/work/" (22509 32061 761654 747000) "carinsurance_pricing/" "./" "datadriven/" "survival_dashboard/" "generate_lifeinsurance_book/" "training_courses/" "zalando/" "blas_graph_benchmark/" "awscli/" "../" "stancasestudy_losscurves/" "nneg/" "scala/" "KidsFoodandFacebook/" "PhD/")
+
+ ("/home/mcooney/applied.ai/appliedai_generate_insurancedata/" (22376 11747 665611 66000) "11_create_life_policy_lapses.ipynb" "./" ".gitignore" "20_create_car_policy_data.Rmd" ".ipynb_checkpoints/" "20_create_car_policy_data.ipynb" "code/" "12_create_life_policy_latlng.Rmd" "20_create_car_policy_data.r" ".git/" "../" "10_create_life_policy_data.r" "11_create_life_policy_lapses.Rmd" ".Rhistory" "12_create_life_policy_latlng.r" "assets/" "12_create_life_policy_latlng.ipynb" "11_create_life_policy_lapses.r" "README.md" "10_create_life_policy_data.Rmd" "data/" ".RData" "10_create_life_policy_data.ipynb")
+
+ ("/home/mcooney/htnr_work/htnr_working/src/" (22490 62885 209533 197000) "./" "install_packages.R" "write_psim_data.R" "run_weeklies.R" "setup.R" "generate_option_greeks.R" "../" "run_event_updates.R" "run_bias_factor_calculation.R" "create_metrics_data.R" "calculate_optionvlm.R" "create_fundnav_data.R" "create_psim_data.R")
+
+ ("/home/mcooney/githubrepos/datadriven/" (22477 43769 700850 42000) "./" ".git/" "../" ".Rhistory" "README.md" "BayesCred/" ".RData")
+
+ ("/home/mcooney/work/training_courses/" (22468 43646 588989 73000) "LICENSE" "./" ".gitignore" "timeseries_intro/" "sdpsm_intro/" ".git/" "../" "README.md")
+
+ ("/home/mcooney/DublinR/dublin_r_workshops/jltalk_dsge_201609/" (22471 15422 975417 674000) "./" ".gitignore" "../" "gadfly_md_sample.jmd" ".Rhistory" ".juliahistory" "jltalk_dsge_201609.jmd")
+
+ ("/home/mcooney/htnr_work/htnr_working/" (22468 41316 753018 7000) "profiling/" "src/" "munge/" "./" "tests/" "lib/" "README" ".gitignore" "doc/" "cache/" "graphs/" ".git/" "../" ".Rhistory" ".Rhistory.20140902" "config/" "TODO" "diagnostics/" "reports/" "logs/" "data/" ".RData")
+
+ ("/home/mcooney/htnr_work/" (22406 7229 630815 368000) "./" "htnr_working/" "margin_calculator/" "forecast_display/" "blmbg_data_retrieval/" "volforecaster/" "bond_cashflows/" "../" ".Rhistory" "mortality_swap/" "projects/" "volare_packages/" "daily_tasks/" "pace_jobs/")
+
+ ("/home/mcooney/htnr_work/blmbg_data_retrieval/" (22489 24106 348624 222000) "index_tickers.csv" "blmbg_sector_headers.txt" "./" ".gitignore" "blmbg_extra_symbols.txt" ".git/" "../" "lib.R" ".Rhistory" "retrieve_blmbg_earnings_data.R")
+
+ ("/home/mcooney/DublinR/dublin_lg_code/lottery/" (22467 9964 888151 63000) "./" ".gitignore" ".#mcooney_10_lottery_exploration.Rmd" "mcooney_10_lottery_exploration.Rmd" "../" ".Rhistory" "data/" ".RData" "mcooney_10_lottery_exploration.html")
+
+ ("/home/mcooney/work/blas_graph_benchmark/" (22465 38976 730647 0) "LICENSE" "./" ".gitignore" ".git/" "../" ".#10_matrix_benchmarks.Rmd" "README.md" "10_matrix_benchmarks.Rmd")
+
+ ("/home/mcooney/tmp/revealdemo/" (22465 28080 454704 603000) "./" "../" ".Rhistory")
+
+ ("/home/mcooney/tmp/" (22465 28027 143684 866000) "diabetes-data.tar.Z" "profiling/" "directlabels/" "steam_latest.deb" "kddb.bz2" "CorePropositions_EcosystemsAndPredictionEngines.pdf" "assignment_1.zip" "creditcard/" "read_company_data.pl" "ee263/" "mxdata/" "Encyclopedia of Biostatistics2ndEd2005.pdf" "dailyreport/" "atom-amd64.deb" "librarydata.csv" "aailc/" "shiny-salesman/" "timereg/" "emcee/" "2327743.pdf" "sampler_tests.tar.bz2" "test.txt" "spark/" "Anaconda3-4.0.0-Linux-x86_64.sh" "scala_impatient.pdf" "sampler_tests/" "DIT_June_2016.zip" "JAGS-4.1.0.tar.gz" "dired-refcard.gnu.ps" "python-mode.el-6.2.0/" "gelman/" "fouriertransform.zip" "ProductAnalyst_Test_406745.pdf" "create_company_data_sql.pl" "states_sorted.txt" ".gitignore" "workR/" "v36i11.pdf" "pystatsml/" "qqq.txt" "LoneWolf/" "pool-binary-trials/" "spark_training_bhaycock/" "OpenBUGS-3.2.3/" "symbols.txt" "ideaIC/" "2533673.pdf" "library_files.md5" "policies.png" "adnd/" "eveindustry.Rproj" "extra_earnings_dates.txt" "teamviewer_11.0.57095_amd64.deb" "calc.wod.success.R" "ZalandoDSTrainings.xlsx" "updateR/" "RLmeetup.zip" "RAdamant/" "conda/" "get_companynames.pl" "sc/" "advrbook/" "bootstrap.zip" "OpenBUGS-3.2.3.tar.gz" "Finance-QuoteHist-1.19/" "dired-refcard.gnu.pdf" "slack-desktop-2.0.6-amd64.deb" "scratch.txt" "lifetables/" "python-mode.el-6.2.0.tar.gz" "optiondata_insert_footer.sql" "v46i10.R" "ProductAnalyst_Test [406745].pdf" "kddcup.data" "bfg-repo-cleaner/" "kddb.t.bz2" "libpng-1.6.21.tar.gz" "signalmedia-1m.jsonl" "vms-empire-1.10.tar.gz" "wireless-info.sh" "v46i10.pdf" "deprivation/" "wclogs/" "sql_delete.sql" "As from Mick.docx" "bdasingle2014.zip" "CAS/" "nasa/" "rstudio-0.99.902-amd64.deb" "hostshare/" "google-chrome-stable_current_amd64.deb" "Screenhero.zip" "packages/" "libpng16-deb/" "badmodel.png" "shiny_tutorial/" "FINAL DOCUMENT JWNFJF.docx" "dailydata_dump.sql" "TCD/" "optiondata_insert_header.sql" "packages.txt" ".Rhistory" "survival_2.38-3.tar.gz" "survival/" "swdata/" "errorlog.tex" "vms-empire-1.10/" "v39i02.pdf" "DA Kate-Aoife.docx" "goodfriday.txt~" "RAdamant_0.8.3.2.tar.gz" "libpng-1.6.21/" "rftg-0.8.1.tar.bz2" "talk.pdf" "talklifeinsurancemortswap2015.Rnw" "psc/" "fouriertransform/" "[Havard_Rue,_Leonhard_Held]_Gaussian_Markov_Random.pdf" "derek/" "quote_AEF_20160401_20160429.xls" "git_trial.sh" "16037893 - Quantitative Analyst AVP - External.pdf" ".#revealdemo.Rmd" "HeadHunt+International+QUANTATIVE+INVESTMENT+ANALYST.docx" "ofund_run.R" "goodfriday.txt" "samiam30_linux_amd64.tar.gz" "Paper-Autumn-2005.pdf" "Umacs_0.924.tar.gz" "bootstrap/" "TODO" "CME_2016.zip" "teamviewer_11.0.57095_i386.deb" "Measuring the Length of the Great Recession via Lapse Rates- A Bayesian Approach to Change-Point Detection.pdf" "header.sql" "Matrix_Analysis.pdf" "ppr_geocoded.csv.bz2" "logs_jrogers.log.bz2" "beamer_template/" "document.pdf" "oldcomp/" "clustering_reduced.png" "bdasingle2014/" "DeltaNormalVaR.xlsx" "worldgen/" "table.csv" "DIT_June_2016/" "spy_update.R" "american_ls.pdf" "dropbox_1.6.0_amd64.deb" "nltuk1113reg_tcm77-377319.xls" "visualisation.png" "dn/" "juliawork/" "bda/" "Finance-QuoteHist-1.19.tar.gz" "MANOVA_ANOVA_ANCOVA_R/" "aptitude_call.txt" "Diabetes-Data/" ".RData" "advr/" "pd18_complete.pdf" "full13f2july2015.csv.bz2" "Data Mining with R-Kumar.pdf" "LondonRinIns_boardingcard.pdf" "CASdatasets_1.0-6.tar.gz" "kddcup.names" "revealdemo/" "codinggrace/" "sorted_library.md5" "Qs for Mick.docx" "HeadHunt International QUANTATIVE INVESTMENT ANALYST.docx" "ideaIC-2016.1.3.tar.gz" "dit_windspeed/" "prob.pdf" "../" "./")
+
+ ("/home/mcooney/" (22458 7317 438934 540000) ".pki/" ".pam_environment" "people/" ".julia/" ".ipython/" ".xscorch/" ".idea-build/" "Podcasts/" ".bash_logout" ".emacs.d/" ".spark_history" "Downloads/" "Music/" ".lesshst" "anaconda3/" "./" ".adobe/" ".psql_history-localhost-geospatialdb" ".inputrc" ".AnnotationHubData/" ".gvfs/" ".condarc" ".hushlogin" ".gnome2/" ".java/" "applied.ai/" "dominions3/" ".dropbox-dist/" "run_steam.sh" ".Xdefaults" ".mozilla/" ".cache/" ".psql_history-localhost-dailydata" ".gksu.lock" "Videos/" ".gimp-2.8/" ".steam/" ".profile" ".macromedia/" ".gconf/" ".install_locations/" ".config/" ".gphoto/" "Desktop/" ".dmrc" ".gitconfig" ".dropbox/" ".ICEauthority" "Audiobooks/" ".minttyrc" ".IdeaIC2016.1/" "../" ".bash_profile" ".xscreensaver" ".continuum/" ".pulse-cookie" ".Xauthority" ".android/" ".bashrc" "Pictures/" ".rstudio-desktop/" "online_classes/" ".jupyter/" ".bashenv" "tmp/" ".bash_eternal_history" "IdeaProjects/" ".Rhistory" "work/" ".Rprofile" "htnr_work/" ".gnome2_private/" ".xsession-errors" ".bash_aliases" ".sbt/" ".xsession-errors.old" ".julia_history" "R-dev/" ".local/" ".ssh/" ".scorched3d/" ".sudo_as_admin_successful" ".gnupg/" ".ssh-agent" ".Skype/" ".steampid" ".nano/" ".bash_history" ".gtkpod/" ".qgis2/" ".ivy2/" "DublinR/" "misc/" ".armagetronad/" ".byobu/" "Dropbox/" ".dbus/" ".bashrc-anaconda3.bak" ".RData" "githubrepos/" ".gnome/" ".gem/" ".project" ".texmf-var/" ".emacs" ".aptitude/" "Public/" "sysadmin/" ".psqlrc" ".steampath" ".Renviron" ".thumbnails/" "gPodder/" "dit_windspeed/")
+
+ ("/home/mcooney/work/training_courses/sdpr_intro/" (22460 47619 854102 218000) "./" "sdpsm_worksheet_probpyr.Rnw" "../" ".Rhistory" "sdpsm_worksheet_shell.Rnw" "data/" ".RData" "sdpsm_worksheet_git.Rnw" "sdpsm_worksheet_modeling.Rnw" "sdpsm_workshop_outline.org")
+
+ ("/home/mcooney/DublinR/dublin_r_workshops/talk_pgminsurance_201607/" (22450 10819 497981 330000) "ProbabilisticGraphicalModelsForDetectingUnderwritingFraud.pdf" "talk_rininsurance2016.pdf" "sherlock_picture.jpg" "./" "talk_rininsurance2016.out" "pgm_cover.jpg" "chestclinic_example_plot-1.pdf" "underwriting_plot-1.pdf" "talk_rininsurance2016.aux" "clouseau_picture.jpg" "talk_pgminsurance_201607.log" ".gitignore" "outlier_graphical.png" "gadget_picture.jpg" "underwriting_network-1.pdf" "talk_rininsurance2016.Rnw" "talk_pgminsurance_201607.vrb" "talk_pgminsurance_201607.out" "talk_rininsurance2016.nav" "talk_rininsurance2016.log" "littlefinger.jpg" "talk_rininsurance2016.snm" "talk_pgminsurance_201607.pdf" "talk_pgminsurance_201607.nav" "talk_rininsurance2016.tex" "../" "talk_rininsurance2016.html" "sprinkler_graph_data-1.pdf" ".Rhistory" "graphicalmodels_cover.jpg" "talk_pgminsurance_201607.tex" "talk_pgminsurance_201607.toc" "talk_pgminsurance_201607.Rnw" "underwriting_network_plot-1.pdf" "disclosure_form.jpg" "sprinkler_graph-1.pdf" "chestclinic_example-1.pdf" "lgm_plot-1.pdf" "talk_pgminsurance_201607.aux" "talk_rininsurance2016.vrb" "bueller_teacher.jpg" "datascience_venndiagram.png" ".RData" "bit_tunnel.jpg" "talk_rininsurance2016.toc" "talk_pgminsurance_201607.snm")
+
+ ("/home/mcooney/htnr_work/bond_cashflows/" (22419 20925 12193 71000) "./" ".gitignore" "server.R" "01_bond_portfolio.Rmd" "01_bond_portfolio.html" ".git/" "../" "cadusd.csv" ".Rhistory" "custom_functions.R" "styles.css" "ui.R" "data/" ".RData")
+
+ ("/home/mcooney/applied.ai/appliedai_carinspricing/" (22419 56187 406044 216000) "run_book_code.R" "./" ".gitignore" ".git/" "../" ".Rhistory" ".RData")
+
+ ("/home/mcooney/DublinR/dublin_r_workshops/talk_lossmodels_201608/" (22456 1797 574073 635000) "talk_lossmodels_201608.tex" "talk_lossmodels_201608.Rnw" "mi_stan_1_traceplots_p3-1.pdf" "talk_lossmodels_201608.snm" "./" "lgm_stan_sanity_1993-1.pdf" "mi_stan_2_ppc-1.pdf" ".gitignore" "lc_ppauto_plot-1.pdf" "mi_stan_1_parameters-1.pdf" "talk_lossmodels_201608.log" "lgm_stan_sanity_1988-1.pdf" "chainladder_mack_plotcompare-1.pdf" "talk_lossmodels_201608.vrb" "cache/" "talk_lossmodels_201608.toc" "mi_stan_1_traceplots_p1-1.pdf" "lc_prodliab_plot-1.pdf" "losscurves_multiple.stan" "../" "chainladder_mack_plotlattice-1.pdf" "lgm_stan_prediction_1993-1.pdf" "run_solvency2.R" "talk_lossmodels_201608.out" "lgm_stan_prediction_1997-1.pdf" "losscurves_singlesep.stan" "mi_stan_2_traceplots_p1-1.pdf" ".Rhistory" "chainladder_load-1.pdf" "lgm_stan_1_diagnostics-1.pdf" "start_shinystan.R" "lgm_stan_prediction_1995-1.pdf" "lgm_stan_1_traceplots_p2-1.pdf" "talk_lossmodels_201608.aux" "mi_stan_2_ppc_2-1.pdf" "caution_jazz_hands.jpg" "talk_lossmodels_201608.nav" "lgm_plot-1.pdf" "lgm_stan_1_traceplots_p1-1.pdf" "chainladder_mack_plot-1.pdf" "mi_stan_1_traceplots_p2-1.pdf" "mi_stan_2_parameters-1.pdf" "data/" "lgm_stan_1_parameters-1.pdf" "mi_stan_2_diagostics-1.pdf" "losscurves_single.stan" "mi_stan_1_diagostics-1.pdf" "talk_lossmodels_201608.pdf" "mi_stan_2_traceplots_p2-1.pdf")
+
+ ("/home/mcooney/tmp/DIT_June_2016/newcode/" (22425 13738 126344 585000) "hplot.svg" "clusters_2ndrun.csv" "./" "coef_barplot.svg" "segment_dataset.csv" "scree_plot.svg" "../" "coef_barplot.png" "DB_small.csv" "clusters_5.csv" "pairs_plot.pdf" "run_code.R" "hplot_rect.svg")
+
+ ("/home/mcooney/tmp/DIT_June_2016/Group Project/" (22415 50318 485070 740000) "./" "../" "DB_small.zip" "Predictive Analytics - Group Project.docx" "DB_small.csv" "Data Dictionary.doc" ".~lock.Predictive Analytics - Group Project.docx#")
+
+ ("/home/mcooney/htnr_work/bond_cashflows/data/" (22412 60469 530709 260000) "./" "delivery_dates.csv" "../" "highyield_bond_portfolio.csv")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
