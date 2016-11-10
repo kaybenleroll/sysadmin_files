@@ -48,6 +48,7 @@ Sys.setenv(R_HISTSIZE = '1000000');
    ,'DifferentialEquations'
    ,'Distributions'
    ,'Econometrics'
+   ,'ExperimentalDesign'
    ,'Finance'
    ,'HighPerformanceComputing'
    ,'MachineLearning'

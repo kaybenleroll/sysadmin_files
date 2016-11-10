@@ -91,7 +91,7 @@
   (setq ess-noweb-doc-mode 'markdown-mode))
 
 (setq auto-mode-alist (append (list (cons "\\.mdw$" 'mdw-mode))
-                                                 auto-mode-alist))
+                              auto-mode-alist))
 
 (require 'stan-mode)
 
