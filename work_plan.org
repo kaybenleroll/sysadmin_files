@@ -1,0 +1,21 @@
+* Irish Census Clustering
+** Gather the census data
+** Perform some basic SVD
+** Choose some clustering algorithms
+* dataexpks
+** Use the template on multiple datasets
+* Car Insurance
+** Convert current work into a talk
+** Check through the car insurance datasets
+** Look at the basic pricing models
+** Perform basic model validation of pricing
+** Investigate use of overdispersed models
+* Loss Curves Stan Case Study
+** Finish off the first version of the model
+** Submit the case study to the stan lists
+** Start work on extensions to the model
+* Data Science Competition
+** Build the simplistic geospatial model
+** Work on ways
+* Look into RNNs
+* Investigate INLA models
