@@ -24,7 +24,7 @@ options(
                             ,'http://www.bioconductor.org/packages/release/bioc'
                           )
    ,browserNLdisabled    = TRUE
-   ,width                = 160
+   ,width                = 120
    ,max.print            = 1000
    ,digits               = 6
    ,digits.secs          = 3
@@ -49,7 +49,9 @@ Sys.setenv(R_HISTSIZE = '1000000');
    ,'Distributions'
    ,'Econometrics'
    ,'ExperimentalDesign'
+   ,'ExtremeValue'
    ,'Finance'
+   ,'FunctionalData'
    ,'HighPerformanceComputing'
    ,'MachineLearning'
    ,'Multivariate'

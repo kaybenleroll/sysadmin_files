@@ -1,3 +1,19 @@
+** Talks
+*** Valuing a Book of Life Insurance Business
+*** Generating Fake Data for Fun and Profit
+*** A Capital Model in 20 minutes Or Your Pizza Free
+*** Systematic Data Exploration with dataexpks
+*** Revisting the Mortality Swap
+*** Pricing Car Insurance with a GLM and MonteCarlo Validation
+** Projects
+*** Irish Census Clustering
+*** UK Census Clustering
+*** Life Insurance Cashflow Modelling
+*** London Market Data Generation
+*** Fake Data Generation for Claims Development
+*** Time-series Analysis
+*** Improving the Car Insurance Work
+*** Basic Machine-learning Work
 * Irish Census Clustering
 ** Gather the census data
 ** Perform some basic SVD
