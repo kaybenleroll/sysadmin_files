@@ -28,7 +28,7 @@ options(
    ,max.print            = 1000
    ,digits               = 6
    ,digits.secs          = 3
-   ,deparse.max.lines    = 2
+#   ,deparse.max.lines    = 2
    ,shiny.launch.browser = FALSE
 );
 
@@ -142,9 +142,6 @@ Sys.setenv(R_HISTSIZE = '1000000');
 }
 
 
-
-.custom.env$startup  <- function() { require(ProjectTemplate); load.project(); }
-.custom.env$startdev <- function() { dev_mode(TRUE); load('.RData'); startup(); }
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
 attach(.custom.env);

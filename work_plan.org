@@ -1,37 +1,60 @@
-** Talks
-*** Valuing a Book of Life Insurance Business
-*** Generating Fake Data for Fun and Profit
-*** A Capital Model in 20 minutes Or Your Pizza Free
-*** Systematic Data Exploration with dataexpks
-*** Revisting the Mortality Swap
-*** Pricing Car Insurance with a GLM and MonteCarlo Validation
-** Projects
-*** Irish Census Clustering
-*** UK Census Clustering
-*** Life Insurance Cashflow Modelling
-*** London Market Data Generation
-*** Fake Data Generation for Claims Development
-*** Time-series Analysis
-*** Improving the Car Insurance Work
-*** Basic Machine-learning Work
-* Irish Census Clustering
-** Gather the census data
-** Perform some basic SVD
-** Choose some clustering algorithms
-* dataexpks
-** Use the template on multiple datasets
-* Car Insurance
-** Convert current work into a talk
-** Check through the car insurance datasets
-** Look at the basic pricing models
-** Perform basic model validation of pricing
-** Investigate use of overdispersed models
-* Loss Curves Stan Case Study
-** Finish off the first version of the model
-** Submit the case study to the stan lists
-** Start work on extensions to the model
-* Data Science Competition
-** Build the simplistic geospatial model
-** Work on ways
-* Look into RNNs
-* Investigate INLA models
+* Talks
+** Valuing a Book of Life Insurance Business
+** Generating Fake Data for Fun and Profit
+** A Capital Model in 20 minutes Or Your Pizza Free
+** Systematic Data Exploration with dataexpks
+** Revisiting the Mortality Swap
+** Pricing Car Insurance with a GLM and MonteCarlo Validation
+* Projects
+** Irish Census Clustering
+*** Gather the census data
+*** Perform some basic SVD
+*** Choose some clustering algorithms
+** UK Census Clustering
+** Lapse Modelling Work on Life Insurance Business
+*** Create a ground-up set of notebooks on survival analysis
+*** Model lapses using KM, CoxPH and possible Aalen Additive
+*** Try out parameteric approaches such as AFT and Weibull regression
+** Life Insurance Cashflow Modelling
+*** Focus on With-Profits Business
+*** Model cost of guarantees and cost of smoothing
+** London Market Data Generation
+*** Investigate the use of generative modelling
+*** Need to account for both censorship and truncation
+*** Investigate effects of distributions on inferences
+** Fake Data Generation for Claims Development
+*** Construct simple policy data
+*** Create a state model for claims development
+** dataexpks
+*** Use the template on multiple datasets
+** Time-series Analysis
+*** Investigate the use of tidyquant
+*** Combine time series with regression models
+*** Check applications in Stan
+*** Look into use of control systems theory
+** Stan Case Study on Loss Curves
+*** Finish off the first version of the model
+*** Submit the case study to the stan lists
+*** Start work on extensions to the model
+** Improving the Car Insurance Work
+*** Convert current work into a talk
+*** Check through the car insurance datasets
+*** Look at the basic pricing models
+*** Perform basic model validation of pricing
+*** Investigate use of overdispersed models
+** Basic Machine-learning Work
+*** Work on some classic problems using caret
+*** Find some insurance related work to use
+*** Customer targetting from contact campaigns
+** Learn scikit-learn
+*** Repeat ML work in R in python
+*** Use pandas for data manipulation
+** Cannonball Run Competition
+*** Build the simplistic geospatial model
+*** Build simulator for car journeys
+*** Simulate accidents and insurance policies
+** Look into RNNs
+*** Learn about LSTM
+*** Use of RNNs for financial data
+** Investigate INLA models
+*** Build some simple geospatial models
