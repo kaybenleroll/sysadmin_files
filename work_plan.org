@@ -6,6 +6,16 @@
 ** Revisiting the Mortality Swap
 ** Pricing Car Insurance with a GLM and MonteCarlo Validation
 * Projects
+** Cannonball Run Competition
+*** Build the simplistic geospatial model
+*** Build simulator for car journeys
+*** Simulate accidents and insurance policies
+** dataexpks
+*** Use the template on multiple datasets
+** Generate Captive Insurance Data
+*** Create country development curves
+*** Create claim data
+*** Create vehicle splits
 ** Irish Census Clustering
 *** Gather the census data
 *** Perform some basic SVD
