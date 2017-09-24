@@ -19,16 +19,15 @@
 
 options(
     lib                  = '/usr/local/lib/R/site-library'
-   ,CRAN                 = c('http://cran.rstudio.com')
-   ,repos                = c('http://cran.rstudio.com'
-                            ,'http://www.bioconductor.org/packages/release/bioc'
+   ,repos                = c(CRAN = 'https://cran.rstudio.com'
+                            ,BIOC = 'https://www.bioconductor.org/packages/release/bioc'
                           )
    ,browserNLdisabled    = TRUE
    ,width                = 120
    ,max.print            = 1000
    ,digits               = 6
    ,digits.secs          = 3
-#   ,deparse.max.lines    = 2
+   ,deparse.max.lines    = 2
    ,shiny.launch.browser = FALSE
 );
 
@@ -142,6 +141,9 @@ Sys.setenv(R_HISTSIZE = '1000000');
 }
 
 
+
+.custom.env$startup  <- function() { require(ProjectTemplate); load.project(); }
+.custom.env$startdev <- function() { dev_mode(TRUE); load('.RData'); startup(); }
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
 attach(.custom.env);
