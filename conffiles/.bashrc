@@ -82,3 +82,11 @@ export HISTTIMEFORMAT="[%Y-%m-%d %T] "
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $HOSTNAME $USER "$(history 1)" >> ~/.bash_eternal_history'
 
 source $HOME/.ssh-agent
+
+### Add the folowing entries to your crontab file
+#@reboot ssh-agent -s | grep -v echo > $HOME/.ssh-agent
+
+
+
+# added by Anaconda3 4.3.1 installer
+export PATH="/home/mcooney/anaconda3/bin:$PATH"
