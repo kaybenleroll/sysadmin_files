@@ -2,6 +2,10 @@
 
 ;; ----- ido-last-directory-list -----
 (
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/" . "static/")
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/lib/" . "js/")
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/" . "data/")
+ ("/home/mcooney/agrippa_data/website/" . "_posts/")
  ("/home/mcooney/work/generate_lifeinsurance_book/" . "assets/")
  ("/home/mcooney/work/" . "stancasestudy_losscurves/")
  ("/home/mcooney/tmp/" . "revealdemo/")
@@ -12,6 +16,11 @@
 
 ;; ----- ido-work-directory-list -----
 (
+ "/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/data/"
+ "/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/"
+ "/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/css/"
+ "/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/js/"
+ "/home/mcooney/agrippa_data/website/_posts/"
  "/home/mcooney/work/carinsurance_pricing/"
  "/home/mcooney/work/generate_lifeinsurance_book/data/"
  "/home/mcooney/DublinR/drcomp_islandgold/"
@@ -35,20 +44,42 @@
 
 ;; ----- ido-work-file-list -----
 (
+ "clusters_ac_tree_simplified.json"
+ "index.html"
+ "custom.css"
+ "dcmcleaflet.js"
+ "2018-03-08-what-is-propensity-modelling.md"
+ "2018-03-01-what-we-do.md"
  "40_carpricing_modelcheck.Rmd"
  "20_carinspricing_initmodel.Rmd"
  "cluster_policy_proportions.csv"
  "10_competition_site.Rmd"
- "02_create_geological_data.Rmd"
- "styles.css"
- "README.md"
- "config"
- "data_README.md"
- "submission_README.md"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/data/" (23677 7556 339541 495000) "./" "../" "lsoa_boundaries.geojson" "dashboard_lsoa_data.csv" "clusters_ac_tree_simplified.json" "postcode_data.csv")
+
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/" (23677 10424 707541 495000) "./" "../" "index.html" "static/" ".gitignore")
+
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/js/" (23677 10318 51541 495000) "./" "../" "dcmcleaflet.js")
+
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/css/" (23677 10315 963541 495000) "./" "../" "custom.css")
+
+ ("/home/mcooney/agrippa_data/website/_posts/" (23272 34285 219514 400000) "2018-03-08-what-is-propensity-modelling.md" "./" "../" "2018-03-01-what-we-do.md")
+
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/" (23668 3448 843300 606000) "lib/" "css/" "img/" "./" "../" "data/" "js/")
+
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/lib/js/" (23645 25423 358000 0) "leaflet.markercluster-src.js" "simpleheat.js" "./" "../" "leaflet.markercluster.freezable-src.js" "easy-button.js" "leaflet-heat.js")
+
+ ("/home/mcooney/agrippa_data/kompreno_core/production/health_wealth/kompreno_healthwealth_dash/static/lib/" (23645 25423 358000 0) "css/" "./" "../" "js/")
+
+ ("/home/mcooney/agrippa_data/website/" (23272 32761 530054 351000) "../" "_includes/" "_posts/" ".gitignore" "js/" "css/" "index.html" "contact.php" "videos/" "_layouts/" "_site/" "README.md" "images/" ".#index.html" ".git/" "fonts/" "favicon.ico" "./" "_config.yml" "CNAME")
+
+ ("/home/mcooney/applied.ai/appliedai_generate_insurancedata/" (23021 48810 256069 371000) "../" ".RData" "10_create_life_policy_data.ipynb" ".gitignore" "12_create_life_policy_latlng.Rmd" "assets/" "10_create_life_policy_data.Rmd" "data/" "20_create_car_policy_data.Rmd" "20_create_car_policy_data.r" ".Rhistory" "README.md" "20_create_car_policy_data.ipynb" ".git/" ".ipynb_checkpoints/" "./" "20_create_car_policy_data.html" "12_create_life_policy_latlng.ipynb" "10_create_life_policy_data.r" "11_create_life_policy_lapses.Rmd" "11_create_life_policy_lapses.r" "11_create_life_policy_lapses.ipynb" "12_create_life_policy_latlng.r" "code/")
+
+ ("/home/mcooney/workspace/dublin_r_workshops/talk_bm_201604/" (22659 17855 449134 344000) "../" "chainladder_mack_plot-1.pdf" ".RData" ".gitignore" "lgm_plot-1.pdf" "chainladder_mack_plotlattice-1.pdf" "losscurves_single.stan" "talkbm201604.pdf" "lc_prodliab_plot-1.pdf" "data/" "losscurves_multiple.stan" "start_shinystan.R" ".Rhistory" "lc_ppauto_plot-1.pdf" "run_solvency2.R" "talkbm201604.tex" "lgm_stan_1_parameters-1.pdf" "./" "caution_jazz_hands.jpg" "chainladder_mack_plotcompare-1.pdf" "talkbm201604.Rnw" "losscurves_singlesep.stan" "chainladder_load-1.pdf")
+
  ("/home/mcooney/work/carinsurance_pricing/" (22531 46230 857267 695000) "30_carinspricing_calcprices.Rmd" "30_carinspricing_calcprices.html" "LICENSE" "./" "20_carinspricing_initmodel.Rmd" ".gitignore" "40_carpricing_modelcheck.Rmd" ".git/" "../" "render_workbooks.R" ".Rhistory" "10_carinspricing_exploration.html" "custom_functions.R" "README.md" "40_carpricing_modelcheck.html" "styles.css" "data/" ".RData" "10_carinspricing_exploration.Rmd" "20_carinspricing_initmodel.html")
 
  ("/home/mcooney/work/training_courses/sdpsm_intro/" (22525 25104 348795 47000) "sdpsm_worksheet_probpyr.log" "sdpsm_worksheet_git.out" "./" ".gitignore" "sdpsm_worksheet_git.pdf" "sdpsm_worksheet_probpyr.Rnw" "sdpsm_worksheet_probpyr.aux" "sdpsm_worksheet_git.aux" "../" "sdpsm_worksheet_shell.pdf" "sdpsm_worksheet_shell.aux" "sdpsm_worksheet_probpyr.tex" "sdpsm_worksheet_shell.log" ".Rhistory" "sdpsm_worksheet_shell.out" "sdpsm_worksheet_probpyr.out" "sdpsm_worksheet_git.log" "sdpsm_worksheet_shell.Rnw" "sdpsm_worksheet_git.tex" "sdpsm_worksheet_probpyr.pdf" "sdpsm_worksheet_shell.tex" "data/" ".RData" "sdpsm_worksheet_git.Rnw" "sdpsm_worksheet_modeling.Rnw" "sdpsm_workshop_outline.org")
@@ -76,8 +107,6 @@
  ("/home/mcooney/work/stancasestudy_losscurves/" (22505 5516 32135 168000) "LICENSE" "./" "losscurves_casestudy.Rmd" ".gitignore" ".git/" "losscurves_multiple.stan" "../" ".Rhistory" "assets/" "README.md" "losscurves_casestudy.html" "data/" ".RData" "losscurves_single.stan" "contributors.txt")
 
  ("/home/mcooney/work/" (22509 32061 761654 747000) "carinsurance_pricing/" "./" "datadriven/" "survival_dashboard/" "generate_lifeinsurance_book/" "training_courses/" "zalando/" "blas_graph_benchmark/" "awscli/" "../" "stancasestudy_losscurves/" "nneg/" "scala/" "KidsFoodandFacebook/" "PhD/")
-
- ("/home/mcooney/applied.ai/appliedai_generate_insurancedata/" (22376 11747 665611 66000) "11_create_life_policy_lapses.ipynb" "./" ".gitignore" "20_create_car_policy_data.Rmd" ".ipynb_checkpoints/" "20_create_car_policy_data.ipynb" "code/" "12_create_life_policy_latlng.Rmd" "20_create_car_policy_data.r" ".git/" "../" "10_create_life_policy_data.r" "11_create_life_policy_lapses.Rmd" ".Rhistory" "12_create_life_policy_latlng.r" "assets/" "12_create_life_policy_latlng.ipynb" "11_create_life_policy_lapses.r" "README.md" "10_create_life_policy_data.Rmd" "data/" ".RData" "10_create_life_policy_data.ipynb")
 
  ("/home/mcooney/htnr_work/htnr_working/src/" (22490 62885 209533 197000) "./" "install_packages.R" "write_psim_data.R" "run_weeklies.R" "setup.R" "generate_option_greeks.R" "../" "run_event_updates.R" "run_bias_factor_calculation.R" "create_metrics_data.R" "calculate_optionvlm.R" "create_fundnav_data.R" "create_psim_data.R")
 

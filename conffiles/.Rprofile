@@ -29,31 +29,37 @@ options(
    ,digits.secs          = 3
    ,deparse.max.lines    = 2
    ,shiny.launch.browser = FALSE
-);
+)
 
 
-if (interactive()) {
-    suppressMessages(require(devtools))
-}
+#if (interactive()) {
+#    suppressMessages(library(devtools))
+#}
 
 
-Sys.setenv(R_HISTSIZE = '1000000');
+Sys.setenv(R_HISTSIZE = '1000000')
 
-.custom.env <- new.env();
+.custom.env <- new.env()
 
 .custom.env$cran.nox.view.list <- c(
     'Bayesian'
    ,'Cluster'
+   ,'Databases'
    ,'DifferentialEquations'
    ,'Distributions'
    ,'Econometrics'
+   ,'Environmetrics'
    ,'ExperimentalDesign'
    ,'ExtremeValue'
    ,'Finance'
    ,'FunctionalData'
    ,'HighPerformanceComputing'
    ,'MachineLearning'
+   ,'MetaAnalysis'
+   ,'MissingData'
+   ,'ModelDeployment'
    ,'Multivariate'
+   ,'NaturalLanguageProcessing'
    ,'NumericalMathematics'
    ,'OfficialStatistics'
    ,'Optimization'
@@ -65,13 +71,13 @@ Sys.setenv(R_HISTSIZE = '1000000');
    ,'Survival'
    ,'TimeSeries'
    ,'WebTechnologies'
-);
+)
 
 
 .custom.env$cran.view.list <- c(.custom.env$cran.nox.view.list
                                ,'Graphics'
                                ,'gR'
-                                );
+                                )
 
 
 
@@ -119,7 +125,7 @@ Sys.setenv(R_HISTSIZE = '1000000');
         out <- names
     }
 
-    return(out);
+    return(out)
 }
 
 # shorthand
@@ -129,21 +135,21 @@ Sys.setenv(R_HISTSIZE = '1000000');
 
 
 .custom.env$mem <- function() {
-    bit <- 8L * .Machine$sizeof.pointer;
+    bit <- 8L * .Machine$sizeof.pointer
     if(!(bit == 32L || bit == 64L)) {
         stop("Unknown architecture", call. = FALSE)
     }
 
-    node_size <- if(bit == 32L) 28L else 56L;
+    node_size <- if(bit == 32L) 28L else 56L
 
-    usage <- gc();
-    sum(usage[, 1] * c(node_size, 8)) / (1024 ^ 2);
+    usage <- gc()
+    sum(usage[, 1] * c(node_size, 8)) / (1024 ^ 2)
 }
 
 
 
-.custom.env$startup  <- function() { require(ProjectTemplate); load.project(); }
-.custom.env$startdev <- function() { dev_mode(TRUE); load('.RData'); startup(); }
+.custom.env$startup  <- function() { library(ProjectTemplate); load.project() }
+.custom.env$startdev <- function() { dev_mode(TRUE); load('.RData'); startup() }
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
-attach(.custom.env);
+attach(.custom.env)

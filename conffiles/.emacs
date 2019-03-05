@@ -29,7 +29,8 @@
 ;(define-key key-translation-map [?\C-h] [?\C-?])
 
 
-(load "/home/mcooney/githubrepos/ESS/lisp/ess-site")
+;(add-to-list 'load-path "/home/mcooney/githubrepos/ESS/lisp")
+;(load "/home/mcooney/githubrepos/ESS/lisp/ess-site")
 (setq inferior-julia-program-name "/usr/local/bin/julia")
 
 ;;; Add in ESS
@@ -139,3 +140,17 @@
 ;;; Configure emacs for python
 ;(require 'ipython)
 (put 'downcase-region 'disabled nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (stan-snippets standoff-mode stan-mode polymode isend-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
