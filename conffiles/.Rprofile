@@ -1,4 +1,3 @@
-
 ##						Emacs please make this -*- R -*-
 ## empty Rprofile.site for R on Debian
 ##
@@ -18,18 +17,18 @@
 # .Last <- function()  cat("\n   Goodbye!\n\n")
 
 options(
-    lib                  = '/usr/local/lib/R/site-library'
-   ,repos                = c(CRAN = 'https://cran.rstudio.com'
-                            ,BIOC = 'https://www.bioconductor.org/packages/release/bioc'
-                          )
-   ,browserNLdisabled    = TRUE
-   ,width                = 120
-   ,max.print            = 1000
-   ,digits               = 6
-   ,digits.secs          = 3
-   ,deparse.max.lines    = 2
-   ,shiny.launch.browser = FALSE
-);
+  lib                  = '/usr/local/lib/R/site-library',
+  repos                = c(CRAN = 'https://cran.rstudio.com',
+                           BIOC = 'https://www.bioconductor.org/packages/release/bioc'
+                           ),
+  browserNLdisabled    = TRUE,
+  width                = 120,
+  max.print            = 1000,
+  digits               = 6,
+  digits.secs          = 3,
+  deparse.max.lines    = 2,
+  shiny.launch.browser = FALSE
+)
 
 
 if (interactive()) {
@@ -37,46 +36,47 @@ if (interactive()) {
 }
 
 
-Sys.setenv(R_HISTSIZE = '1000000');
+Sys.setenv(R_HISTSIZE = '1000000')
 
-.custom.env <- new.env();
+.custom.env <- new.env()
 
 .custom.env$cran.nox.view.list <- c(
-    'Bayesian'
-   ,'Cluster'
-   ,'Databases'
-   ,'DifferentialEquations'
-   ,'Distributions'
-   ,'Econometrics'
-   ,'ExperimentalDesign'
-   ,'ExtremeValue'
-   ,'Finance'
-   ,'FunctionalData'
-   ,'HighPerformanceComputing'
-   ,'MachineLearning'
-   ,'MissingData'
-   ,'ModelDeployment'
-   ,'Multivariate'
-   ,'NaturalLanguageProcessing'
-   ,'NumericalMathematics'
-   ,'OfficialStatistics'
-   ,'Optimization'
-   ,'ReproducibleResearch'
-   ,'Robust'
-   ,'SocialSciences'
-   ,'Spatial'
-   ,'SpatioTemporal'
-   ,'Survival'
-   ,'TeachingStatistics'
-   ,'TimeSeries'
-   ,'WebTechnologies'
-);
+  'Bayesian',
+  'Cluster',
+  'Databases',
+  'DifferentialEquations',
+  'Distributions',
+  'Econometrics',
+  'ExperimentalDesign',
+  'ExtremeValue',
+  'Finance',
+  'FunctionalData',
+  'HighPerformanceComputing',
+  'MachineLearning',
+  'MissingData',
+  'ModelDeployment',
+  'Multivariate',
+  'NaturalLanguageProcessing',
+  'NumericalMathematics',
+  'OfficialStatistics',
+  'Optimization',
+  'ReproducibleResearch',
+  'Robust',
+  'SocialSciences',
+  'Spatial',
+  'SpatioTemporal',
+  'Survival',
+  'TeachingStatistics',
+  'TimeSeries',
+  'WebTechnologies'
+)
 
 
-.custom.env$cran.view.list <- c(.custom.env$cran.nox.view.list
-                               ,'Graphics'
-                               ,'gR'
-                                );
+.custom.env$cran.view.list <- c(
+  .custom.env$cran.nox.view.list,
+  'Graphics',
+  'gR'
+)
 
 
 
@@ -97,55 +97,59 @@ Sys.setenv(R_HISTSIZE = '1000000');
 ###
 
 .custom.env$.ls.objects <- function (pos = 1, pattern, order.by, decreasing = FALSE, head = FALSE, n = 5) {
-    napply <- function(names, fn) sapply(names, function(x) fn(get(x, pos = pos)))
-    names <- ls(pos = pos, pattern = pattern)
+  napply <- function(names, fn) sapply(names, function(x) fn(get(x, pos = pos)))
+  names <- ls(pos = pos, pattern = pattern)
 
-    if(length(names) > 0) {
-        obj.class      <- napply(names, function(x) as.character(class(x))[1])
-        obj.mode       <- napply(names, mode)
-        obj.type       <- ifelse(is.na(obj.class), obj.mode, obj.class)
-        obj.size       <- napply(names, object.size)
-        obj.prettysize <- napply(names, function(x) { capture.output(print(object.size(x), units = "auto")) })
-        obj.dim        <- t(napply(names, function(x) as.numeric(dim(x))[1:2]))
+  if(length(names) > 0) {
+    obj.class      <- napply(names, function(x) as.character(class(x))[1])
+    obj.mode       <- napply(names, mode)
+    obj.type       <- ifelse(is.na(obj.class), obj.mode, obj.class)
+    obj.size       <- napply(names, object.size)
+    obj.prettysize <- napply(names, function(x) { capture.output(print(object.size(x), units = "auto")) })
+    obj.dim        <- t(napply(names, function(x) as.numeric(dim(x))[1:2]))
 
-        vec <- is.na(obj.dim)[, 1] & (obj.type != "function")
+    vec <- is.na(obj.dim)[, 1] & (obj.type != "function")
 
-        obj.dim[vec, 1] <- napply(names, length)[vec]
+    obj.dim[vec, 1] <- napply(names, length)[vec]
 
-        out        <- data.frame(obj.type, obj.size, obj.prettysize, obj.dim)
-        names(out) <- c("Type", "Size", "PrettySize", "Rows", "Columns")
+    out        <- data.frame(obj.type, obj.size, obj.prettysize, obj.dim)
+    names(out) <- c("Type", "Size", "PrettySize", "Rows", "Columns")
 
-        if(!missing(order.by)) {
-            out    <- out[order(out[[order.by]], decreasing=decreasing), ]
-        }
-
-        if(head) { out <- head(out, n) }
-    } else {
-        out <- names
+    if(!missing(order.by)) {
+      out <- out[order(out[[order.by]], decreasing=decreasing), ]
     }
 
-    return(out);
+    if(head) {
+      out <- head(out, n)
+    }
+
+  } else {
+    out <- names
+  }
+
+  return(out)
 }
 
 # shorthand
 .custom.env$lsos <- function(..., n = 30) {
-    .ls.objects(..., order.by = "Size", decreasing = TRUE, head = TRUE, n = n);
+   .ls.objects(..., order.by = "Size", decreasing = TRUE, head = TRUE, n = n)
 }
 
 
 .custom.env$mem <- function() {
-    bit <- 8L * .Machine$sizeof.pointer;
-    if(!(bit == 32L || bit == 64L)) {
-        stop("Unknown architecture", call. = FALSE)
-    }
+   bit <- 8L * .Machine$sizeof.pointer
 
-    node_size <- if(bit == 32L) 28L else 56L;
+   if(!(bit == 32L || bit == 64L)) {
+     stop("Unknown architecture", call. = FALSE)
+   }
 
-    usage <- gc();
-    sum(usage[, 1] * c(node_size, 8)) / (1024 ^ 2);
+   node_size <- if(bit == 32L) 28L else 56L;
+
+   usage <- gc()
+   sum(usage[, 1] * c(node_size, 8)) / (1024 ^ 2)
 }
 
 
 
 while('.custom.env' %in% search()) { detach('.custom.env') }
-attach(.custom.env);
+attach(.custom.env)
