@@ -23,9 +23,13 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
 case "$TERM" in
 xterm-color)
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]$(parse_git_branch)\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
     ;;
 *)
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
@@ -83,5 +87,5 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $HOSTNAME $USER "
 
 source $HOME/.ssh-agent
 
-# added by Anaconda3 4.3.1 installer
-export PATH="/home/mcooney/anaconda3/bin:$PATH"
+### Add the folowing entries to your crontab file
+#@reboot ssh-agent -s | grep -v echo > $HOME/.ssh-agent
