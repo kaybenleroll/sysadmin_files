@@ -1,13 +1,26 @@
 [user]
-	name = Mick Cooney
-	email = mickcooney@gmail.com
+  name = Mick Cooney
+  email = mickcooney@gmail.com
 [push]
-	default = simple
+  default = simple
 [alias]
-        lol  = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  lol      = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola     = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  recommit = commit --amend -m
+  commend  = commit --amend --no-edit
+  here     = !git init && git add . && git commit -m \"Initialized a new repository\"
+  search   = grep
+  who      = blame
+  zip      = archive --format=tar.gz -o ../repo.tar.gz
+  lonely   = clone --single-branch --branch
+  plg      = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen| %cr %C(bold blue)| %an%Creset' --abbrev-commit --date=relative
+  fresh    = filter-branch --prune-empty --subdirectory-filter
+
 [color]
-        branch = auto
-        diff = auto
-        interactive = auto
-        status = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+
+
+[alias]
