@@ -1,8 +1,13 @@
 [user]
   name = Mick Cooney
   email = mickcooney@gmail.com
+
 [push]
   default = simple
+
+[pull]
+	rebase = false
+
 [alias]
   lol      = log --graph --decorate --pretty=oneline --abbrev-commit
   lola     = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -21,6 +26,3 @@
   diff = auto
   interactive = auto
   status = auto
-
-
-[alias]

@@ -1,0 +1,46 @@
+
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
+       	                           ("marmalade" . "http://marmalade-repo.org/packages/")
+			           ("melpa"     . "http://melpa.milkbox.net/packages/")
+				   )))
+(package-initialize) ;; You might already have this line
+
+
+;;; Save all backup files to a specific directory in the home dir
+(defvar user-temporary-file-directory "/home/mcooney/.emacs.d/backups")
+
+(make-directory user-temporary-file-directory t)
+
+(setq backup-by-copying t)
+(setq backup-directory-alist
+  `(("." . ,user-temporary-file-directory)))
+(setq auto-save-list-file-prefix
+  (concat user-temporary-file-directory ".auto-saves-"))
+(setq auto-save-file-name-transforms
+  `((".*" ,user-temporary-file-directory t)))
+
+
+
+;;; Remove trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;;; Ensure tabs are added as spaces
+(setq-default indent-tabs-mode nil)
+
+;;; Show the column number
+(setq column-number-mode t)
+
+
+
+;;; Configure org mode
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
