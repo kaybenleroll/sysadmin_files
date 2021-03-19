@@ -2,11 +2,14 @@
   name = Mick Cooney
   email = mickcooney@gmail.com
 
+[credential]
+  helper = cache --timeout=3600
+
 [push]
   default = simple
 
 [pull]
-	rebase = false
+  rebase = false
 
 [alias]
   lol      = log --graph --decorate --pretty=oneline --abbrev-commit
