@@ -2,6 +2,6 @@
 \set HISTFILE ~/.psql_history- :HOST - :DBNAME
 \set HISTSIZE 10000
 \timing
-\set PROMPT1 '(%n@%M:%>) [%/] > '
+\set PROMPT1 '(%`date` - %n@%M:%>) [%/] > '
 \set PROMPT2 ''
 \encoding unicode
