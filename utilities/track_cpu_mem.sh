@@ -5,8 +5,8 @@ while :
 do 
   # Get the current usage of CPU and memory
   datetime=$(date)
-  cpuUsage=$(top -bn1 | awk '/Cpu/ { print $2}')
-  memUsage=$(free -m | awk '/Mem/{print $3}')
+  cpuUsage=$(top -bn1 | awk '/Cpu/ { if ($2 == "us,") { print 100 } else { print $2 } }')
+  memUsage=$(free -m | awk '/Mem/{print $3}')1
 
   # Print the usage
   echo "$datetime - CPU: $cpuUsage% Mem: $memUsage MB"
