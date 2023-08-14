@@ -1,6 +1,7 @@
 [user]
   name = Mick Cooney
   email = mickcooney@gmail.com
+#  email = mcooney@describedata.com
 
 [credential]
   helper = cache --timeout=3600
