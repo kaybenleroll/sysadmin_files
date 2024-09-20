@@ -24,6 +24,15 @@
   lonely   = clone --single-branch --branch
   plg      = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen| %cr %C(bold blue)| %an%Creset' --abbrev-commit --date=relative
   fresh    = filter-branch --prune-empty --subdirectory-filter
+  gs       = git status
+  gc       = git commit -m
+  gp       = git push
+  gl       = git pull
+  glog     = git log --oneline --graph --all --decorate # View Git log in one-line format
+  gd       = git diff --cached                          # View the difference of staged changes
+  grh      = git reset --hard HEAD                      # Hard reset to the latest commit
+  gb       = git branch -vv                             # Show branches and the last commit in one-line
+  gf       = fit fetch --all                            # Fetch all remote branches
 
 [color]
   branch = auto
