@@ -87,5 +87,8 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $HOSTNAME $USER "
 
 source $HOME/.ssh-agent
 
+
+complete -W "\`if [ -f Makefile ]; then grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'; elif [ -f makefile ]; then grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' makefile | sed 's/[^a-zA-Z0-9_-]*$//'; fi \`" make
+
 ### Add the folowing entries to your crontab file
 #@reboot ssh-agent -s | grep -v echo > $HOME/.ssh-agent
