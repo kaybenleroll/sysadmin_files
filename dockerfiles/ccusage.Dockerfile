@@ -16,8 +16,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # pnpm (matching repo spec) and bun for schema generation
-RUN corepack enable \
-  && corepack prepare pnpm@10.24.0 --activate
+RUN corepack enable
 RUN curl -fsSL https://bun.sh/install | bash
 
 WORKDIR /app

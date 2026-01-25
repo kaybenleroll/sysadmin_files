@@ -4,8 +4,7 @@ FROM alpine:latest
 # Install the necessary tools
 RUN apk add --no-cache \
     ffmpeg \
-    yt-dlp \
-    nodejs
+    yt-dlp
 
 # Set the working directory to the mount point
 WORKDIR /downloads

@@ -3,7 +3,7 @@
 # Build script for my-ytdl container image
 # This builds the YouTube downloader container based on Alpine Linux
 
-set -e  # Exit on error
+set -euo pipefail  # Exit on error
 
 DOCKERFILE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../dockerfiles" && pwd)"
 IMAGE_NAME="my-ytdl"

@@ -56,14 +56,12 @@ export PAGER="less"
 export VISUAL="emacs -nw"
 export EDITOR="emacs -nw"
 
-export PERL5LIB=/home/mcooney/workspace/dbmanagement
+export PERL5LIB="$HOME/workspace/dbmanagement"
 export R_HISTSIZE=100000
 
 # One-line fix: properly wraps variables and colors to prevent wrapping
+ret_status='%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )'
 PROMPT='%{$fg[white]%}[%D{%Y%m%d %H:%M:%S}]%{$reset_color%} %{${ret_status}%} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info) '
-
-
-
 # ============================================================================
 # History Configuration
 # ============================================================================
@@ -171,9 +169,10 @@ alias ls='ls --color=auto -F'
 # Set terminal title to user@host:dir
 case "$TERM" in
   xterm*|rxvt*|screen*)
-    precmd() {
+    set_window_title() {
       print -Pn "\e]0;%n@%m: %~\a"
     }
+    precmd_functions+=(set_window_title)
     ;;
 esac
 
@@ -244,6 +243,6 @@ DISABLE_AUTO_UPDATE="true"
 # alias hsearch='grep -i ~/.zsh_eternal_history'
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.opencode/bin:$PATH"
-eval "$(/home/mcooney/.local/bin/mise activate zsh)"
+eval "$("$HOME/.local/bin/mise" activate zsh)"
 
 # opencode
